@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MenuIcon, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sheet";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -23,6 +23,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const { t } = useI18n();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".snap-y") || window;
@@ -74,11 +76,15 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-          {navKeys.map((link) =>
-            link.isRoute ? (
+          {navKeys.map((link) => {
+            const isHashLink = link.href.startsWith('#');
+            const targetHref = isHashLink && !isHome ? `/${link.href}` : link.href;
+            const isRouterLink = link.isRoute || (isHashLink && !isHome);
+
+            return isRouterLink ? (
               <Link
                 key={link.href}
-                to={link.href}
+                to={targetHref}
                 className={cn(
                   "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
                   scrolled
@@ -91,7 +97,13 @@ const Header = () => {
             ) : (
               <a
                 key={link.href}
-                href={link.href}
+                href={targetHref}
+                onClick={(e) => {
+                  if (isHashLink && isHome) {
+                    e.preventDefault();
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className={cn(
                   "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
                   scrolled
@@ -101,8 +113,8 @@ const Header = () => {
               >
                 {t(link.key)}
               </a>
-            )
-          )}
+            );
+          })}
         </nav>
 
         {/* Right side */}
@@ -148,11 +160,15 @@ const Header = () => {
             <SheetContent side="right" className="w-72 bg-card border-border">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <nav aria-label="Mobile navigation" className="flex flex-col gap-2 mt-8">
-                {navKeys.map((link) =>
-                  link.isRoute ? (
+                {navKeys.map((link) => {
+                  const isHashLink = link.href.startsWith('#');
+                  const targetHref = isHashLink && !isHome ? `/${link.href}` : link.href;
+                  const isRouterLink = link.isRoute || (isHashLink && !isHome);
+
+                  return isRouterLink ? (
                     <Link
                       key={link.href}
-                      to={link.href}
+                      to={targetHref}
                       onClick={() => setOpen(false)}
                       className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                     >
@@ -161,14 +177,20 @@ const Header = () => {
                   ) : (
                     <a
                       key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
+                      href={targetHref}
+                      onClick={(e) => {
+                        if (isHashLink && isHome) {
+                          e.preventDefault();
+                          document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setOpen(false);
+                      }}
                       className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                     >
                       {t(link.key)}
                     </a>
-                  )
-                )}
+                  );
+                })}
               </nav>
               <SheetFooter className="mt-6 flex flex-col gap-2">
                 <a
