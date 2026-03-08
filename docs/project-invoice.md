@@ -33,9 +33,13 @@
 | 19 | **Full Mobile & Tablet Responsiveness** (testing across breakpoints) | 5,000 | 10,000 | 20,000 |
 | 20 | **SEO Optimization** (meta tags, semantic HTML, alt text, robots.txt) | 2,000 | 5,000 | 10,000 |
 | 21 | **Theming System** (CSS variables, design tokens, dark-mode ready) | 2,000 | 4,000 | 8,000 |
-| 22 | **Developer Documentation** (code structure, integration guides) | 2,000 | 4,000 | 8,000 |
+| 22 | **Developer Documentation** (code structure, integration guides, 3 docs) | 2,000 | 4,000 | 8,000 |
+| 23 | **Dark Mode Toggle** (theme persistence via localStorage, CSS variable switching) | 3,000 | 6,000 | 12,000 |
+| 24 | **PWA Support** (service worker, manifest, installable app, offline caching) | 5,000 | 10,000 | 20,000 |
+| 25 | **Cookie Consent Banner** (GDPR-style popup, localStorage consent tracking) | 3,000 | 6,000 | 12,000 |
+| 26 | **Page Speed Optimization** (font caching, image caching, service worker) | 3,000 | 6,000 | 12,000 |
 | | | | | |
-| | **SUBTOTAL (Development)** | **66,500** | **1,53,000** | **2,92,000** |
+| | **SUBTOTAL (Development)** | **80,500** | **1,81,000** | **3,48,000** |
 
 ---
 
@@ -111,7 +115,11 @@
 - [x] Mobile & tablet optimized
 - [x] SEO-ready structure
 - [x] Theming system (easy colour/font changes)
-- [x] Developer documentation
+- [x] Dark mode with theme toggle
+- [x] PWA — installable as mobile app
+- [x] Cookie consent banner
+- [x] Page speed optimization (caching strategies)
+- [x] Developer documentation (3 guides)
 - [x] Clean, maintainable TypeScript codebase
 
 ---

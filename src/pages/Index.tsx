@@ -12,6 +12,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FAQSection from "@/components/FAQSection";
 import FloatingCTA from "@/components/FloatingCTA";
 import Footer from "@/components/Footer";
+import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => (
   <div className="min-h-screen bg-background snap-y snap-mandatory overflow-y-auto h-screen scroll-smooth">
@@ -29,6 +30,7 @@ const Index = () => (
     <div className="snap-start"><FAQSection /></div>
     <div className="snap-start"><Footer /></div>
     <FloatingCTA />
+    <CookieConsent />
   </div>
 );
 

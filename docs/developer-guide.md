@@ -9,23 +9,30 @@
 
 1. [Project Structure](#1-project-structure)
 2. [How the Theme Palette Works](#2-how-the-theme-palette-works)
-3. [How to Customise Fonts](#3-how-to-customise-fonts)
-4. [EmailJS Integration](#4-emailjs-integration)
-5. [WhatsApp Integration](#5-whatsapp-integration)
+3. [Dark Mode](#3-dark-mode)
+4. [How to Customise Fonts](#4-how-to-customise-fonts)
+5. [EmailJS Integration](#5-emailjs-integration)
+6. [WhatsApp Integration](#6-whatsapp-integration)
+7. [PWA (Progressive Web App)](#7-pwa-progressive-web-app)
+8. [Cookie Consent](#8-cookie-consent)
 
 ---
 
 ## 1. Project Structure
 
 ```
-├── public/                  # Static assets served as-is (favicon, robots.txt)
+├── public/                  # Static assets served as-is (favicon, robots.txt, PWA icons)
+├── docs/                    # Developer documentation (you are here)
+│   ├── developer-guide.md           # This file
+│   ├── seo-domain-deployment-cookies.md  # SEO, domain, deployment, cookies guide
+│   └── project-invoice.md          # Cost breakdown
 ├── src/
 │   ├── assets/              # Images imported by components (logo, hero background)
 │   ├── components/          # All React components
 │   │   ├── ui/              # Reusable UI primitives (Button, Input, Dialog, etc.)
 │   │   │                      These come from shadcn/ui and are rarely edited.
-│   │   ├── Header.tsx        # Top navigation bar (desktop + mobile sheet)
-│   │   ├── HeroSection.tsx   # Landing hero with background image
+│   │   ├── Header.tsx        # Top navigation bar (desktop + mobile sheet) + theme toggle
+│   │   ├── HeroSection.tsx   # Landing hero with background image slideshow
 │   │   ├── PillarsSection.tsx
 │   │   ├── ServicesSection.tsx
 │   │   ├── PricingSection.tsx
@@ -38,6 +45,8 @@
 │   │   ├── Footer.tsx
 │   │   ├── FloatingCTA.tsx         # Floating Action Button (FAB) — Book Now, Chat, Go to Top
 │   │   ├── ChatFormDialog.tsx      # Dialog form that opens from FAB → sends to WhatsApp
+│   │   ├── ThemeToggle.tsx         # Dark/light mode toggle button
+│   │   ├── CookieConsent.tsx       # Cookie consent banner
 │   │   └── WhatsAppButton.tsx      # (Legacy) Standalone WhatsApp button — hidden, replaced by FAB
 │   ├── data/
 │   │   ├── clinicData.ts    # Clinic info (addresses, phone numbers, hours)
@@ -52,7 +61,8 @@
 │   ├── App.tsx               # Router setup
 │   └── main.tsx              # Entry point — renders App into the DOM
 ├── tailwind.config.ts        # Tailwind configuration (extends theme with custom tokens)
-├── index.html                # HTML shell
+├── vite.config.ts            # Vite config + PWA plugin setup
+├── index.html                # HTML shell (meta tags, OG tags, theme-color)
 └── package.json              # Dependencies and scripts
 ```
 
@@ -61,15 +71,17 @@
 `src/pages/Index.tsx` is the homepage. It imports each section component and renders them in order:
 
 ```tsx
+<Header />
 <HeroSection />
 <PillarsSection />
 <ServicesSection />
 ...
-<ContactFormSection />   // Contact Us (email form)
-<ContactSection />       // Visit Us (addresses)
+<ContactFormSection />
+<ContactSection />
 <FAQSection />
 <Footer />
-<FloatingCTA />          // Floating button — always visible
+<FloatingCTA />
+<CookieConsent />
 ```
 
 **To reorder sections**, simply move the `<div>` wrappers in `Index.tsx`.
@@ -92,32 +104,24 @@ All colours live in **one place**: `src/index.css`, inside CSS custom properties
   --primary: 213 100% 19%;        /* Main brand colour (dark navy) */
   --primary-foreground: 0 0% 100%; /* Text on primary (white) */
   --secondary: 197 71% 73%;       /* Accent colour (light teal) */
-  --secondary-foreground: 213 100% 19%;
-  --muted: 210 20% 94%;           /* Subdued backgrounds */
-  --muted-foreground: 213 30% 45%;/* Subdued text */
-  --accent: 197 71% 73%;          /* Interactive highlights */
-  --destructive: 0 84.2% 60.2%;   /* Error / danger */
-  --border: 210 20% 88%;
-  --input: 210 20% 88%;
-  --ring: 213 100% 19%;           /* Focus ring */
   /* ...more tokens */
+}
+
+.dark {
+  --background: 213 80% 8%;       /* Dark page background */
+  --foreground: 210 20% 95%;      /* Light text for dark mode */
+  --primary: 197 71% 73%;         /* Teal becomes primary in dark */
+  /* ...all tokens redefined for dark */
 }
 ```
 
 > **Format**: All values are in **HSL without the `hsl()` wrapper** — e.g. `213 100% 19%`.
-> Tailwind and shadcn wrap them automatically: `hsl(var(--primary))`.
 
 ### How to change the entire colour scheme
 
 1. Open `src/index.css`.
-2. Find the `:root { ... }` block.
-3. Change the HSL values. For example, to make the brand colour green:
-
-```css
---primary: 150 80% 30%;          /* A green tone */
---primary-foreground: 0 0% 100%; /* Keep white text on it */
-```
-
+2. Find the `:root { ... }` block (light mode) and `.dark { ... }` block (dark mode).
+3. Change the HSL values in **both** blocks.
 4. Save. Every component using `bg-primary`, `text-primary`, etc. updates automatically.
 
 ### Rules to follow
@@ -127,239 +131,156 @@ All colours live in **one place**: `src/index.css`, inside CSS custom properties
 | Use semantic classes: `bg-primary`, `text-muted-foreground` | Hard-code colours: `bg-blue-900`, `text-white` |
 | Change colours only in `index.css` | Add colour values directly in component files |
 | Keep HSL format without the wrapper | Use hex or rgb values in CSS variables |
+| Update **both** `:root` and `.dark` blocks | Only change one theme |
 
-### Dark mode
+---
 
-If you add a `.dark` class block in `index.css`, Tailwind will pick it up automatically:
+## 3. Dark Mode
 
-```css
-.dark {
-  --background: 213 50% 10%;
-  --foreground: 210 20% 95%;
-  /* ...redefine all tokens for dark */
-}
+### How it works
+
+1. **ThemeToggle** component (`src/components/ThemeToggle.tsx`) adds/removes the `dark` class on `<html>`
+2. **Tailwind** detects the class via `darkMode: ["class"]` in `tailwind.config.ts`
+3. **CSS variables** switch between `:root` (light) and `.dark` (dark) values in `index.css`
+4. **localStorage** saves the choice as `theme: "light"` or `theme: "dark"`
+
+### Where the toggle lives
+
+The toggle button is in the **Header** (`src/components/Header.tsx`), between the nav links and the "Book Now" button.
+
+### Special handling
+
+Some components use hardcoded colors instead of semantic tokens because they need consistent appearance regardless of theme:
+
+- **HeroSection**: Always uses dark navy overlay + white text (the hero image needs a dark overlay for readability in both themes)
+- **Footer**: Uses `dark:bg-[...]` and `dark:text-white` overrides to stay dark in both themes
+
+### Adding dark mode to a new component
+
+Just use semantic classes. They automatically adapt:
+```tsx
+<div className="bg-card text-card-foreground">  {/* Auto-adapts */}
+<p className="text-muted-foreground">            {/* Auto-adapts */}
 ```
 
 ---
 
-## 3. How to Customise Fonts
+## 4. How to Customise Fonts
 
 ### Where fonts are loaded
 
-At the top of `src/index.css`, Google Fonts are imported:
-
+At the top of `src/index.css`:
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&...');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 ```
 
 ### Where fonts are mapped
 
-In `tailwind.config.ts`, the `fontFamily` section maps friendly names:
-
+In `tailwind.config.ts`:
 ```ts
 fontFamily: {
-  display: ["Outfit", "sans-serif"],  // Used for headings
-  body: ["DM Sans", "sans-serif"],    // Used for body text
-  mono: ["Space Mono", "monospace"],  // Used for code-like text
+  display: ["Outfit", "sans-serif"],  // Headings
+  body: ["DM Sans", "sans-serif"],    // Body text
 }
 ```
 
 ### How to change a font
 
-**Step 1** — Pick a new font from [Google Fonts](https://fonts.google.com/).
+1. Pick a new font from [Google Fonts](https://fonts.google.com/)
+2. Replace the `@import` URL in `src/index.css`
+3. Update `tailwind.config.ts` `fontFamily`
+4. All `font-display` and `font-body` classes auto-update
 
-**Step 2** — Replace the `@import` URL in `src/index.css`:
+---
 
-```css
-@import url('https://fonts.googleapis.com/css2?family=YOUR+NEW+FONT:wght@400;500;600;700&display=swap');
-```
+## 5. EmailJS Integration
 
-**Step 3** — Update `tailwind.config.ts`:
+The **Contact Us** form (`src/components/ContactFormSection.tsx`) sends emails using [EmailJS](https://www.emailjs.com/).
+
+### Setup steps
+
+1. Sign up at [emailjs.com](https://www.emailjs.com/) (free: 200 emails/month)
+2. **Email Services** → Add Gmail → Connect `acureatus@gmail.com` → Copy **Service ID**
+3. **Email Templates** → Create template with: `{{from_name}}`, `{{from_email}}`, `{{phone}}`, `{{subject}}`, `{{message}}`, `{{to_email}}`  → Copy **Template ID**
+4. **Account** → API Keys → Copy **Public Key**
+5. Update `src/components/ContactFormSection.tsx`:
 
 ```ts
-fontFamily: {
-  display: ["Your New Font", "sans-serif"],
-}
-```
-
-**Step 4** — All elements using `font-display` or `font-body` in the components will automatically use the new font. No component changes needed.
-
-### Usage in components
-
-```tsx
-<h2 className="font-display font-bold">Heading</h2>  // Uses display font
-<p className="font-body">Paragraph text</p>           // Uses body font
+const EMAILJS_SERVICE_ID = "your_service_id";
+const EMAILJS_TEMPLATE_ID = "your_template_id";
+const EMAILJS_PUBLIC_KEY = "your_public_key";
 ```
 
 ---
 
-## 4. EmailJS Integration
+## 6. WhatsApp Integration
 
-The **Contact Us** form (`src/components/ContactFormSection.tsx`) sends emails using [EmailJS](https://www.emailjs.com/) — a client-side email service (no backend needed).
+### How it works
 
-### How it works (flow)
-
-```
-User fills form → Clicks "Send Message"
-      ↓
-Form validated with Zod (client-side)
-      ↓
-emailjs.send() called with form data
-      ↓
-EmailJS server sends email to acureatus@gmail.com
-      ↓
-User sees success/error toast
-```
-
-### Code walkthrough
+The **FAB → Chat form** (`src/components/ChatFormDialog.tsx`) builds a WhatsApp Click-to-Chat URL:
 
 ```tsx
-// src/components/ContactFormSection.tsx
-
-// 1. These IDs connect to your EmailJS account
-const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";    // Your email service
-const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";  // Your email template
-const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";     // Your public API key
-
-// 2. On form submit, data is sent to EmailJS
-const onSubmit = async (data) => {
-  await emailjs.send(
-    EMAILJS_SERVICE_ID,
-    EMAILJS_TEMPLATE_ID,
-    {
-      from_name: data.name,       // Maps to {{from_name}} in template
-      from_email: data.email,     // Maps to {{from_email}}
-      phone: data.phone,          // Maps to {{phone}}
-      subject: data.subject,      // Maps to {{subject}}
-      message: data.message,      // Maps to {{message}}
-      to_email: "acureatus@gmail.com",
-    },
-    EMAILJS_PUBLIC_KEY
-  );
-};
-```
-
-### Setup steps (first time only)
-
-| Step | Action |
-|---|---|
-| 1 | Go to [emailjs.com](https://www.emailjs.com/) → Sign up (free: 200 emails/month) |
-| 2 | **Email Services** → Add New → Choose Gmail → Connect `acureatus@gmail.com` → Copy **Service ID** |
-| 3 | **Email Templates** → Create New → Use variables: `{{from_name}}`, `{{from_email}}`, `{{phone}}`, `{{subject}}`, `{{message}}`, `{{to_email}}` → Copy **Template ID** |
-| 4 | **Account** → API Keys → Copy **Public Key** |
-| 5 | Open `src/components/ContactFormSection.tsx` → Replace the 3 placeholder strings |
-
-### Example email template
-
-```
-Subject: New Contact: {{subject}}
-
-Name: {{from_name}}
-Email: {{from_email}}
-Phone: {{phone}}
-
-Message:
-{{message}}
-```
-
-Set **To Email** = `{{to_email}}` and **Reply To** = `{{from_email}}` in EmailJS template settings.
-
-### Input validation
-
-The form uses **Zod** for validation before any data is sent:
-
-```tsx
-const contactSchema = z.object({
-  name: z.string().min(2).max(100).regex(/^[a-zA-Z\s.'-]+$/),  // Letters only
-  email: z.string().email().max(255),
-  phone: z.string().min(10).max(15).regex(/^[+]?[\d\s-]+$/),   // Numbers only
-  subject: z.string().min(3).max(200),
-  message: z.string().min(10).max(2000),
-});
-```
-
-This prevents invalid or malicious input from being submitted.
-
----
-
-## 5. WhatsApp Integration
-
-There are **two places** where WhatsApp is used:
-
-### A. Floating Action Button (FAB) → Chat Form
-
-**File**: `src/components/ChatFormDialog.tsx`
-
-**Flow**:
-
-```
-User clicks FAB (+) → Clicks "Chat with us"
-      ↓
-Dialog opens with form (Name, Phone, Service, Message, Date, Time)
-      ↓
-Form validated with Zod
-      ↓
-Data formatted as a WhatsApp message
-      ↓
-Opens WhatsApp Web/App with pre-filled message
-```
-
-**How the WhatsApp URL is built**:
-
-```tsx
-// WhatsApp's Click-to-Chat API
 const url = `https://wa.me/917996217888?text=${encodeURIComponent(messageText)}`;
 window.open(url, "_blank");
 ```
 
-- `917996217888` = country code (91) + phone number
-- `text=` parameter pre-fills the message
-- `encodeURIComponent()` safely encodes special characters
+### Changing the WhatsApp number
 
-**The message looks like this on WhatsApp**:
-
-```
-*Name:* John Doe
-*Phone:* +91 99999 99999
-*Service:* Back Pain Treatment
-*Message:* I'd like to book an appointment
-*Preferred Date:* March 15, 2026
-*Preferred Time:* 10:00 AM
-```
-
-The `*...*` syntax makes text **bold** in WhatsApp.
-
-### B. Changing the WhatsApp number
-
-Search for `917996217888` in the codebase and replace it with the new number (include country code, no `+` or spaces):
-
-```
-wa.me/917996217888  →  wa.me/91XXXXXXXXXX
-```
+Search for `917996217888` and replace with the new number (country code + number, no `+` or spaces).
 
 Files to update:
-- `src/components/ChatFormDialog.tsx` (form submission)
-- `src/components/FloatingCTA.tsx` (if any direct links remain)
+- `src/components/ChatFormDialog.tsx`
+- `src/components/FloatingCTA.tsx` (if any direct links)
 
-### Input validation for WhatsApp form
+---
 
-Same approach as the email form — Zod validates everything before building the URL:
+## 7. PWA (Progressive Web App)
 
-```tsx
-const formSchema = z.object({
-  name: z.string().min(2).max(100).regex(/^[a-zA-Z\s.'-]+$/),
-  phone: z.string().min(10).max(15).regex(/^[+]?[\d\s-]+$/),
-  message: z.string().min(3).max(1000),
-  preferredDate: z.date(),           // Must be a future date, not a Sunday
-  preferredTime: z.string(),         // Selected from dropdown (9 AM – 8 PM)
-});
-```
+### What it does
 
-### Calendar restrictions
+The app is installable as a mobile app. Users can add it to their home screen from the browser.
 
-- **Past dates** are disabled
-- **Sundays** are disabled (clinic is closed)
-- **Time slots** are 30-minute intervals from 9:00 AM to 8:00 PM
+### How it's configured
+
+In `vite.config.ts`, the `VitePWA` plugin handles:
+- **Service worker**: Auto-generated, caches static assets
+- **Manifest**: App name, icons, theme color, display mode
+- **Runtime caching**: Google Fonts (1 year), Unsplash images (30 days)
+
+### PWA Icons
+
+- `public/pwa-192x192.png` — Standard icon
+- `public/pwa-512x512.png` — Large icon + maskable
+
+### How users install it
+
+- **Android**: Chrome → Menu → "Add to Home Screen"
+- **iPhone**: Safari → Share → "Add to Home Screen"
+
+---
+
+## 8. Cookie Consent
+
+### Why it exists
+
+The cookie consent banner (`src/components/CookieConsent.tsx`) informs users that the site stores data locally (theme preference, PWA cache). While we don't use tracking cookies, it's best practice to ask.
+
+### How it works
+
+- Appears 1.5 seconds after first visit
+- User choices: "Accept All" or "Essential Only"
+- Choice saved to `localStorage` as `cookie-consent`
+- Banner never appears again after a choice is made
+
+### Data stored on user's device
+
+| Key | Value | Purpose |
+|---|---|---|
+| `theme` | `"light"` / `"dark"` | Remember dark mode preference |
+| `cookie-consent` | `"accepted"` / `"declined"` | Remember consent choice |
+| `cookie-consent-date` | ISO date | When consent was given |
+
+See `docs/seo-domain-deployment-cookies.md` for full details on cookies, SEO, and deployment.
 
 ---
 
@@ -367,13 +288,15 @@ const formSchema = z.object({
 
 | Task | File to edit |
 |---|---|
-| Change colours | `src/index.css` (`:root` block) |
-| Change fonts | `src/index.css` (imports) + `tailwind.config.ts` (fontFamily) |
+| Change colours | `src/index.css` (`:root` + `.dark` blocks) |
+| Change fonts | `src/index.css` (imports) + `tailwind.config.ts` |
 | Change section order | `src/pages/Index.tsx` |
 | Change clinic info | `src/data/clinicData.ts` |
 | Change WhatsApp number | Search `917996217888` in codebase |
 | Setup EmailJS | `src/components/ContactFormSection.tsx` (3 constants) |
-| Add a new FAQ | `src/components/FAQSection.tsx` (add to `faqs` array) |
+| Change cookie banner | `src/components/CookieConsent.tsx` |
+| Change dark mode behavior | `src/components/ThemeToggle.tsx` |
+| Change PWA config | `vite.config.ts` (VitePWA section) |
 | Change FAB behaviour | `src/components/FloatingCTA.tsx` |
 
 ---

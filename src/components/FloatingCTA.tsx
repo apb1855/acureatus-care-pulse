@@ -7,6 +7,7 @@ const FloatingCTA = () => {
   const [open, setOpen] = useState(false);
   const [chatFormOpen, setChatFormOpen] = useState(false);
   const [inFooter, setInFooter] = useState(false);
+  const [pastSecondSection, setPastSecondSection] = useState(false);
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -18,6 +19,21 @@ const FloatingCTA = () => {
     );
     observer.observe(footer);
     return () => observer.disconnect();
+  }, []);
+
+  // Track scroll position to hide Go to Top on first two sections
+  useEffect(() => {
+    const scrollContainer = document.querySelector(".snap-y") || window;
+    const onScroll = () => {
+      const scrollTop =
+        scrollContainer === window
+          ? window.scrollY
+          : (scrollContainer as HTMLElement).scrollTop;
+      // Approx 2 viewport heights = past first two snap sections
+      setPastSecondSection(scrollTop > window.innerHeight * 1.5);
+    };
+    scrollContainer.addEventListener("scroll", onScroll, { passive: true });
+    return () => scrollContainer.removeEventListener("scroll", onScroll);
   }, []);
 
   const btnClass = cn(
@@ -39,18 +55,20 @@ const FloatingCTA = () => {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         {open && (
           <div className="flex flex-col items-end gap-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
-            <button
-              onClick={() => {
-                const container = document.querySelector(".snap-y") || window;
-                if (container === window) window.scrollTo({ top: 0, behavior: "smooth" });
-                else (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
-                setOpen(false);
-              }}
-              className={cn(btnClass, "lg:hidden")}
-            >
-              Go to Top
-              <ArrowUp className="w-4 h-4 shrink-0" />
-            </button>
+            {pastSecondSection && (
+              <button
+                onClick={() => {
+                  const container = document.querySelector(".snap-y") || window;
+                  if (container === window) window.scrollTo({ top: 0, behavior: "smooth" });
+                  else (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
+                  setOpen(false);
+                }}
+                className={cn(btnClass, "lg:hidden")}
+              >
+                Go to Top
+                <ArrowUp className="w-4 h-4 shrink-0" />
+              </button>
+            )}
             <a href="tel:+917996217888" className={btnClass}>
               Book Now
               <Phone className="w-4 h-4 shrink-0" />
