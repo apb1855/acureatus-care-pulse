@@ -57,7 +57,7 @@ const Footer = () => (
           <a href="#home" className="inline-block">
             <img src={logo} alt="Acureatus Logo" className="h-24 w-auto brightness-0 invert" />
           </a>
-          <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-xs">
+          <p className="text-sm text-primary-foreground/70 dark:text-white/70 leading-relaxed max-w-xs">
             {clinicData.business_identity.branding_tagline}
           </p>
           <div className="flex items-center gap-3 pt-2">
