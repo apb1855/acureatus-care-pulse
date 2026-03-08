@@ -130,6 +130,8 @@ const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
       </Dialog>
     </section>
   );
-};
+});
+
+Feature108.displayName = "Feature108";
 
 export { Feature108 };
