@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, Phone, X, Plus } from "lucide-react";
+import { MessageCircle, Phone, X, Plus, ArrowUp } from "lucide-react";
 import ChatFormDialog from "@/components/ChatFormDialog";
 
 const FloatingCTA = () => {
