@@ -4,20 +4,23 @@ import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sh
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import ThemeToggle from "@/components/ThemeToggle";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useI18n } from "@/hooks/useI18n";
 
-const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Team", href: "#team" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact-form" },
+const navKeys = [
+  { key: "nav.home", href: "#home" },
+  { key: "nav.services", href: "#services" },
+  { key: "nav.pricing", href: "#pricing" },
+  { key: "nav.team", href: "#team" },
+  { key: "nav.gallery", href: "#gallery" },
+  { key: "nav.contact", href: "#contact-form" },
 ];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
+  const { t } = useI18n();
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".snap-y") || window;
@@ -36,10 +39,13 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={cn(
-      "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl transition-all duration-300",
-      visible ? "translate-y-0 opacity-100" : "-translate-y-[calc(100%+2rem)] opacity-0"
-    )}>
+    <header
+      role="banner"
+      className={cn(
+        "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl transition-all duration-300",
+        visible ? "translate-y-0 opacity-100" : "-translate-y-[calc(100%+2rem)] opacity-0"
+      )}
+    >
       <div
         className={cn(
           "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
@@ -49,7 +55,7 @@ const Header = () => {
         )}
       >
         {/* Logo */}
-        <a href="#home" className="flex flex-col leading-tight">
+        <a href="#home" aria-label="Go to homepage" className="flex flex-col leading-tight">
           <span className={cn(
             "font-display text-lg md:text-xl font-bold tracking-tight transition-colors duration-500",
             scrolled ? "text-primary" : "text-primary-foreground"
@@ -65,8 +71,8 @@ const Header = () => {
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
+        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
+          {navKeys.map((link) => (
             <a
               key={link.href}
               href={link.href}
@@ -77,13 +83,18 @@ const Header = () => {
                   : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
               )}
             >
-              {link.label}
+              {t(link.key)}
             </a>
           ))}
         </nav>
 
         {/* Right side */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <LanguageSwitcher className={cn(
+            scrolled
+              ? "text-foreground hover:bg-primary/5"
+              : "text-primary-foreground hover:bg-primary-foreground/10"
+          )} />
           <ThemeToggle className={cn(
             scrolled
               ? "text-foreground hover:bg-primary/5"
@@ -91,6 +102,7 @@ const Header = () => {
           )} />
           <a
             href="tel:+917996217888"
+            aria-label="Call to book appointment"
             className={cn(
               "hidden sm:inline-flex items-center gap-2 h-9 px-4 rounded-xl text-sm font-semibold transition-colors duration-500",
               scrolled
@@ -99,7 +111,7 @@ const Header = () => {
             )}
           >
             <Phone className="w-4 h-4" />
-            Book Now
+            {t("nav.bookNow")}
           </a>
 
           {/* Mobile menu */}
@@ -108,6 +120,7 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setOpen(!open)}
+              aria-label="Open navigation menu"
               className={cn(
                 "lg:hidden transition-colors",
                 scrolled ? "text-foreground" : "text-primary-foreground"
@@ -117,15 +130,15 @@ const Header = () => {
             </Button>
             <SheetContent side="right" className="w-72 bg-card border-border">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <nav className="flex flex-col gap-2 mt-8">
-                {navLinks.map((link) => (
+              <nav aria-label="Mobile navigation" className="flex flex-col gap-2 mt-8">
+                {navKeys.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
                     className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </a>
                 ))}
               </nav>
@@ -139,7 +152,7 @@ const Header = () => {
                   )}
                 >
                   <Phone className="w-4 h-4" />
-                  Book Now
+                  {t("nav.bookNow")}
                 </a>
               </SheetFooter>
             </SheetContent>
