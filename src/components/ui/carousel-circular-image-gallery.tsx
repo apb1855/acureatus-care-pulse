@@ -83,7 +83,7 @@ export function ImageGallery({ images: imagesProp }: ImageGalleryProps) {
   useEffect(() => {
     if (!gsapReady) return;
     if (autoplayTimer.current) clearInterval(autoplayTimer.current);
-    autoplayTimer.current = window.setInterval(next, 4500);
+    autoplayTimer.current = window.setInterval(next, 6000);
     return () => {
       if (autoplayTimer.current) clearInterval(autoplayTimer.current);
     };
