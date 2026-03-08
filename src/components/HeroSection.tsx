@@ -55,19 +55,19 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-2xl"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/15 backdrop-blur-sm border border-primary-foreground/20 mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/15 backdrop-blur-sm border border-white/20 mb-6">
             <Star className="w-4 h-4 text-gold fill-gold" />
-            <span className="text-sm font-medium text-primary-foreground">
+            <span className="text-sm font-medium text-white">
               {business_identity.rating}★ Trusted by {business_identity.review_count}+ Patients
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-foreground leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
             Moving from symptomatic relief to{" "}
-            <span className="text-secondary">root-cause cure</span>
+            <span className="text-secondary dark:text-[hsl(197,71%,73%)]">root-cause cure</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 font-body leading-relaxed">
+          <p className="text-lg md:text-xl text-white/80 mb-8 font-body leading-relaxed">
             AI-powered diagnostics combined with advanced physiotherapy for lasting pain relief.
             An initiative of Sharp Insight Rehabilitation Research Centre.
           </p>
