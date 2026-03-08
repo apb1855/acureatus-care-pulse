@@ -10,7 +10,18 @@ export interface iTestimonial {
   designation: string;
   description: string;
   profileImage: string;
+  socialLinks?: {
+    linkedin?: string;
+    instagram?: string;
+    website?: string;
+  };
 }
+
+const truncateToWords = (text: string, maxWords: number) => {
+  const words = text.split(/\s+/);
+  if (words.length <= maxWords) return text;
+  return words.slice(0, maxWords).join(" ") + "..";
+};
 
 interface iCarouselProps {
   items: React.ReactElement<{
