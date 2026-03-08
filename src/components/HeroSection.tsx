@@ -87,6 +87,8 @@ const HeroSection = () => {
               {t("hero.exploreServices")}
             </a>
           </div>
+
+          <StatsBar />
         </motion.div>
       </div>
     </section>

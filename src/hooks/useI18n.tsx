@@ -194,6 +194,12 @@ const translations: Record<Locale, Record<string, string>> = {
     "fab.goToTop": "ಮೇಲಕ್ಕೆ ಹೋಗಿ",
     "fab.bookNow": "ಈಗ ಬುಕ್ ಮಾಡಿ",
     "fab.chat": "ನಮ್ಮೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ",
+
+    // Stats
+    "stats.yearsExperience": "ವರ್ಷಗಳ ಅನುಭವ",
+    "stats.happyPatients": "ಸಂತೋಷದ ರೋಗಿಗಳು",
+    "stats.advancedTech": "ಮುಂದುವರಿದ ತಂತ್ರಜ್ಞಾನಗಳು",
+    "stats.specializedClinics": "ವಿಶೇಷ ಕ್ಲಿನಿಕ್‌ಗಳು",
   },
 };
 
