@@ -45,14 +45,16 @@ const ServicesSection = () => {
   return (
     <section id="services" className="py-20 md:py-28 bg-muted/50">
       <div className="container">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            {t("services.title")}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            {t("services.subtitle")}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              {t("services.title")}
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              {t("services.subtitle")}
+            </p>
+          </div>
+        </ScrollReveal>
 
         <BentoGrid className="lg:grid-rows-3">
           {features.map((feature) => (
