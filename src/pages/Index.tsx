@@ -20,7 +20,7 @@ const Index = () => (
     <div className="snap-start"><ServicesSection /></div>
     <div className="snap-start"><PricingSection /></div>
     <div className="snap-start"><TeamSection /></div>
-    <div className="snap-start"><HallOfFameSection /></div>
+    {/* <div className="snap-start"><HallOfFameSection /></div> */}
     <div className="snap-start"><GallerySection /></div>
     <div className="snap-start"><TestimonialsSection /></div>
     <div className="snap-start"><ContactSection /></div>
