@@ -29,13 +29,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 const formSchema = z.object({
   name: z
@@ -62,14 +55,6 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-const timeSlots = [
-  "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
-  "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM",
-  "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
-  "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM",
-  "05:00 PM", "05:30 PM", "06:00 PM", "06:30 PM",
-  "07:00 PM", "07:30 PM", "08:00 PM",
-];
 
 interface ChatFormDialogProps {
   open: boolean;
@@ -100,7 +85,7 @@ const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
       .filter(Boolean)
       .join("%0A");
 
-    const url = `https://wa.me/919796217888?text=${encodeURIComponent(lines.replace(/%0A/g, "\n"))}`;
+    const url = `https://wa.me/917996217888?text=${encodeURIComponent(lines.replace(/%0A/g, "\n"))}`;
     window.open(url, "_blank", "noopener,noreferrer");
     form.reset();
     onOpenChange(false);
@@ -223,20 +208,20 @@ const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
                     <FormLabel>Preferred Time *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className={cn(!field.value && "text-muted-foreground")}>
-                          <SelectValue placeholder="Pick time" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="max-h-60">
-                        {timeSlots.map((slot) => (
-                          <SelectItem key={slot} value={slot}>
-                            {slot}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <div className="relative">
+                        <Input
+                          type="time"
+                          value={field.value || ""}
+                          onChange={(e) => field.onChange(e.target.value)}
+                          className={cn(
+                            "w-full pl-3 pr-3",
+                            !field.value && "text-muted-foreground"
+                          )}
+                        />
+                        <Clock className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-50 pointer-events-none" />
+                      </div>
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
