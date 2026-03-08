@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { MenuIcon, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sheet";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -13,6 +14,7 @@ const navKeys = [
   { key: "nav.pricing", href: "#pricing" },
   { key: "nav.team", href: "#team" },
   { key: "nav.gallery", href: "#gallery" },
+  { key: "nav.blog", href: "/blog", isRoute: true },
   { key: "nav.contact", href: "#contact-form" },
 ];
 
@@ -72,20 +74,35 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-          {navKeys.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
-                scrolled
-                  ? "text-foreground hover:text-primary hover:bg-primary/5"
-                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              )}
-            >
-              {t(link.key)}
-            </a>
-          ))}
+          {navKeys.map((link) =>
+            link.isRoute ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                  scrolled
+                    ? "text-foreground hover:text-primary hover:bg-primary/5"
+                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                )}
+              >
+                {t(link.key)}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                  scrolled
+                    ? "text-foreground hover:text-primary hover:bg-primary/5"
+                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                )}
+              >
+                {t(link.key)}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Right side */}
@@ -131,16 +148,27 @@ const Header = () => {
             <SheetContent side="right" className="w-72 bg-card border-border">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <nav aria-label="Mobile navigation" className="flex flex-col gap-2 mt-8">
-                {navKeys.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
-                  >
-                    {t(link.key)}
-                  </a>
-                ))}
+                {navKeys.map((link) =>
+                  link.isRoute ? (
+                    <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setOpen(false)}
+                      className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                    >
+                      {t(link.key)}
+                    </Link>
+                  ) : (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
+                    >
+                      {t(link.key)}
+                    </a>
+                  )
+                )}
               </nav>
               <SheetFooter className="mt-6 flex flex-col gap-2">
                 <a
