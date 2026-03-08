@@ -1,8 +1,9 @@
+import { forwardRef } from "react";
 import { Shield, Scale, Heart, Activity } from "lucide-react";
 import { Feature108 } from "@/components/ui/feature108";
 import { useI18n } from "@/hooks/useI18n";
 
-const PillarsSection = () => {
+const PillarsSection = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useI18n();
 
   const pillarTabs = [
@@ -61,13 +62,17 @@ const PillarsSection = () => {
   ];
 
   return (
-    <Feature108
-      badge="Our Approach"
-      heading={t("pillars.title")}
-      description={t("pillars.subtitle")}
-      tabs={pillarTabs}
-    />
+    <div ref={ref}>
+      <Feature108
+        badge="Our Approach"
+        heading={t("pillars.title")}
+        description={t("pillars.subtitle")}
+        tabs={pillarTabs}
+      />
+    </div>
   );
-};
+});
+
+PillarsSection.displayName = "PillarsSection";
 
 export default PillarsSection;

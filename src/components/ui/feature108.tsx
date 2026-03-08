@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,16 +33,16 @@ interface Feature108Props {
   tabs?: Tab[];
 }
 
-const Feature108 = ({
+const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
   badge,
   heading,
   description,
   tabs = [],
-}: Feature108Props) => {
+}, ref) => {
   const [openModal, setOpenModal] = useState<TabContent | null>(null);
 
   return (
-    <section className="py-20 md:py-28 bg-background">
+    <section ref={ref} className="py-20 md:py-28 bg-background">
       <div className="container">
         <div className="flex flex-col items-center gap-4 text-center mb-12">
           {badge && <Badge variant="outline" className="text-sm font-medium text-primary border-primary/30">{badge}</Badge>}
@@ -130,6 +130,8 @@ const Feature108 = ({
       </Dialog>
     </section>
   );
-};
+});
+
+Feature108.displayName = "Feature108";
 
 export { Feature108 };
