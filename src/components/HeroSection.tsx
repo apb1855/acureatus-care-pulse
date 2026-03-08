@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { Star, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Star, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -16,7 +16,6 @@ const HeroSection = () => {
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % heroImages.length), []);
-  const prev = useCallback(() => setCurrent((c) => (c - 1 + heroImages.length) % heroImages.length), []);
 
   useEffect(() => {
     const timer = setInterval(next, 5000);
@@ -25,47 +24,26 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background carousel */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
+      {/* Background images - all rendered, only current visible */}
+      {heroImages.map((src, i) => (
+        <div
+          key={i}
+          className="absolute inset-0 transition-opacity duration-1000"
+          style={{ opacity: i === current ? 1 : 0 }}
         >
-          <img src={heroImages[current]} alt="" className="w-full h-full object-cover" />
+          <img src={src} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Navigation arrows */}
-      <button
-        onClick={prev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-card/20 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center text-primary-foreground hover:bg-card/40 transition"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-5 h-5" />
-      </button>
-      <button
-        onClick={next}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-card/20 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center text-primary-foreground hover:bg-card/40 transition"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-5 h-5" />
-      </button>
+        </div>
+      ))}
 
       {/* Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroImages.map((_, i) => (
-          <button
+          <span
             key={i}
-            onClick={() => setCurrent(i)}
             className={`w-2.5 h-2.5 rounded-full transition-all ${
               i === current ? "bg-secondary w-6" : "bg-primary-foreground/40"
             }`}
-            aria-label={`Go to slide ${i + 1}`}
           />
         ))}
       </div>
