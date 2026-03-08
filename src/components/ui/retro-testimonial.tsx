@@ -211,15 +211,44 @@ const TestimonialCard = ({
               >
                 <X className="h-5 w-5 text-primary-foreground" />
               </button>
-              <p className="text-sm font-medium text-muted-foreground">
-                {testimonial.designation}
-              </p>
-              <p className="text-2xl md:text-4xl font-display font-semibold text-foreground mt-2">
-                {testimonial.name}
-              </p>
-              <div className="py-10">
-                <Quote className="h-8 w-8 text-primary/30 mb-4" />
-                <p className="text-muted-foreground leading-relaxed">{testimonial.description}</p>
+              <div className="flex flex-col md:flex-row gap-6 mt-4">
+                <div className="w-full md:w-1/3 flex-shrink-0">
+                  <img
+                    src={testimonial.profileImage}
+                    alt={testimonial.name}
+                    className="w-full aspect-[3/4] object-cover rounded-2xl"
+                  />
+                </div>
+                <div className="flex-1">
+                  <p className="text-2xl md:text-4xl font-display font-semibold text-foreground">
+                    {testimonial.name}
+                  </p>
+                  <p className="text-sm font-medium text-muted-foreground mt-2">
+                    {testimonial.designation}
+                  </p>
+                  <p className="text-muted-foreground leading-relaxed mt-6">
+                    {testimonial.description}
+                  </p>
+                  {testimonial.socialLinks && (
+                    <div className="flex gap-3 mt-6">
+                      {testimonial.socialLinks.linkedin && (
+                        <a href={testimonial.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+                          <Linkedin className="h-5 w-5" />
+                        </a>
+                      )}
+                      {testimonial.socialLinks.instagram && (
+                        <a href={testimonial.socialLinks.instagram} target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+                          <Instagram className="h-5 w-5" />
+                        </a>
+                      )}
+                      {testimonial.socialLinks.website && (
+                        <a href={testimonial.socialLinks.website} target="_blank" rel="noopener noreferrer" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
+                          <Globe className="h-5 w-5" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           </motion.div>
