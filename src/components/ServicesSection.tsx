@@ -25,7 +25,7 @@ const features = clinicData.specialized_clinics.map((clinic, i) => ({
   name: clinic.title,
   description: clinic.focus + (clinic.partnership ? ` (Partner: ${clinic.partnership})` : ""),
   href: "#contact",
-  cta: "Book Appointment",
+  cta: "View More",
   imageSrc: clinicImages[i],
   background: (
     <img
