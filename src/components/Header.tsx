@@ -1,138 +1,122 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-
+import React, { useState, useEffect } from "react";
+import { MenuIcon, Phone } from "lucide-react";
+import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sheet";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Services", href: "#services" },
   { label: "Pricing", href: "#pricing" },
   { label: "Team", href: "#team" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Contact", href: "#contact" },
 ];
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const scrollContainer = document.querySelector('.snap-y') || window;
+    const scrollContainer = document.querySelector(".snap-y") || window;
     const onScroll = () => {
-      const currentY = scrollContainer === window ? window.scrollY : (scrollContainer as HTMLElement).scrollTop;
+      const currentY =
+        scrollContainer === window
+          ? window.scrollY
+          : (scrollContainer as HTMLElement).scrollTop;
       setScrolled(currentY > 20);
-      setHidden(currentY > lastScrollY && currentY > 80);
-      setLastScrollY(currentY);
     };
     scrollContainer.addEventListener("scroll", onScroll, { passive: true });
     return () => scrollContainer.removeEventListener("scroll", onScroll);
-  }, [lastScrollY]);
+  }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50"
-          : "bg-card/20 backdrop-blur-lg border-b border-primary-foreground/15"
-      }`}
-    >
-      <div className="container flex items-center justify-between h-16 md:h-20">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+      <div
+        className={cn(
+          "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
+          scrolled
+            ? "bg-card/90 backdrop-blur-xl border-border shadow-lg"
+            : "bg-card/60 backdrop-blur-lg border-border/50"
+        )}
+      >
+        {/* Logo */}
         <a href="#home" className="flex flex-col leading-tight">
-          <span className={`font-display text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300 ${
-            scrolled ? "text-primary" : "text-primary-foreground"
-          }`}>
+          <span className="font-display text-lg md:text-xl font-bold tracking-tight text-primary">
             ACUREATUS
           </span>
-          <span className={`text-[9px] md:text-[11px] font-semibold tracking-widest transition-colors duration-300 ${
-            scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
-          }`}>
+          <span className="text-[8px] md:text-[10px] font-semibold tracking-widest text-muted-foreground">
             AI Advanced Physio Pain Clinic
           </span>
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((l) => (
+        <nav className="hidden lg:flex items-center gap-1">
+          {navLinks.map((link) => (
             <a
-              key={l.href}
-              href={l.href}
-              className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                scrolled
-                  ? "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              }`}
+              key={link.href}
+              href={link.href}
+              className="px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-primary rounded-lg transition-colors hover:bg-primary/5"
             >
-              {l.label}
+              {link.label}
             </a>
           ))}
+        </nav>
+
+        {/* Right side */}
+        <div className="flex items-center gap-2">
           <a
             href="tel:+917996217888"
-            className={`inline-flex items-center gap-2 h-11 px-6 ml-3 rounded-full font-semibold text-sm transition-all duration-300 ${
-              scrolled
-                ? "bg-primary text-primary-foreground hover:opacity-90"
-                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-            }`}
+            className={cn(
+              buttonVariants({ variant: "default", size: "sm" }),
+              "hidden sm:inline-flex gap-2 rounded-xl"
+            )}
           >
             <Phone className="w-4 h-4" />
             Book Now
           </a>
-        </nav>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
-          }`}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {/* Mobile overlay */}
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 top-16 bg-foreground/40 backdrop-blur-sm z-30 md:hidden"
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute top-16 left-4 right-4 bg-card z-40 md:hidden rounded-2xl shadow-2xl border border-border overflow-hidden"
+          {/* Mobile menu */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setOpen(!open)}
+              className="lg:hidden"
             >
-              <nav className="flex flex-col items-center gap-2 py-6 px-4">
-                {navLinks.map((l) => (
+              <MenuIcon className="w-5 h-5" />
+            </Button>
+            <SheetContent side="right" className="w-72 bg-card border-border">
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+              <nav className="flex flex-col gap-2 mt-8">
+                {navLinks.map((link) => (
                   <a
-                    key={l.href}
-                    href={l.href}
+                    key={link.href}
+                    href={link.href}
                     onClick={() => setOpen(false)}
-                    className="w-full text-center text-lg font-semibold text-foreground hover:text-primary hover:bg-primary/5 py-3 rounded-xl transition-colors"
+                    className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                   >
-                    {l.label}
+                    {link.label}
                   </a>
                 ))}
+              </nav>
+              <SheetFooter className="mt-6 flex flex-col gap-2">
                 <a
                   href="tel:+917996217888"
-                  className="inline-flex items-center justify-center gap-2 w-full h-14 rounded-xl bg-primary text-primary-foreground font-semibold text-lg mt-2"
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    buttonVariants({ variant: "default" }),
+                    "w-full gap-2 rounded-xl"
+                  )}
                 >
-                  <Phone className="w-5 h-5" />
-                  Call Now
+                  <Phone className="w-4 h-4" />
+                  Book Now
                 </a>
-              </nav>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
     </header>
   );
 };
