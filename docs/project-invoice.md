@@ -111,7 +111,11 @@
 - [x] Mobile & tablet optimized
 - [x] SEO-ready structure
 - [x] Theming system (easy colour/font changes)
-- [x] Developer documentation
+- [x] Dark mode with theme toggle
+- [x] PWA — installable as mobile app
+- [x] Cookie consent banner
+- [x] Page speed optimization (caching strategies)
+- [x] Developer documentation (3 guides)
 - [x] Clean, maintainable TypeScript codebase
 
 ---
