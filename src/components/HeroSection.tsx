@@ -75,7 +75,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="tel:+917996217888"
-              className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-lg bg-card text-primary font-semibold text-base hover:bg-card/90 transition min-h-[48px]"
+              className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-lg bg-card text-primary dark:bg-white dark:text-[hsl(213,100%,19%)] font-semibold text-base hover:bg-card/90 dark:hover:bg-white/90 transition min-h-[48px]"
             >
               Book Appointment
               <ArrowRight className="w-4 h-4" />
