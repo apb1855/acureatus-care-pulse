@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import ContactSection from "@/components/ContactSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import BlogPreviewSection from "@/components/BlogPreviewSection";
 import FAQSection from "@/components/FAQSection";
 import FloatingCTA from "@/components/FloatingCTA";
 import Footer from "@/components/Footer";
