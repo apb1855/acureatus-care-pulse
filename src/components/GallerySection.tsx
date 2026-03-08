@@ -11,6 +11,10 @@ import {
 } from "@/components/ui/carousel";
 
 const GallerySection = () => {
+  const autoplayPlugin = useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })
+  );
+
   return (
     <section id="gallery" className="py-20 md:py-28 bg-muted/30">
       <div className="container">
