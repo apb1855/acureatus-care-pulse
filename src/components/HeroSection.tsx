@@ -3,6 +3,7 @@ import { Star, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
 import { useI18n } from "@/hooks/useI18n";
+import StatsBar from "@/components/StatsBar";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const heroImages = [
