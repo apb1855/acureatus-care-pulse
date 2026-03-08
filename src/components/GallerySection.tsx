@@ -55,8 +55,10 @@ const GallerySection = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-4 md:-left-5" />
-            <CarouselNext className="-right-4 md:-right-5" />
+            <div className="flex items-center justify-center gap-4 mt-8">
+              <CarouselPrevious className="static translate-y-0 h-10 w-10 border-border bg-card shadow-md hover:bg-accent" />
+              <CarouselNext className="static translate-y-0 h-10 w-10 border-border bg-card shadow-md hover:bg-accent" />
+            </div>
           </Carousel>
         </motion.div>
       </div>
