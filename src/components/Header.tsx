@@ -16,15 +16,19 @@ const navLinks = [
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".snap-y") || window;
+    let lastY = 0;
     const onScroll = () => {
       const currentY =
         scrollContainer === window
           ? window.scrollY
           : (scrollContainer as HTMLElement).scrollTop;
       setScrolled(currentY > 20);
+      setVisible(currentY <= 20 || currentY < lastY);
+      lastY = currentY;
     };
     scrollContainer.addEventListener("scroll", onScroll, { passive: true });
     return () => scrollContainer.removeEventListener("scroll", onScroll);
