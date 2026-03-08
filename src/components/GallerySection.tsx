@@ -1,5 +1,7 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { galleryImages } from "@/data/galleryData";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
