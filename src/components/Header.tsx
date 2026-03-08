@@ -18,14 +18,15 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
+    const scrollContainer = document.querySelector('.snap-y') || window;
     const onScroll = () => {
-      const currentY = window.scrollY;
+      const currentY = scrollContainer === window ? window.scrollY : (scrollContainer as HTMLElement).scrollTop;
       setScrolled(currentY > 20);
       setHidden(currentY > lastScrollY && currentY > 80);
       setLastScrollY(currentY);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    scrollContainer.addEventListener("scroll", onScroll, { passive: true });
+    return () => scrollContainer.removeEventListener("scroll", onScroll);
   }, [lastScrollY]);
 
   return (

@@ -12,18 +12,18 @@ import FloatingCTA from "@/components/FloatingCTA";
 import Footer from "@/components/Footer";
 
 const Index = () => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen bg-background snap-y snap-mandatory overflow-y-auto h-screen scroll-smooth">
     <Header />
-    <HeroSection />
-    <PillarsSection />
-    <ServicesSection />
-    <PricingSection />
-    <TeamSection />
-    <HallOfFameSection />
-    <GallerySection />
-    <ContactSection />
-    <FAQSection />
-    <Footer />
+    <div className="snap-start"><HeroSection /></div>
+    <div className="snap-start"><PillarsSection /></div>
+    <div className="snap-start"><ServicesSection /></div>
+    <div className="snap-start"><PricingSection /></div>
+    <div className="snap-start"><TeamSection /></div>
+    <div className="snap-start"><HallOfFameSection /></div>
+    <div className="snap-start"><GallerySection /></div>
+    <div className="snap-start"><ContactSection /></div>
+    <div className="snap-start"><FAQSection /></div>
+    <div className="snap-start"><Footer /></div>
     <FloatingCTA />
   </div>
 );
