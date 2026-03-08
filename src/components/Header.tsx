@@ -69,7 +69,7 @@ const Header = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 top-16 bg-card/98 backdrop-blur-xl z-40 md:hidden"
+            className="fixed inset-0 top-16 bg-card z-40 md:hidden shadow-2xl"
           >
             <nav className="flex flex-col items-center justify-center gap-8 pt-16">
               {navLinks.map((l) => (
