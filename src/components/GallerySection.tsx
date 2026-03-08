@@ -1,20 +1,66 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { galleryImages } from "@/data/galleryData";
-import Autoplay from "embla-carousel-autoplay";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery";
+
+const mediaItems = [
+  {
+    id: 1,
+    type: "image",
+    title: "Physiotherapy Session",
+    desc: "Hands-on manual therapy treatment",
+    url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop",
+    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2",
+  },
+  {
+    id: 2,
+    type: "image",
+    title: "Rehabilitation Exercise",
+    desc: "Guided patient recovery program",
+    url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop",
+    span: "md:col-span-2 md:row-span-2 sm:col-span-2 sm:row-span-2",
+  },
+  {
+    id: 3,
+    type: "image",
+    title: "Advanced Equipment",
+    desc: "State-of-the-art medical devices",
+    url: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=600&fit=crop",
+    span: "md:col-span-1 md:row-span-3 sm:col-span-2 sm:row-span-2",
+  },
+  {
+    id: 4,
+    type: "image",
+    title: "Spinal Therapy",
+    desc: "Specialized spinal treatment care",
+    url: "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=800&h=600&fit=crop",
+    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2",
+  },
+  {
+    id: 5,
+    type: "image",
+    title: "Clinical Consultation",
+    desc: "Expert diagnosis and care planning",
+    url: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=800&h=600&fit=crop",
+    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2",
+  },
+  {
+    id: 6,
+    type: "image",
+    title: "Modern Clinic",
+    desc: "Clean and welcoming facility",
+    url: "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&h=600&fit=crop",
+    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2",
+  },
+  {
+    id: 7,
+    type: "image",
+    title: "Balance Training",
+    desc: "Fitness and mobility exercises",
+    url: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800&h=600&fit=crop",
+    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2",
+  },
+];
 
 const GallerySection = () => {
-  const autoplayPlugin = useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
-
   return (
     <section id="gallery" className="py-20 md:py-28 bg-muted/30">
       <div className="container">
@@ -22,51 +68,12 @@ const GallerySection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Gallery
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            A glimpse into our clinic, treatments, and patient care journey.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-5xl mx-auto"
-        >
-          <Carousel
-            opts={{ align: "start", loop: true }}
-            plugins={[autoplayPlugin.current]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-3 md:-ml-4">
-              {galleryImages.map((img, i) => (
-                <CarouselItem key={i} className="pl-3 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <div className="group relative overflow-hidden rounded-xl aspect-[3/2] bg-card border border-border shadow-sm">
-                    <img
-                      src={img.src}
-                      alt={img.alt}
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/30 transition-colors duration-300 flex items-end">
-                      <p className="text-primary-foreground text-xs font-medium p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {img.alt}
-                      </p>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <div className="flex items-center justify-center gap-4 mt-8">
-              <CarouselPrevious className="static translate-y-0 h-10 w-10 border-border bg-card shadow-md hover:bg-accent" />
-              <CarouselNext className="static translate-y-0 h-10 w-10 border-border bg-card shadow-md hover:bg-accent" />
-            </div>
-          </Carousel>
+          <InteractiveBentoGallery
+            mediaItems={mediaItems}
+            title="Gallery"
+            description="A glimpse into our clinic, treatments, and patient care journey."
+          />
         </motion.div>
       </div>
     </section>
