@@ -3,6 +3,7 @@ import { MenuIcon, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sheet";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Home", href: "#home" },
