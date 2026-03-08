@@ -5,6 +5,7 @@ import ServicesSection from "@/components/ServicesSection";
 import PricingSection from "@/components/PricingSection";
 import TeamSection from "@/components/TeamSection";
 import HallOfFameSection from "@/components/HallOfFameSection";
+import GallerySection from "@/components/GallerySection";
 import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import FloatingCTA from "@/components/FloatingCTA";
