@@ -66,12 +66,12 @@ const Header = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 top-16 bg-card z-40 md:hidden shadow-2xl"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-16 left-4 right-4 bg-card z-40 md:hidden rounded-xl shadow-2xl border border-border"
           >
-            <nav className="flex flex-col items-center justify-center gap-8 pt-16">
+            <nav className="flex flex-col items-center gap-6 py-8">
               {navLinks.map((l) => (
                 <a
                   key={l.href}
