@@ -106,6 +106,29 @@ The language switcher is in the **Header** between the nav links and the theme t
 - When in English: Shows `ಕನ್ನಡ` (click to switch to Kannada)
 - When in Kannada: Shows `EN` (click to switch to English)
 
+### Components using `t()` translations
+
+All 13 major components are wired to the i18n system:
+
+| Component | Translation keys used |
+|---|---|
+| `HeroSection` | `hero.*` |
+| `PillarsSection` | `pillars.*` |
+| `ServicesSection` | `services.*` |
+| `PricingSection` | `pricing.*` |
+| `TeamSection` | `team.*` |
+| `GallerySection` | `gallery.*` |
+| `TestimonialsSection` | `testimonials.*` |
+| `ContactFormSection` | `contact.*` |
+| `ContactSection` | `visit.*` |
+| `FAQSection` | `faq.*` |
+| `Footer` | `footer.*`, `nav.*`, `visit.*` |
+| `FloatingCTA` | `fab.*` |
+| `CookieConsent` | `cookie.*` |
+| `Header` | `nav.*` |
+
+> **Note**: Some content like clinic names, addresses, FAQ questions/answers, and testimonial quotes remain in English as they are proper nouns or clinic-specific data from `clinicData.ts`.
+
 ### Storage
 
 | Key | Value | Location |
