@@ -62,7 +62,12 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="px-3 py-1.5 text-sm font-semibold text-foreground/80 hover:text-primary rounded-lg transition-colors hover:bg-primary/5"
+              className={cn(
+                "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                scrolled
+                  ? "text-foreground hover:text-primary hover:bg-primary/5"
+                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+              )}
             >
               {link.label}
             </a>
