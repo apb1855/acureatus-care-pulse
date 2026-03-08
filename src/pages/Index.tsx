@@ -10,6 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import FloatingCTA from "@/components/FloatingCTA";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Footer from "@/components/Footer";
 
 const Index = () => (
@@ -27,6 +28,7 @@ const Index = () => (
     <div className="snap-start"><FAQSection /></div>
     <div className="snap-start"><Footer /></div>
     <FloatingCTA />
+    <WhatsAppButton />
   </div>
 );
 
