@@ -23,6 +23,8 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const { t } = useI18n();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".snap-y") || window;
