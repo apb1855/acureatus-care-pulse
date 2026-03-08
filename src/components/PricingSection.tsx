@@ -25,39 +25,20 @@ const PricingSection = () => (
         </p>
       </motion.div>
 
-      {/* Mobile: Accordion / Desktop: Table */}
-      <div className="md:hidden">
-        <Accordion type="single" collapsible className="space-y-2">
-          {clinicData.treatment_price_list_inr.map((t, i) => (
-            <AccordionItem key={i} value={`item-${i}`} className="border border-border rounded-lg px-4 bg-card">
-              <AccordionTrigger className="text-base font-medium text-foreground py-4">
-                {t.item}
-              </AccordionTrigger>
-              <AccordionContent className="pb-4">
-                <div className="flex items-center gap-1 text-lg font-semibold text-primary">
-                  <IndianRupee className="w-4 h-4" />
-                  {t.price ? t.price : t.price_range}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-
-      <div className="hidden md:block">
-        <div className="rounded-xl border border-border overflow-hidden bg-card">
+      <div className="rounded-xl border border-border overflow-hidden bg-card">
+        <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="bg-primary text-primary-foreground">
-                <th className="text-left px-6 py-4 font-display font-semibold">Treatment</th>
-                <th className="text-right px-6 py-4 font-display font-semibold">Price (₹)</th>
+                <th className="text-left px-4 md:px-6 py-3 md:py-4 font-display font-semibold text-sm md:text-base">Treatment</th>
+                <th className="text-right px-4 md:px-6 py-3 md:py-4 font-display font-semibold text-sm md:text-base">Price (₹)</th>
               </tr>
             </thead>
             <tbody>
               {clinicData.treatment_price_list_inr.map((t, i) => (
                 <tr key={i} className="border-t border-border hover:bg-muted/50 transition-colors">
-                  <td className="px-6 py-4 text-foreground">{t.item}</td>
-                  <td className="px-6 py-4 text-right font-semibold text-primary">
+                  <td className="px-4 md:px-6 py-3 md:py-4 text-sm md:text-base text-foreground">{t.item}</td>
+                  <td className="px-4 md:px-6 py-3 md:py-4 text-right text-sm md:text-base font-semibold text-primary">
                     ₹{t.price ? t.price : t.price_range}
                   </td>
                 </tr>
