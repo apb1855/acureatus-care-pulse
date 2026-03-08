@@ -26,12 +26,12 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50"
-          : "bg-card/10 backdrop-blur-md border-b border-primary-foreground/10"
+          : "bg-card/20 backdrop-blur-lg border-b border-primary-foreground/15"
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt="Acureatus Logo" className="h-10 md:h-14 w-auto" />
+          <img src={logo} alt="Acureatus Logo" className="h-14 md:h-20 w-auto drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]" />
         </a>
 
         {/* Desktop nav */}
