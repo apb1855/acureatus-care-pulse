@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/acureatus-logo.png";
+
 
 const navLinks = [
   { label: "Home", href: "#home" },
