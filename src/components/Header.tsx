@@ -45,7 +45,7 @@ const Header = () => {
           <span className="font-display text-lg md:text-xl font-bold tracking-tight text-primary">
             ACUREATUS
           </span>
-          <span className="text-[8px] md:text-[10px] font-semibold tracking-widest text-muted-foreground">
+          <span className="text-[8px] md:text-[10px] font-semibold tracking-widest text-foreground/60">
             AI Advanced Physio Pain Clinic
           </span>
         </a>
