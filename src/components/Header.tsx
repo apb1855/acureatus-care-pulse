@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Pricing", href: "#pricing" },
   { label: "Team", href: "#team" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "#contact-form" },
 ];
 
 const Header = () => {
