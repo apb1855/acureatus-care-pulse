@@ -25,7 +25,7 @@ const teamProfileImages: Record<string, string> = {
   "Dr. Pratham":
     "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200&auto=format&fit=crop",
   "Ms. Glevisha":
-    "https://images.unsplash.com/photo-1594824476967-48c8b964ac31?q=80&w=200&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop",
 };
 
 const getDescription = (member: typeof clinicData.medical_team[0]) => {
