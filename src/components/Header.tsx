@@ -101,6 +101,7 @@ const Header = () => {
               </a>
             </nav>
           </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>
