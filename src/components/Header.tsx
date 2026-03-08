@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "@/assets/acureatus-logo.png";
+
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -39,8 +39,17 @@ const Header = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt="Acureatus Logo" className="h-14 md:h-20 w-auto drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]" />
+        <a href="#home" className="flex items-center gap-1.5">
+          <span className={`font-display text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300 ${
+            scrolled ? "text-primary" : "text-primary-foreground"
+          }`}>
+            Acureatus
+          </span>
+          <span className={`hidden sm:inline text-xs md:text-sm font-medium transition-colors duration-300 ${
+            scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
+          }`}>
+            AI Physio Clinic
+          </span>
         </a>
 
         {/* Desktop nav */}
