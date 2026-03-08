@@ -43,12 +43,12 @@ const Header = () => {
           <span className={`font-display text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300 ${
             scrolled ? "text-primary" : "text-primary-foreground"
           }`}>
-            Acureatus
+            ACUREATUS
           </span>
-          <span className={`text-[9px] md:text-[11px] font-semibold uppercase tracking-widest transition-colors duration-300 ${
+          <span className={`text-[9px] md:text-[11px] font-semibold tracking-widest transition-colors duration-300 ${
             scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
           }`}>
-            AI Advanced Physio Pain Clinic
+            Ai Advanced Physio Pain Clinic
           </span>
         </a>
 
