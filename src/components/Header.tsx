@@ -79,8 +79,10 @@ const Header = () => {
           <a
             href="tel:+917996217888"
             className={cn(
-              buttonVariants({ variant: "default", size: "sm" }),
-              "hidden sm:inline-flex gap-2 rounded-xl"
+              "hidden sm:inline-flex items-center gap-2 h-9 px-4 rounded-xl text-sm font-semibold transition-colors duration-500",
+              scrolled
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             )}
           >
             <Phone className="w-4 h-4" />
