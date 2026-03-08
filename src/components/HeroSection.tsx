@@ -42,7 +42,7 @@ const HeroSection = () => {
           <span
             key={i}
             className={`w-2.5 h-2.5 rounded-full transition-all ${
-              i === current ? "bg-secondary w-6" : "bg-primary-foreground/40"
+              i === current ? "bg-secondary w-6" : "bg-white/40"
             }`}
           />
         ))}
