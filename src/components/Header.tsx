@@ -3,6 +3,7 @@ import { MenuIcon, Phone } from "lucide-react";
 import { Sheet, SheetContent, SheetFooter, SheetTitle } from "@/components/ui/sheet";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -83,6 +84,11 @@ const Header = () => {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
+          <ThemeToggle className={cn(
+            scrolled
+              ? "text-foreground hover:bg-primary/5"
+              : "text-primary-foreground hover:bg-primary-foreground/10"
+          )} />
           <a
             href="tel:+917996217888"
             className={cn(
