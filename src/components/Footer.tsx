@@ -106,7 +106,7 @@ const Footer = () => (
               {clinicData.locations[0].contact_numbers[0]}
             </a>
           </div>
-          <div className="flex items-center gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-center gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <Clock className="w-4 h-4 shrink-0 text-secondary" />
             <span>Mon–Sat: {clinicData.operating_hours.monday_to_saturday}</span>
           </div>
