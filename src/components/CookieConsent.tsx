@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Cookie, X } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useI18n } from "@/hooks/useI18n";
 
 const CookieConsent = () => {
+  const { t } = useI18n();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("cookie-consent");
     if (!consent) {
-      // Small delay so it doesn't flash on load
       const timer = setTimeout(() => setVisible(true), 1500);
       return () => clearTimeout(timer);
     }
@@ -23,7 +23,6 @@ const CookieConsent = () => {
   const decline = () => {
     localStorage.setItem("cookie-consent", "declined");
     localStorage.setItem("cookie-consent-date", new Date().toISOString());
-    // Clear theme preference if user declines cookies
     setVisible(false);
   };
 
@@ -37,33 +36,14 @@ const CookieConsent = () => {
             <Cookie className="w-5 h-5 text-primary" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-display font-semibold text-foreground text-base mb-1">
-              We value your privacy 🍪
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              We use cookies and local storage to remember your theme preference (light/dark mode)
-              and improve your browsing experience. No personal data is collected or shared with third parties.
-            </p>
+            <h3 className="font-display font-semibold text-foreground text-base mb-1">{t("cookie.title")}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{t("cookie.description")}</p>
             <div className="flex flex-wrap gap-3 mt-4">
-              <button
-                onClick={accept}
-                className="inline-flex items-center px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors"
-              >
-                Accept All
-              </button>
-              <button
-                onClick={decline}
-                className="inline-flex items-center px-5 py-2 rounded-lg border border-border text-sm font-semibold text-foreground hover:bg-muted transition-colors"
-              >
-                Essential Only
-              </button>
+              <button onClick={accept} className="inline-flex items-center px-5 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-colors">{t("cookie.accept")}</button>
+              <button onClick={decline} className="inline-flex items-center px-5 py-2 rounded-lg border border-border text-sm font-semibold text-foreground hover:bg-muted transition-colors">{t("cookie.decline")}</button>
             </div>
           </div>
-          <button
-            onClick={decline}
-            aria-label="Close cookie banner"
-            className="shrink-0 text-muted-foreground hover:text-foreground transition-colors"
-          >
+          <button onClick={decline} aria-label="Close cookie banner" className="shrink-0 text-muted-foreground hover:text-foreground transition-colors">
             <X className="w-5 h-5" />
           </button>
         </div>

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Star, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
+import { useI18n } from "@/hooks/useI18n";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const heroImages = [
@@ -13,6 +14,7 @@ const heroImages = [
 
 const HeroSection = () => {
   const { business_identity } = clinicData;
+  const { t } = useI18n();
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % heroImages.length), []);
@@ -24,7 +26,6 @@ const HeroSection = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background images - all rendered, only current visible */}
       {heroImages.map((src, i) => (
         <div
           key={i}
@@ -36,7 +37,6 @@ const HeroSection = () => {
         </div>
       ))}
 
-      {/* Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {heroImages.map((_, i) => (
           <span
@@ -58,18 +58,17 @@ const HeroSection = () => {
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/15 backdrop-blur-sm border border-white/20 mb-6">
             <Star className="w-4 h-4 text-gold fill-gold" />
             <span className="text-sm font-medium text-white">
-              {business_identity.rating}★ Trusted by {business_identity.review_count}+ Patients
+              {business_identity.rating}★ {t("hero.trustedBy")} {business_identity.review_count}+ {t("hero.patients")}
             </span>
           </div>
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6">
-            Moving from symptomatic relief to{" "}
-            <span className="text-secondary dark:text-[hsl(197,71%,73%)]">root-cause cure</span>
+            {t("hero.tagline")}{" "}
+            <span className="text-secondary dark:text-[hsl(197,71%,73%)]">{t("hero.taglineHighlight")}</span>
           </h1>
 
           <p className="text-lg md:text-xl text-white/80 mb-8 font-body leading-relaxed">
-            AI-powered diagnostics combined with advanced physiotherapy for lasting pain relief.
-            An initiative of Sharp Insight Rehabilitation Research Centre.
+            {t("hero.description")}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
@@ -77,14 +76,14 @@ const HeroSection = () => {
               href="tel:+917996217888"
               className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-lg bg-card text-primary dark:bg-white dark:text-[hsl(213,100%,19%)] font-semibold text-base hover:bg-card/90 dark:hover:bg-white/90 transition min-h-[48px]"
             >
-              Book Appointment
+              {t("hero.bookAppointment")}
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="#services"
               className="inline-flex items-center justify-center gap-2 h-14 px-8 rounded-lg border-2 border-white/30 text-white font-semibold text-base hover:bg-white/10 transition min-h-[48px]"
             >
-              Explore Services
+              {t("hero.exploreServices")}
             </a>
           </div>
         </motion.div>
