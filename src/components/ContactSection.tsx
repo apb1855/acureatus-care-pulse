@@ -85,17 +85,6 @@ const ContactSection = () => {
               </a>
             </div>
 
-            <div className="p-6 rounded-xl bg-card border border-border">
-              <h3 className="text-lg font-display font-semibold text-foreground mb-4">FAQs</h3>
-              <div className="space-y-4">
-                {clinicData.faqs.map((faq, i) => (
-                  <div key={i}>
-                    <p className="text-sm font-medium text-foreground">{faq.q}</p>
-                    <p className="text-sm text-muted-foreground mt-1">{faq.a}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </div>
