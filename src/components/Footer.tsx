@@ -48,7 +48,7 @@ function AnimatedContainer({ className, delay = 0.1, children }: { delay?: numbe
 }
 
 const Footer = () => (
-  <footer className="bg-primary text-primary-foreground">
+  <footer className="bg-primary text-primary-foreground dark:bg-[hsl(213,80%,8%)] dark:text-[hsl(210,20%,95%)]">
     {/* Main footer */}
     <div className="container py-14">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
