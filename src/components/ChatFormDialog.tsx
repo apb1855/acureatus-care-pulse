@@ -100,7 +100,7 @@ const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
       .filter(Boolean)
       .join("%0A");
 
-    const url = `https://wa.me/919796217888?text=${encodeURIComponent(lines.replace(/%0A/g, "\n"))}`;
+    const url = `https://wa.me/917996217888?text=${encodeURIComponent(lines.replace(/%0A/g, "\n"))}`;
     window.open(url, "_blank", "noopener,noreferrer");
     form.reset();
     onOpenChange(false);
