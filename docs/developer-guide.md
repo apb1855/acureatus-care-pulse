@@ -15,6 +15,7 @@
 6. [WhatsApp Integration](#6-whatsapp-integration)
 7. [PWA (Progressive Web App)](#7-pwa-progressive-web-app)
 8. [Cookie Consent](#8-cookie-consent)
+9. [Treatment Pricing Data](#9-treatment-pricing-data)
 
 ---
 
@@ -24,8 +25,14 @@
 ├── public/                  # Static assets served as-is (favicon, robots.txt, PWA icons)
 ├── docs/                    # Developer documentation (you are here)
 │   ├── developer-guide.md           # This file
+│   ├── features-guide.md            # i18n, accessibility, booking guide
+│   ├── animations-darkmode-guide.md # Animations & dark mode guide
+│   ├── services-reviews-microinteractions-guide.md  # Service details, reviews, hover effects
+│   ├── seo-performance-guide.md     # JSON-LD, performance optimizations
 │   ├── seo-domain-deployment-cookies.md  # SEO, domain, deployment, cookies guide
-│   └── project-invoice.md          # Cost breakdown
+│   ├── white-label-guide.md         # Reusing for other clients
+│   ├── future-backend-guide.md      # Firebase / MongoDB / Lovable Cloud migration
+│   └── project-invoice.md           # Cost breakdown
 ├── src/
 │   ├── assets/              # Images imported by components (logo, hero background)
 │   ├── components/          # All React components
@@ -33,12 +40,13 @@
 │   │   │                      These come from shadcn/ui and are rarely edited.
 │   │   ├── Header.tsx        # Top navigation bar (desktop + mobile sheet) + theme toggle
 │   │   ├── HeroSection.tsx   # Landing hero with background image slideshow
-│   │   ├── PillarsSection.tsx
-│   │   ├── ServicesSection.tsx
-│   │   ├── PricingSection.tsx
+│   │   ├── PillarsSection.tsx  # Core pillars (Feature108 tabbed layout)
+│   │   ├── ServicesSection.tsx  # Specialized clinic cards (BentoGrid)
+│   │   ├── PricingSection.tsx  # Treatment price table (reads from clinicData.ts)
 │   │   ├── TeamSection.tsx
 │   │   ├── GallerySection.tsx
 │   │   ├── TestimonialsSection.tsx
+│   │   ├── GoogleReviewsSection.tsx  # Google reviews widget (static)
 │   │   ├── ContactFormSection.tsx  # "Contact Us" form → sends email via EmailJS
 │   │   ├── ContactSection.tsx      # "Visit Us" with clinic addresses & map
 │   │   ├── FAQSection.tsx          # Collapsible FAQ list
@@ -46,22 +54,32 @@
 │   │   ├── FloatingCTA.tsx         # Floating Action Button (FAB) — Book Now, Chat, Go to Top
 │   │   ├── ChatFormDialog.tsx      # Dialog form that opens from FAB → sends to WhatsApp
 │   │   ├── ThemeToggle.tsx         # Dark/light mode toggle button
+│   │   ├── LanguageSwitcher.tsx    # EN ↔ ಕನ್ನಡ language toggle
+│   │   ├── ScrollReveal.tsx        # Framer Motion scroll-triggered animation wrapper
+│   │   ├── AnimatedCounter.tsx     # Animated number counter (used in StatsBar)
+│   │   ├── StatsBar.tsx            # Hero stats (3+ years, 56+ patients, etc.)
+│   │   ├── LazyImage.tsx           # Image with skeleton loading state
+│   │   ├── JsonLd.tsx              # SEO structured data (MedicalBusiness schema)
+│   │   ├── SkipToContent.tsx       # Accessibility skip link
 │   │   ├── CookieConsent.tsx       # Cookie consent banner
 │   │   └── WhatsAppButton.tsx      # (Legacy) Standalone WhatsApp button — hidden, replaced by FAB
 │   ├── data/
-│   │   ├── clinicData.ts    # Clinic info (addresses, phone numbers, hours)
+│   │   ├── clinicData.ts    # ALL clinic info (addresses, phone, hours, pricing, team, FAQs)
 │   │   └── galleryData.ts   # Gallery image data
 │   ├── hooks/               # Custom React hooks
+│   │   ├── useI18n.tsx      # Multi-language context (EN + Kannada)
+│   │   ├── use-mobile.tsx   # Mobile breakpoint detection
+│   │   └── use-toast.ts     # Toast notification hook
 │   ├── lib/
 │   │   └── utils.ts         # Utility functions (cn helper for classnames)
 │   ├── pages/
 │   │   ├── Index.tsx         # Main page — assembles all sections in order
-│   │   └── NotFound.tsx      # 404 page
+│   │   └── NotFound.tsx      # 404 page with auto-redirect
 │   ├── index.css             # Global styles + Tailwind theme tokens (colours, fonts)
-│   ├── App.tsx               # Router setup
+│   ├── App.tsx               # Router setup + providers
 │   └── main.tsx              # Entry point — renders App into the DOM
 ├── tailwind.config.ts        # Tailwind configuration (extends theme with custom tokens)
-├── vite.config.ts            # Vite config + PWA plugin setup
+├── vite.config.ts            # Vite config + PWA plugin + React dedupe
 ├── index.html                # HTML shell (meta tags, OG tags, theme-color)
 └── package.json              # Dependencies and scripts
 ```
@@ -75,7 +93,11 @@
 <HeroSection />
 <PillarsSection />
 <ServicesSection />
-...
+<PricingSection />
+<TeamSection />
+<GallerySection />
+<TestimonialsSection />
+<GoogleReviewsSection />
 <ContactFormSection />
 <ContactSection />
 <FAQSection />
@@ -84,7 +106,7 @@
 <CookieConsent />
 ```
 
-**To reorder sections**, simply move the `<div>` wrappers in `Index.tsx`.
+**To reorder sections**, simply move the components in `Index.tsx`.
 
 **To add a new section**, create a component in `src/components/`, then import and place it in `Index.tsx`.
 
@@ -108,9 +130,9 @@ All colours live in **one place**: `src/index.css`, inside CSS custom properties
 }
 
 .dark {
-  --background: 213 80% 8%;       /* Dark page background */
+  --background: 215 28% 7%;       /* Dark page background */
   --foreground: 210 20% 95%;      /* Light text for dark mode */
-  --primary: 197 71% 73%;         /* Teal becomes primary in dark */
+  --primary: 197 71% 68%;         /* Teal becomes primary in dark */
   /* ...all tokens redefined for dark */
 }
 ```
@@ -143,17 +165,18 @@ All colours live in **one place**: `src/index.css`, inside CSS custom properties
 2. **Tailwind** detects the class via `darkMode: ["class"]` in `tailwind.config.ts`
 3. **CSS variables** switch between `:root` (light) and `.dark` (dark) values in `index.css`
 4. **localStorage** saves the choice as `theme: "light"` or `theme: "dark"`
+5. **Smooth transition**: `body` has `transition: background-color 0.3s ease, color 0.3s ease`
 
 ### Where the toggle lives
 
-The toggle button is in the **Header** (`src/components/Header.tsx`), between the nav links and the "Book Now" button.
+The toggle button is in the **Header** (`src/components/Header.tsx`), between the language switcher and the "Book Now" button.
 
 ### Special handling
 
-Some components use hardcoded colors instead of semantic tokens because they need consistent appearance regardless of theme:
+Some components use hardcoded colors for consistent appearance regardless of theme:
 
-- **HeroSection**: Always uses dark navy overlay + white text (the hero image needs a dark overlay for readability in both themes)
-- **Footer**: Uses `dark:bg-[...]` and `dark:text-white` overrides to stay dark in both themes
+- **HeroSection**: Always uses dark navy overlay + white text
+- **Footer**: Uses dark background in both themes
 
 ### Adding dark mode to a new component
 
@@ -224,6 +247,16 @@ const url = `https://wa.me/917996217888?text=${encodeURIComponent(messageText)}`
 window.open(url, "_blank");
 ```
 
+### Chat form fields
+
+The WhatsApp chat form collects:
+- **Name** (required)
+- **Phone Number** (required)
+- **Service Interested In** (optional)
+- **Message** (required)
+- **Preferred Date** (required, calendar picker, Sundays disabled)
+- **Preferred Time** (required, select from 09:00 AM – 08:00 PM slots)
+
 ### Changing the WhatsApp number
 
 Search for `917996217888` and replace with the new number (country code + number, no `+` or spaces).
@@ -261,10 +294,6 @@ In `vite.config.ts`, the `VitePWA` plugin handles:
 
 ## 8. Cookie Consent
 
-### Why it exists
-
-The cookie consent banner (`src/components/CookieConsent.tsx`) informs users that the site stores data locally (theme preference, PWA cache). While we don't use tracking cookies, it's best practice to ask.
-
 ### How it works
 
 - Appears 1.5 seconds after first visit
@@ -277,10 +306,45 @@ The cookie consent banner (`src/components/CookieConsent.tsx`) informs users tha
 | Key | Value | Purpose |
 |---|---|---|
 | `theme` | `"light"` / `"dark"` | Remember dark mode preference |
+| `locale` | `"en"` / `"kn"` | Remember language preference |
 | `cookie-consent` | `"accepted"` / `"declined"` | Remember consent choice |
 | `cookie-consent-date` | ISO date | When consent was given |
 
-See `docs/seo-domain-deployment-cookies.md` for full details on cookies, SEO, and deployment.
+---
+
+## 9. Treatment Pricing Data
+
+### Current Price List (INR)
+
+All pricing is managed in `src/data/clinicData.ts` → `treatment_price_list_inr`:
+
+| Treatment | Price (₹) |
+|---|---:|
+| Spinal Decompression | 500 |
+| Laser Therapy | 500 |
+| Tens / IFT | 350 |
+| Electrical Stimulation | 350 |
+| Spinal Manual Therapy | 350 |
+| Exercise Therapy | 250 – 500 |
+| Coordination Board Exercises | 400 |
+| Manual Muscle Testing | 400 |
+| Interactive Sports Gaming | 350 |
+| Hand Rehabilitation | 500 |
+
+**Price range**: ₹250 – ₹500 per session.
+
+### How pricing is rendered
+
+- **PricingSection** (`src/components/PricingSection.tsx`) reads `clinicData.treatment_price_list_inr` and renders a table
+- **JSON-LD** (`src/components/JsonLd.tsx`) includes each treatment in a `hasOfferCatalog` for Google rich results
+- **Payment methods accepted**: Google Pay, UPI, Cash
+
+### Updating prices
+
+1. Open `src/data/clinicData.ts`
+2. Edit the `treatment_price_list_inr` array
+3. Use `price: number` for fixed prices, or `price_range: "min - max"` for ranges
+4. Both the pricing table and JSON-LD schema update automatically
 
 ---
 
@@ -291,13 +355,14 @@ See `docs/seo-domain-deployment-cookies.md` for full details on cookies, SEO, an
 | Change colours | `src/index.css` (`:root` + `.dark` blocks) |
 | Change fonts | `src/index.css` (imports) + `tailwind.config.ts` |
 | Change section order | `src/pages/Index.tsx` |
-| Change clinic info | `src/data/clinicData.ts` |
+| Change clinic info / prices | `src/data/clinicData.ts` |
 | Change WhatsApp number | Search `917996217888` in codebase |
 | Setup EmailJS | `src/components/ContactFormSection.tsx` (3 constants) |
 | Change cookie banner | `src/components/CookieConsent.tsx` |
 | Change dark mode behavior | `src/components/ThemeToggle.tsx` |
 | Change PWA config | `vite.config.ts` (VitePWA section) |
 | Change FAB behaviour | `src/components/FloatingCTA.tsx` |
+| Change language translations | `src/hooks/useI18n.tsx` |
 
 ---
 

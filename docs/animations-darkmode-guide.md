@@ -10,7 +10,7 @@
 
 **File**: `src/components/ScrollReveal.tsx`
 
-A reusable wrapper that animates children into view when scrolled to, using Framer Motion's `useInView`.
+A reusable wrapper that animates children into view when scrolled to, using Framer Motion's `useInView`. Supports `forwardRef` for parent ref forwarding.
 
 ### Props
 
@@ -37,8 +37,9 @@ import ScrollReveal from "@/components/ScrollReveal";
 | Section | Effect |
 |---|---|
 | `ServicesSection` | Heading fades up on scroll |
-| `PricingSection` | Price table fades up on scroll |
+| `PricingSection` | Price table (10 treatments, ₹250–₹500) fades up on scroll |
 | `StatsBar` | Stats counter row reveals with delay |
+| `GoogleReviewsSection` | Review cards stagger in |
 
 ---
 
@@ -48,7 +49,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 **File**: `src/components/AnimatedCounter.tsx`
 
-Counts from 0 to a target number with an ease-out cubic animation when scrolled into view.
+Counts from 0 to a target number with an ease-out cubic animation when scrolled into view. Supports `forwardRef`.
 
 ### Props
 
@@ -59,15 +60,6 @@ Counts from 0 to a target number with an ease-out cubic animation when scrolled 
 | `suffix` | `string` | `""` | Text after number (e.g., "+") |
 | `prefix` | `string` | `""` | Text before number (e.g., "₹") |
 | `className` | `string` | `""` | Additional CSS classes |
-
-### Usage
-
-```tsx
-import AnimatedCounter from "@/components/AnimatedCounter";
-
-<AnimatedCounter end={56} suffix="+" duration={1.5} />
-// Renders: 0 → 1 → ... → 56+
-```
 
 ### Stats Bar
 
@@ -86,32 +78,30 @@ Displays 4 animated stats in the hero section:
 
 ## 3. Dark Mode Refinements
 
-### Changes Made
+### Optimized Tokens
 
-| Token | Before | After | Reason |
+| Token | Light Value | Dark Value | Notes |
 |---|---|---|---|
-| `--background` | `213 80% 8%` | `215 28% 7%` | Less saturated, easier on eyes |
-| `--card` | `213 60% 12%` | `215 25% 11%` | Subtler card elevation |
-| `--primary` | `197 71% 73%` | `197 71% 68%` | Better contrast ratio against dark bg |
-| `--muted-foreground` | `210 15% 60%` | `210 15% 65%` | Improved readability for secondary text |
-| `--destructive` | `0 62.8% 30.6%` | `0 72% 51%` | More visible error states |
-| `--radius` | `0rem` | `0.75rem` | Consistent with light mode |
-| Sidebar tokens | Generic gray | Matched to main theme | Consistent sidebar appearance |
+| `--background` | `210 20% 98%` | `215 28% 7%` | Less saturated dark, easier on eyes |
+| `--card` | Themed | `215 25% 11%` | Subtler card elevation |
+| `--primary` | `213 100% 19%` (navy) | `197 71% 68%` (teal) | Inverted brand colour for dark |
+| `--muted-foreground` | Themed | `210 15% 65%` | Improved readability |
+| `--destructive` | Themed | `0 72% 51%` | More visible error states |
 
 ### Theme Transition
 
-Added `transition: background-color 0.3s ease, color 0.3s ease` to `body` for smooth light↔dark switching.
+`body` has `transition: background-color 0.3s ease, color 0.3s ease` for smooth light↔dark switching.
 
 ### Testing Dark Mode
 
 1. Click the theme toggle (sun/moon icon) in the header
 2. Check these areas for proper contrast:
    - Hero section text over images
-   - Pricing table rows and headers
+   - **Pricing table** rows and headers (₹250–₹500 treatments)
    - FAQ accordion text
    - Footer links
    - Contact form inputs
-3. Use Chrome DevTools → Rendering → Emulate `prefers-color-scheme: dark`
+   - Google Reviews cards
 
 ---
 

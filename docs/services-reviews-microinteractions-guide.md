@@ -20,13 +20,15 @@ Each specialized clinic card in the **Services** section now opens a rich detail
 
 **File**: `src/data/clinicData.ts` → `specialized_clinics[]`
 
-Each clinic now has additional fields:
+### Current Specialized Clinics
 
-| Field | Type | Description |
-|---|---|---|
-| `details` | `string` | Long-form description of the clinic |
-| `treatments` | `string[]` | List of key treatments offered |
-| `duration` | `string` | Typical recovery/program duration |
+| # | Clinic | Focus | Duration |
+|---|---|---|---|
+| 1 | The Shoulder Clinic | Frozen Shoulder & Scapular Imbalance | 6–12 weeks |
+| 2 | Robotic Spine Center | Sciatica, Lumbar Spondylitis, Disc Herniation | 8–16 weeks |
+| 3 | Neuro-Rehab Wing | Stroke Recovery & Bell's Palsy | Ongoing, milestone-based |
+| 4 | Athletic Performance Lab | Professional Athletes & Swimmers | Ongoing programs |
+| 5 | Post-Amputation Clinic | Prosthetic Training (Ottobock partner) | 12–24 weeks |
 
 ### Adding a New Specialized Clinic
 
@@ -43,25 +45,44 @@ Each clinic now has additional fields:
 
 Then add a matching icon and image in `src/components/ServicesSection.tsx` arrays.
 
-### Component Flow
+---
 
-```
-User hovers on BentoCard → Card lifts up, icon shifts color
-       ↓
-User clicks "View More" → Dialog opens with full details
-       ↓
-User clicks "Book Consultation" → Dialog closes, scrolls to #contact-form
-```
+## 2. Treatment Pricing
+
+### Current Price List (INR)
+
+All prices are managed in `src/data/clinicData.ts` → `treatment_price_list_inr`:
+
+| Treatment | Price (₹) |
+|---|---:|
+| Spinal Decompression | 500 |
+| Laser Therapy | 500 |
+| Tens / IFT | 350 |
+| Electrical Stimulation | 350 |
+| Spinal Manual Therapy | 350 |
+| Exercise Therapy | 250 – 500 |
+| Coordination Board Exercises | 400 |
+| Manual Muscle Testing | 400 |
+| Interactive Sports Gaming | 350 |
+| Hand Rehabilitation | 500 |
+
+**Payment methods**: Google Pay, UPI, Cash
+
+### How Pricing Renders
+
+- `PricingSection.tsx` renders the table from `clinicData.treatment_price_list_inr`
+- `JsonLd.tsx` includes prices in the `hasOfferCatalog` for Google rich results
+- `PricingSection.tsx` shows payment badges from `clinicData.payment_options`
 
 ---
 
-## 2. Google Reviews Widget
+## 3. Google Reviews Widget
 
 ### Component
 
 **File**: `src/components/GoogleReviewsSection.tsx`
 
-Displays a grid of Google Business reviews with star ratings, reviewer names, and dates. Shows the aggregate rating (4.7★) with a link to view all reviews on Google.
+Displays a grid of Google Business reviews with star ratings, reviewer names, and dates. Shows the aggregate rating (4.7★ from 56 reviews) with a link to view all reviews on Google.
 
 ### Current Implementation: Static Reviews
 
@@ -69,26 +90,6 @@ The reviews are currently **hardcoded** in the component. For live Google review
 1. Google Places API key
 2. An edge function to fetch reviews server-side
 3. Caching to avoid API rate limits
-
-### Review Data Structure
-
-```ts
-{
-  name: "Reviewer Name",
-  rating: 5,           // 1-5 stars
-  date: "2 weeks ago", // Relative date string
-  text: "Review text...",
-  avatar: "A",         // First letter for avatar
-}
-```
-
-### Adding/Editing Reviews
-
-Edit the `googleReviews` array in `src/components/GoogleReviewsSection.tsx`. Each review card:
-- Shows avatar initial in a colored circle
-- Displays star rating
-- Animates on scroll with staggered delay
-- Lifts on hover
 
 ### Translation Keys
 
@@ -98,70 +99,32 @@ Edit the `googleReviews` array in `src/components/GoogleReviewsSection.tsx`. Eac
 | `reviews.reviewsOn` | reviews on Google | Google ನಲ್ಲಿ ವಿಮರ್ಶೆಗಳು |
 | `reviews.viewOnGoogle` | View all reviews on Google | Google ನಲ್ಲಿ ಎಲ್ಲಾ ವಿಮರ್ಶೆಗಳನ್ನು ನೋಡಿ |
 
-### Upgrading to Live Reviews (Future)
-
-1. Enable Lovable Cloud
-2. Create an edge function that calls Google Places API
-3. Cache results in a database table (refresh daily)
-4. Replace the static array with a `useQuery` fetch
-
 ---
 
-## 3. Microinteractions
+## 4. Microinteractions
 
 ### Team Cards
-
-**File**: `src/components/ui/retro-testimonial.tsx`
 
 | Effect | Implementation |
 |---|---|
 | **Hover lift** | `whileHover={{ y: -8, scale: 1.02 }}` via Framer Motion |
 | **Tap feedback** | `whileTap={{ scale: 0.98 }}` |
 | **Spring physics** | `type: "spring", stiffness: 300, damping: 20` |
-| **Glow shadow** | `hover:shadow-xl hover:shadow-primary/10` |
-| **Border highlight** | `hover:border-primary/30` |
 
 ### Service Cards (BentoGrid)
-
-**File**: `src/components/ui/bento-grid.tsx`
 
 | Effect | Implementation |
 |---|---|
 | **Hover lift** | `hover:-translate-y-1` |
 | **Icon color shift** | `group-hover:text-secondary` |
 | **CTA arrow slide** | `group-hover:translate-x-1` on ArrowRightIcon |
-| **Background dim** | `group-hover:bg-foreground/[.03]` overlay |
 
 ### Review Cards
-
-**File**: `src/components/GoogleReviewsSection.tsx`
 
 | Effect | Implementation |
 |---|---|
 | **Hover lift** | `whileHover={{ y: -4, scale: 1.01 }}` |
 | **Staggered reveal** | `ScrollReveal` with `delay={i * 0.1}` |
-
-### Adding Microinteractions to New Components
-
-Use Framer Motion's gesture props:
-
-```tsx
-<motion.div
-  whileHover={{ y: -4, scale: 1.02 }}
-  whileTap={{ scale: 0.98 }}
-  transition={{ type: "spring", stiffness: 300, damping: 20 }}
->
-  {/* content */}
-</motion.div>
-```
-
-Or use Tailwind for simpler effects:
-
-```tsx
-<div className="transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-  {/* content */}
-</div>
-```
 
 ---
 
@@ -170,10 +133,12 @@ Or use Tailwind for simpler effects:
 | Task | File |
 |---|---|
 | Edit clinic details | `src/data/clinicData.ts` → `specialized_clinics` |
+| Edit treatment prices | `src/data/clinicData.ts` → `treatment_price_list_inr` |
+| Edit payment methods | `src/data/clinicData.ts` → `payment_options` |
 | Edit service dialog layout | `src/components/ui/bento-grid.tsx` → `BentoCard` |
 | Edit/add Google reviews | `src/components/GoogleReviewsSection.tsx` |
 | Add review translations | `src/hooks/useI18n.tsx` → `reviews.*` |
-| Modify team card hover effects | `src/components/ui/retro-testimonial.tsx` → `TestimonialCard` |
+| Modify team card hover effects | `src/components/ui/retro-testimonial.tsx` |
 
 ---
 
