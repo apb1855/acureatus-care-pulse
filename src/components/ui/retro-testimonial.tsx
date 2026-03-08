@@ -257,37 +257,22 @@ const TestimonialCard = ({
       <motion.button
         layoutId={layout ? `card-${testimonial.name}` : undefined}
         onClick={handleExpand}
-        className="rounded-3xl bg-card border border-border h-80 w-56 md:h-[28rem] md:w-96 overflow-hidden flex flex-col items-start justify-start relative z-10 text-left"
+        className="rounded-3xl bg-card border border-border h-80 w-56 md:h-[28rem] md:w-96 overflow-hidden flex flex-col items-start justify-end relative z-10 text-left"
       >
-        <div className="absolute h-full top-0 inset-x-0 bg-gradient-to-b from-foreground/50 via-transparent to-transparent z-30 pointer-events-none" />
-        <div className="relative z-40 p-6 md:p-8">
-          <ProfileImage
+        <div className="absolute inset-0 z-10">
+          <img
             src={testimonial.profileImage}
             alt={testimonial.name}
-            className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-background object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
-        <div
-          className="absolute inset-0 z-10"
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        <div className="absolute bottom-0 left-0 right-0 z-40 p-6 md:p-8 bg-gradient-to-t from-background/90 via-background/60 to-transparent">
-          <p className="text-foreground/80 text-sm md:text-base font-medium italic">
-            {testimonial.description.length > 100
-              ? `${testimonial.description.slice(0, 100)}...`
-              : testimonial.description}
-          </p>
-          <p className="text-foreground font-display font-semibold text-base md:text-lg mt-2">
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-20 pointer-events-none" />
+        <div className="relative z-40 p-6 md:p-8">
+          <p className="text-foreground font-display font-semibold text-base md:text-lg">
             {testimonial.name}
           </p>
           <p className="text-muted-foreground text-sm">
-            {testimonial.designation.length > 25
-              ? `${testimonial.designation.slice(0, 25)}...`
-              : testimonial.designation}
+            {truncateToWords(testimonial.designation, 2)}
           </p>
         </div>
       </motion.button>
