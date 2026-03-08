@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MessageCircle, Phone, X, Plus, ArrowUp } from "lucide-react";
+import { cn } from "@/lib/utils";
 import ChatFormDialog from "@/components/ChatFormDialog";
 
 const FloatingCTA = () => {
   const [open, setOpen] = useState(false);
   const [chatFormOpen, setChatFormOpen] = useState(false);
+  const [inFooter, setInFooter] = useState(false);
+
+  useEffect(() => {
+    const footer = document.querySelector("footer");
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setInFooter(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
+  const btnClass = cn(
+    "flex items-center gap-2 rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-all duration-300",
+    inFooter
+      ? "bg-secondary text-secondary-foreground"
+      : "bg-primary text-primary-foreground"
+  );
+
+  const fabClass = cn(
+    "flex items-center justify-center w-14 h-14 rounded-full shadow-xl transition-all duration-300 hover:scale-105",
+    inFooter
+      ? "bg-secondary text-secondary-foreground"
+      : "bg-primary text-primary-foreground"
+  );
 
   return (
     <>
@@ -18,15 +46,12 @@ const FloatingCTA = () => {
                 else (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
                 setOpen(false);
               }}
-              className="flex items-center gap-2 bg-primary text-primary-foreground rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-transform lg:hidden"
+              className={cn(btnClass, "lg:hidden")}
             >
               Go to Top
               <ArrowUp className="w-4 h-4 shrink-0" />
             </button>
-            <a
-              href="tel:+917996217888"
-              className="flex items-center gap-2 bg-primary text-primary-foreground rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-transform"
-            >
+            <a href="tel:+917996217888" className={btnClass}>
               Book Now
               <Phone className="w-4 h-4 shrink-0" />
             </a>
@@ -35,7 +60,7 @@ const FloatingCTA = () => {
                 setChatFormOpen(true);
                 setOpen(false);
               }}
-              className="flex items-center gap-2 bg-primary text-primary-foreground rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-transform"
+              className={btnClass}
             >
               Chat with us
               <MessageCircle className="w-4 h-4 shrink-0" />
@@ -44,7 +69,7 @@ const FloatingCTA = () => {
         )}
         <button
           onClick={() => setOpen(!open)}
-          className="flex items-center justify-center w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-xl transition-transform duration-200 hover:scale-105"
+          className={fabClass}
           aria-label={open ? "Close menu" : "Contact us"}
         >
           {open ? <X className="w-6 h-6" /> : <Plus className="w-6 h-6" />}
