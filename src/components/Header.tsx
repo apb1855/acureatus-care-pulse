@@ -160,11 +160,15 @@ const Header = () => {
             <SheetContent side="right" className="w-72 bg-card border-border">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <nav aria-label="Mobile navigation" className="flex flex-col gap-2 mt-8">
-                {navKeys.map((link) =>
-                  link.isRoute ? (
+                {navKeys.map((link) => {
+                  const isHashLink = link.href.startsWith('#');
+                  const targetHref = isHashLink && !isHome ? `/${link.href}` : link.href;
+                  const isRouterLink = link.isRoute || (isHashLink && !isHome);
+
+                  return isRouterLink ? (
                     <Link
                       key={link.href}
-                      to={link.href}
+                      to={targetHref}
                       onClick={() => setOpen(false)}
                       className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                     >
@@ -173,14 +177,20 @@ const Header = () => {
                   ) : (
                     <a
                       key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
+                      href={targetHref}
+                      onClick={(e) => {
+                        if (isHashLink && isHome) {
+                          e.preventDefault();
+                          document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                        }
+                        setOpen(false);
+                      }}
                       className="px-4 py-3 text-base font-medium text-foreground hover:text-primary hover:bg-primary/5 rounded-xl transition-colors"
                     >
                       {t(link.key)}
                     </a>
-                  )
-                )}
+                  );
+                })}
               </nav>
               <SheetFooter className="mt-6 flex flex-col gap-2">
                 <a
