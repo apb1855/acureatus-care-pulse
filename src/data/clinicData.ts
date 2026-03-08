@@ -1,0 +1,98 @@
+export const clinicData = {
+  business_identity: {
+    name: "Acureatus AI Advanced Physio Pain Clinic",
+    branding_tagline: "Moving from symptomatic relief to root-cause cure through AI diagnostics",
+    initiative_of: ["Sharp Insight Rehabilitation Research Centre", "Zeus Fitness Club"],
+    rating: 4.7,
+    review_count: 56,
+    established_approx: "3 years",
+  },
+  locations: [
+    {
+      branch_name: "Mangaluru Main Clinic",
+      address: "1st Floor, Time Square Building, Shivabagh, Mallikatte, Kadri, Mangaluru, Karnataka 575002",
+      landmark: "Above KFC, Near Wines and Spirits",
+      google_maps_url: "https://maps.google.com/?q=Acureatus+AI+Physio+Pain+Clinic+Mangaluru",
+      coordinates_placeholder: "12.8761, 74.8560",
+      contact_numbers: ["+91 79962 17888", "+91 72048 07188"],
+      accessibility: {
+        wheelchair_elevator: true,
+        wheelchair_seating: true,
+        wheelchair_restroom: true,
+      },
+    },
+    {
+      branch_name: "Sharpinsight Rehab Research Centre",
+      address: "Second Floor, Jayashree Hospital, KS Rao Road, Near City Centre Mall, Mangaluru",
+      contact_number: "+91 9448327388",
+    },
+  ],
+  operating_hours: {
+    monday_to_saturday: "09:00 AM - 08:00 PM",
+    sunday: "Closed",
+    appointment_required: true,
+  },
+  medical_team: [
+    {
+      name: "Dr. Harish S. Krishna",
+      credentials: "MPT, Ph.D.",
+      role: "Director & Lead Researcher",
+      specialization: "Osteopathic Manual Therapy, Biomechanics, and Movement Analysis",
+    },
+    {
+      name: "Dr. Chaithresh",
+      role: "Chief Diagnostic Physiotherapist",
+      specialization: "Root Cause Analysis & Muscle Problem Identification",
+    },
+    {
+      name: "Dr. Jayshree",
+      role: "Consultant Physiotherapist",
+    },
+    {
+      name: "Dr. Pratham",
+      role: "Consultant Physiotherapist",
+    },
+    {
+      name: "Ms. Glevisha",
+      role: "Clinical Staff",
+    },
+  ],
+  core_pillars: ["Prehabilitation", "Balance Training", "Pain Relief", "Movement Analysis"],
+  specialized_clinics: [
+    { title: "The Shoulder Clinic", focus: "Frozen Shoulder & Scapular Imbalance (Non-surgical)" },
+    { title: "Robotic Spine Center", focus: "Sciatica, Lumbar Spondylitis, and Disc Herniation" },
+    { title: "Neuro-Rehab Wing", focus: "Stroke Recovery & Bell's Palsy (Facial Paralysis)" },
+    { title: "Athletic Performance Lab", focus: "Evaluation for Professional Athletes & Swimmers" },
+    { title: "Post-Amputation Clinic", focus: "Prosthetic Training & Functional Independence", partnership: "Ottobock" },
+  ],
+  advanced_technology: [
+    "Robotic Spinal Decompression",
+    "AI Motion Analysis",
+    "High-Intensity Laser Therapy (HILT)",
+    "Super Inductive System (SIS)",
+    "AI Gait Analyzer",
+    "Shockwave Therapy",
+  ],
+  treatment_price_list_inr: [
+    { item: "Spinal Decompression", price: 500 },
+    { item: "Laser Therapy", price: 500 },
+    { item: "Tens / IFT", price: 350 },
+    { item: "Electrical Stimulation", price: 350 },
+    { item: "Spinal Manual Therapy", price: 350 },
+    { item: "Exercise Therapy", price_range: "250 - 500" },
+    { item: "Coordination Board Exercises", price: 400 },
+    { item: "Manual Muscle Testing", price: 400 },
+    { item: "Interactive Sports Gaming", price: 350 },
+    { item: "Hand Rehabilitation", price: 500 },
+  ],
+  hall_of_fame: {
+    athlete: "Ms. Sushravya U",
+    achievement: "Golden Book of World Records (Longest Dance on Skating, Dec 2025)",
+    clinic_role: "Provided specialized balance and endurance training",
+  },
+  payment_options: ["Google Pay", "UPI", "Cash"],
+  faqs: [
+    { q: "Do you offer home visits?", a: "Yes, for severe conditions, home visit facilities are available upon request." },
+    { q: "Do you perform surgery?", a: "No. We focus on non-invasive, pre-operative and post-operative rehabilitation to avoid surgery where possible." },
+  ],
+};
