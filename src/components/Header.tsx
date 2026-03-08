@@ -26,7 +26,7 @@ const Header = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50"
-          : "bg-card/10 backdrop-blur-md border-b border-primary-foreground/10"
+          : "bg-card/20 backdrop-blur-lg border-b border-primary-foreground/15"
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
