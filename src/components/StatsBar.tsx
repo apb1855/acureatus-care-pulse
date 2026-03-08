@@ -1,8 +1,9 @@
+import { forwardRef } from "react";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import ScrollReveal from "@/components/ScrollReveal";
 import { useI18n } from "@/hooks/useI18n";
 
-const StatsBar = () => {
+const StatsBar = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useI18n();
 
   const stats = [
@@ -13,7 +14,7 @@ const StatsBar = () => {
   ];
 
   return (
-    <ScrollReveal delay={0.3}>
+    <ScrollReveal delay={0.3} ref={ref}>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-8 border-t border-white/20">
         {stats.map((stat, i) => (
           <div key={i} className="text-center">
@@ -26,6 +27,8 @@ const StatsBar = () => {
       </div>
     </ScrollReveal>
   );
-};
+});
+
+StatsBar.displayName = "StatsBar";
 
 export default StatsBar;
