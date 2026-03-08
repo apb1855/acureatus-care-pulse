@@ -95,7 +95,10 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setOpen(!open)}
-              className="lg:hidden"
+              className={cn(
+                "lg:hidden transition-colors",
+                scrolled ? "text-foreground" : "text-primary-foreground"
+              )}
             >
               <MenuIcon className="w-5 h-5" />
             </Button>
