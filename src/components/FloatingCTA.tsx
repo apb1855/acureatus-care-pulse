@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageCircle, Phone, X, Plus } from "lucide-react";
+import { MessageCircle, Phone, X, Plus, ArrowUp } from "lucide-react";
 import ChatFormDialog from "@/components/ChatFormDialog";
 
 const FloatingCTA = () => {
@@ -11,6 +11,18 @@ const FloatingCTA = () => {
       <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
         {open && (
           <div className="flex flex-col items-end gap-2 animate-in fade-in slide-in-from-bottom-2 duration-200">
+            <button
+              onClick={() => {
+                const container = document.querySelector(".snap-y") || window;
+                if (container === window) window.scrollTo({ top: 0, behavior: "smooth" });
+                else (container as HTMLElement).scrollTo({ top: 0, behavior: "smooth" });
+                setOpen(false);
+              }}
+              className="flex items-center gap-2 bg-primary text-primary-foreground rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-transform lg:hidden"
+            >
+              Go to Top
+              <ArrowUp className="w-4 h-4 shrink-0" />
+            </button>
             <a
               href="tel:+917996217888"
               className="flex items-center gap-2 bg-primary text-primary-foreground rounded-full pl-4 pr-3 py-2.5 shadow-lg text-sm font-semibold hover:scale-105 transition-transform"
