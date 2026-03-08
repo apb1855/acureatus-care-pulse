@@ -27,7 +27,6 @@ const Index = () => (
     <div className="snap-start"><FAQSection /></div>
     <div className="snap-start"><Footer /></div>
     <FloatingCTA />
-    <WhatsAppButton />
   </div>
 );
 
