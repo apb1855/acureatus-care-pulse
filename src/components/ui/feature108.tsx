@@ -33,12 +33,12 @@ interface Feature108Props {
   tabs?: Tab[];
 }
 
-const Feature108 = ({
+const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
   badge,
   heading,
   description,
   tabs = [],
-}: Feature108Props) => {
+}, ref) => {
   const [openModal, setOpenModal] = useState<TabContent | null>(null);
 
   return (
