@@ -104,6 +104,11 @@ const translations: Record<Locale, Record<string, string>> = {
     "stats.happyPatients": "Happy Patients",
     "stats.advancedTech": "Advanced Technologies",
     "stats.specializedClinics": "Specialized Clinics",
+
+    // Reviews
+    "reviews.title": "What Our Patients Say",
+    "reviews.reviewsOn": "reviews on Google",
+    "reviews.viewOnGoogle": "View all reviews on Google",
   },
   kn: {
     // Nav
@@ -200,6 +205,11 @@ const translations: Record<Locale, Record<string, string>> = {
     "stats.happyPatients": "ಸಂತೋಷದ ರೋಗಿಗಳು",
     "stats.advancedTech": "ಮುಂದುವರಿದ ತಂತ್ರಜ್ಞಾನಗಳು",
     "stats.specializedClinics": "ವಿಶೇಷ ಕ್ಲಿನಿಕ್‌ಗಳು",
+
+    // Reviews
+    "reviews.title": "ನಮ್ಮ ರೋಗಿಗಳು ಏನು ಹೇಳುತ್ತಾರೆ",
+    "reviews.reviewsOn": "Google ನಲ್ಲಿ ವಿಮರ್ಶೆಗಳು",
+    "reviews.viewOnGoogle": "Google ನಲ್ಲಿ ಎಲ್ಲಾ ವಿಮರ್ಶೆಗಳನ್ನು ನೋಡಿ",
   },
 };
 

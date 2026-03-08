@@ -257,13 +257,16 @@ const TestimonialCard = ({
       <motion.button
         layoutId={layout ? `card-${testimonial.name}` : undefined}
         onClick={handleExpand}
-        className="rounded-3xl bg-card border border-border h-80 w-56 md:h-[28rem] md:w-96 overflow-hidden flex flex-col items-start justify-end relative z-10 text-left"
+        whileHover={{ y: -8, scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="rounded-3xl bg-card border border-border h-80 w-56 md:h-[28rem] md:w-96 overflow-hidden flex flex-col items-start justify-end relative z-10 text-left hover:shadow-xl hover:shadow-primary/10 hover:border-primary/30 transition-[box-shadow,border-color] duration-300"
       >
         <div className="absolute inset-0 z-10">
           <img
             src={testimonial.profileImage}
             alt={testimonial.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-20 pointer-events-none" />
