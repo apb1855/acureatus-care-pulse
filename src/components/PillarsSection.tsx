@@ -40,7 +40,7 @@ const pillarTabs = [
       description:
         "Using robotic spinal decompression, high-intensity laser therapy, and manual techniques, we target root causes — not just symptoms — for sustainable pain relief without surgery.",
       buttonText: "Learn More",
-      imageSrc: "https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=800&h=500&fit=crop",
+      imageSrc: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=800&h=500&fit=crop",
       imageAlt: "Advanced pain relief therapy",
     },
   },

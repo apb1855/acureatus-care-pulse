@@ -7,7 +7,7 @@ const clinicIcons = [HeartPulse, Cpu, Brain, Dumbbell, Hand];
 const clinicImages = [
   "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=400&fit=crop",
   "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
-  "https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=400&fit=crop",
+  "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&h=400&fit=crop",
   "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=400&fit=crop",
   "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
 ];
