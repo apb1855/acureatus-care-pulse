@@ -16,22 +16,29 @@ const navLinks = [
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const scrollContainer = document.querySelector(".snap-y") || window;
+    let lastY = 0;
     const onScroll = () => {
       const currentY =
         scrollContainer === window
           ? window.scrollY
           : (scrollContainer as HTMLElement).scrollTop;
       setScrolled(currentY > 20);
+      setVisible(currentY <= 20 || currentY < lastY);
+      lastY = currentY;
     };
     scrollContainer.addEventListener("scroll", onScroll, { passive: true });
     return () => scrollContainer.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+    <header className={cn(
+      "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl transition-all duration-300",
+      visible ? "translate-y-0 opacity-100" : "-translate-y-[calc(100%+2rem)] opacity-0"
+    )}>
       <div
         className={cn(
           "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
