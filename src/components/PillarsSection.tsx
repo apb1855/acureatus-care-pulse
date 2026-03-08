@@ -1,55 +1,72 @@
-import { motion } from "framer-motion";
 import { Shield, Scale, Heart, Activity } from "lucide-react";
-import { clinicData } from "@/data/clinicData";
+import { Feature108 } from "@/components/ui/feature108";
 
-const iconMap = [Shield, Scale, Heart, Activity];
-const descMap = [
-  "Preventive care to strengthen your body before issues arise",
-  "Restore stability and coordination for confident movement",
-  "Advanced non-invasive techniques for lasting pain freedom",
-  "AI-powered gait and motion analysis for precise diagnosis",
+const pillarTabs = [
+  {
+    value: "prehabilitation",
+    icon: <Shield className="h-auto w-4 shrink-0" />,
+    label: "Prehabilitation",
+    content: {
+      badge: "Prevention First",
+      title: "Strengthen Before Issues Arise",
+      description:
+        "Our prehabilitation programs focus on preventive care — identifying weaknesses and imbalances early to build resilience and reduce injury risk before problems develop.",
+      buttonText: "Learn More",
+      imageSrc: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=500&fit=crop",
+      imageAlt: "Prehabilitation physiotherapy session",
+    },
+  },
+  {
+    value: "balance",
+    icon: <Scale className="h-auto w-4 shrink-0" />,
+    label: "Balance Training",
+    content: {
+      badge: "Stability & Control",
+      title: "Restore Coordination & Confidence",
+      description:
+        "Advanced balance training protocols using coordination boards and AI-guided analysis to restore stability, prevent falls, and build confident movement patterns.",
+      buttonText: "Learn More",
+      imageSrc: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=500&fit=crop",
+      imageAlt: "Balance training exercise",
+    },
+  },
+  {
+    value: "pain-relief",
+    icon: <Heart className="h-auto w-4 shrink-0" />,
+    label: "Pain Relief",
+    content: {
+      badge: "Non-Invasive Care",
+      title: "Lasting Freedom from Pain",
+      description:
+        "Using robotic spinal decompression, high-intensity laser therapy, and manual techniques, we target root causes — not just symptoms — for sustainable pain relief without surgery.",
+      buttonText: "Learn More",
+      imageSrc: "https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=800&h=500&fit=crop",
+      imageAlt: "Advanced pain relief therapy",
+    },
+  },
+  {
+    value: "movement-analysis",
+    icon: <Activity className="h-auto w-4 shrink-0" />,
+    label: "Movement Analysis",
+    content: {
+      badge: "AI-Powered Diagnostics",
+      title: "Precision Diagnosis with AI",
+      description:
+        "Our AI gait analyzer and motion analysis technology provide data-driven insights into your movement patterns, enabling precise diagnosis and personalized treatment plans.",
+      buttonText: "Learn More",
+      imageSrc: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=800&h=500&fit=crop",
+      imageAlt: "AI motion analysis technology",
+    },
+  },
 ];
 
 const PillarsSection = () => (
-  <section className="py-20 md:py-28 bg-background">
-    <div className="container">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-14"
-      >
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-          Our Four Pillars
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">
-          A holistic approach to physiotherapy built on four foundational principles
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {clinicData.core_pillars.map((pillar, i) => {
-          const Icon = iconMap[i];
-          return (
-            <motion.div
-              key={pillar}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group p-6 rounded-xl bg-card border border-border"
-            >
-              <div className="w-14 h-14 rounded-lg bg-secondary/20 flex items-center justify-center mb-4">
-                <Icon className="w-7 h-7 text-primary" />
-              </div>
-              <h3 className="text-lg font-display font-semibold text-foreground mb-2">{pillar}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{descMap[i]}</p>
-            </motion.div>
-          );
-        })}
-      </div>
-    </div>
-  </section>
+  <Feature108
+    badge="Our Approach"
+    heading="Our Four Pillars"
+    description="A holistic approach to physiotherapy built on four foundational principles"
+    tabs={pillarTabs}
+  />
 );
 
 export default PillarsSection;
