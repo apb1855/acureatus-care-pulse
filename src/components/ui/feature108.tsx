@@ -42,7 +42,7 @@ const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
   const [openModal, setOpenModal] = useState<TabContent | null>(null);
 
   return (
-    <section className="py-20 md:py-28 bg-background">
+    <section ref={ref} className="py-20 md:py-28 bg-background">
       <div className="container">
         <div className="flex flex-col items-center gap-4 text-center mb-12">
           {badge && <Badge variant="outline" className="text-sm font-medium text-primary border-primary/30">{badge}</Badge>}
