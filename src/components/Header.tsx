@@ -42,10 +42,16 @@ const Header = () => {
       >
         {/* Logo */}
         <a href="#home" className="flex flex-col leading-tight">
-          <span className="font-display text-lg md:text-xl font-bold tracking-tight text-primary">
+          <span className={cn(
+            "font-display text-lg md:text-xl font-bold tracking-tight transition-colors duration-500",
+            scrolled ? "text-primary" : "text-primary-foreground"
+          )}>
             ACUREATUS
           </span>
-          <span className="text-[8px] md:text-[10px] font-semibold tracking-widest text-foreground/60">
+          <span className={cn(
+            "text-[8px] md:text-[10px] font-semibold tracking-widest transition-colors duration-500",
+            scrolled ? "text-foreground/60" : "text-primary-foreground/70"
+          )}>
             AI Advanced Physio Pain Clinic
           </span>
         </a>
