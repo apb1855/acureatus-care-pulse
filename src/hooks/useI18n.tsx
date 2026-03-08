@@ -98,6 +98,12 @@ const translations: Record<Locale, Record<string, string>> = {
     "fab.goToTop": "Go to Top",
     "fab.bookNow": "Book Now",
     "fab.chat": "Chat with us",
+
+    // Stats
+    "stats.yearsExperience": "Years Experience",
+    "stats.happyPatients": "Happy Patients",
+    "stats.advancedTech": "Advanced Technologies",
+    "stats.specializedClinics": "Specialized Clinics",
   },
   kn: {
     // Nav
