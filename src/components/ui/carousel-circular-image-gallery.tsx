@@ -32,7 +32,7 @@ const WIDTH = 400;
 const HEIGHT = 400;
 const GAP = 10;
 const CIRCLE_RADIUS = 7;
-const DURATION = 0.4;
+const DURATION = 0.7;
 const SCALE = 700;
 
 export function ImageGallery({ images: imagesProp }: ImageGalleryProps) {
