@@ -53,8 +53,7 @@ const Header = () => {
         {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
+          className="md:hidden p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full transition-colors text-foreground"
           }`}
           aria-label="Toggle menu"
         >
