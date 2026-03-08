@@ -76,11 +76,15 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-          {navKeys.map((link) =>
-            link.isRoute ? (
+          {navKeys.map((link) => {
+            const isHashLink = link.href.startsWith('#');
+            const targetHref = isHashLink && !isHome ? `/${link.href}` : link.href;
+            const isRouterLink = link.isRoute || (isHashLink && !isHome);
+
+            return isRouterLink ? (
               <Link
                 key={link.href}
-                to={link.href}
+                to={targetHref}
                 className={cn(
                   "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
                   scrolled
@@ -93,7 +97,13 @@ const Header = () => {
             ) : (
               <a
                 key={link.href}
-                href={link.href}
+                href={targetHref}
+                onClick={(e) => {
+                  if (isHashLink && isHome) {
+                    e.preventDefault();
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
                 className={cn(
                   "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
                   scrolled
@@ -103,8 +113,8 @@ const Header = () => {
               >
                 {t(link.key)}
               </a>
-            )
-          )}
+            );
+          })}
         </nav>
 
         {/* Right side */}
