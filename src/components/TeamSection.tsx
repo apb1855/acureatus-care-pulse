@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
+import { useI18n } from "@/hooks/useI18n";
 import { Carousel, TestimonialCard, iTestimonial } from "@/components/ui/retro-testimonial";
 
 const teamBackgrounds: Record<string, string> = {
@@ -37,6 +38,8 @@ const getDescription = (member: typeof clinicData.medical_team[0]) => {
 };
 
 const TeamSection = () => {
+  const { t } = useI18n();
+
   const cards = clinicData.medical_team.map((member, index) => {
     const testimonial: iTestimonial = {
       name: member.name,
@@ -64,10 +67,10 @@ const TeamSection = () => {
           className="text-center mb-4"
         >
           <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            Our Medical Team
+            {t("team.title")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Experienced professionals dedicated to your recovery
+            {t("team.subtitle")}
           </p>
         </motion.div>
       </div>
