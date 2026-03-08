@@ -40,6 +40,7 @@ const GallerySection = () => {
         >
           <Carousel
             opts={{ align: "start", loop: true }}
+            plugins={[autoplayPlugin.current]}
             className="w-full"
           >
             <CarouselContent className="-ml-3 md:-ml-4">
