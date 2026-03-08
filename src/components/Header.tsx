@@ -31,7 +31,7 @@ const Header = () => {
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt="Acureatus Logo" className="h-10 md:h-14 w-auto" />
+          <img src={logo} alt="Acureatus Logo" className="h-14 md:h-20 w-auto drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]" />
         </a>
 
         {/* Desktop nav */}
