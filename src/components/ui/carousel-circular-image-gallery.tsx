@@ -189,13 +189,13 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
     if (open) {
       gsap
         .timeline()
-        .set(clip.current, { ...defaults, ...getPosSmall() })
-        .to(clip.current, { ...defaults, ...getPosCenter(), duration: upDuration, ease: "power2.inOut" })
+        .set(clip.current, { ...defaults, ...getPosStart() })
+        .to(clip.current, { ...defaults, ...getPosCenter(), duration: flipDuration, ease: "power2.inOut" })
         .to(clip.current, { ...defaults, ...getPosEnd(), duration: flipDuration, ease: "power2.inOut", onComplete: () => onInPlace(id) });
     } else {
       gsap
         .timeline({ overwrite: true })
-        .set(clip.current, { ...defaults, ...getPosStart() })
+        .set(clip.current, { ...defaults, ...getPosEnd() })
         .to(clip.current, { ...defaults, ...getPosCenter(), delay, duration: flipDuration, ease: "power2.inOut" })
         .to(clip.current, {
           ...defaults,
