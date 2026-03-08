@@ -1,4 +1,4 @@
-import { Faq5 } from "@/components/ui/faq-5";
+import FAQBlock from "@/components/ui/faq-block";
 
 const faqs = [
   {
@@ -29,14 +29,21 @@ const faqs = [
 
 const FAQSection = () => {
   return (
-    <div id="faq" className="hidden md:block">
-      <Faq5
-        badge="FAQ"
-        heading="Frequently Asked Questions"
-        description="Find answers to common questions about our physiotherapy services and treatments."
-        faqs={faqs}
-      />
-    </div>
+    <section id="faq" className="py-16 md:py-24 bg-muted/30">
+      <div className="container">
+        <div className="flex flex-col items-center gap-4 text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-muted-foreground max-w-xl text-sm md:text-base">
+            Find answers to common questions about our physiotherapy services and treatments.
+          </p>
+        </div>
+        <div className="max-w-3xl mx-auto">
+          <FAQBlock faqs={faqs} />
+        </div>
+      </div>
+    </section>
   );
 };
 
