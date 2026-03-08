@@ -171,8 +171,8 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
     r: CIRCLE_RADIUS * 2,
   });
   const getPosCenter = () => ({ cx: WIDTH / 2, cy: HEIGHT / 2, r: CIRCLE_RADIUS * 7 });
-  const getPosEnd = () => ({ cx: WIDTH / 2 - bigSize, cy: HEIGHT / 2, r: bigSize });
-  const getPosStart = () => ({ cx: WIDTH / 2 + bigSize, cy: HEIGHT / 2, r: bigSize });
+  const getPosEnd = () => ({ cx: 0, cy: HEIGHT / 2, r: bigSize });
+  const getPosStart = () => ({ cx: WIDTH + bigSize, cy: HEIGHT / 2, r: bigSize });
 
   useEffect(() => {
     const gsap = window.gsap;
