@@ -115,12 +115,12 @@ const Footer = () => (
     </div>
 
     {/* Bottom bar */}
-    <div className="border-t border-primary-foreground/10">
+    <div className="border-t border-primary-foreground/10 dark:border-white/10">
       <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-xs text-primary-foreground/40">
+        <p className="text-xs text-primary-foreground/40 dark:text-white/40">
           © {new Date().getFullYear()} {clinicData.business_identity.name}. All rights reserved.
         </p>
-        <p className="text-xs text-primary-foreground/40">
+        <p className="text-xs text-primary-foreground/40 dark:text-white/40">
           An initiative of {clinicData.business_identity.initiative_of.join(" & ")}
         </p>
       </div>
