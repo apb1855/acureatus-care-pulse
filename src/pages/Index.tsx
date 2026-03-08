@@ -24,8 +24,8 @@ const Index = () => (
     {/* <div className="snap-start"><HallOfFameSection /></div> */}
     <div className="snap-start"><GallerySection /></div>
     <div className="snap-start"><TestimonialsSection /></div>
-    <div className="snap-start"><ContactSection /></div>
     <div className="snap-start"><ContactFormSection /></div>
+    <div className="snap-start"><ContactSection /></div>
     <div className="snap-start"><FAQSection /></div>
     <div className="snap-start"><Footer /></div>
     <FloatingCTA />
