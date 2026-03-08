@@ -22,15 +22,16 @@ const ScrollReveal = ({ children, className = "", delay = 0, direction = "up", d
   const d = directionMap[direction];
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: d.x * distance, y: d.y * distance }}
-      animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, x: d.x * distance, y: d.y * distance }}
+        animate={isInView ? { opacity: 1, x: 0, y: 0 } : {}}
+        transition={{ duration: 0.6, delay, ease: "easeOut" }}
+        className={className}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 };
 

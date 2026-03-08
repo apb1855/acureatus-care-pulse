@@ -23,7 +23,7 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "", prefix = "", classNam
     const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(eased * end));
 
       if (progress < 1) {
@@ -38,15 +38,9 @@ const AnimatedCounter = ({ end, duration = 2, suffix = "", prefix = "", classNam
   }, [isInView, end, duration]);
 
   return (
-    <motion.span
-      ref={ref}
-      initial={{ opacity: 0, y: 10 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5 }}
-      className={className}
-    >
+    <span ref={ref} className={className}>
       {prefix}{count}{suffix}
-    </motion.span>
+    </span>
   );
 };
 

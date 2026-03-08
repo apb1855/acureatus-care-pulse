@@ -16,21 +16,21 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => (
-  <div id="main-content" role="main" className="min-h-screen bg-background snap-y snap-mandatory overflow-y-auto h-screen scroll-smooth">
+  <div id="main-content" role="main" className="min-h-screen bg-background overflow-y-auto scroll-smooth">
     <Header />
-    <div className="snap-start"><HeroSection /></div>
-    <div className="snap-start"><PillarsSection /></div>
-    <div className="snap-start"><ServicesSection /></div>
-    <div className="snap-start"><PricingSection /></div>
-    <div className="snap-start"><TeamSection /></div>
-    {/* <div className="snap-start"><HallOfFameSection /></div> */}
-    <div className="snap-start"><GallerySection /></div>
-    <div className="snap-start"><TestimonialsSection /></div>
-    <div className="snap-start"><GoogleReviewsSection /></div>
-    <div className="snap-start"><ContactFormSection /></div>
-    <div className="snap-start"><ContactSection /></div>
-    <div className="snap-start"><FAQSection /></div>
-    <div className="snap-start"><Footer /></div>
+    <HeroSection />
+    <PillarsSection />
+    <ServicesSection />
+    <PricingSection />
+    <TeamSection />
+    {/* <HallOfFameSection /> */}
+    <GallerySection />
+    <TestimonialsSection />
+    <GoogleReviewsSection />
+    <ContactFormSection />
+    <ContactSection />
+    <FAQSection />
+    <Footer />
     <FloatingCTA />
     <CookieConsent />
   </div>
