@@ -2,6 +2,7 @@ import { HeartPulse, Cpu, Brain, Dumbbell, Hand, Zap } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { clinicData } from "@/data/clinicData";
 import { useI18n } from "@/hooks/useI18n";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const clinicIcons = [HeartPulse, Cpu, Brain, Dumbbell, Hand];
 
