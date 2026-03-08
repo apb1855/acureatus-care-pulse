@@ -1,17 +1,73 @@
-import { Star, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback } from "react";
+import { Star, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
 import heroBg from "@/assets/hero-bg.jpg";
 
+const heroImages = [
+  heroBg,
+  "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&h=1080&fit=crop",
+  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop",
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1920&h=1080&fit=crop",
+];
+
 const HeroSection = () => {
   const { business_identity } = clinicData;
+  const [current, setCurrent] = useState(0);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % heroImages.length), []);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + heroImages.length) % heroImages.length), []);
+
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
+      {/* Background carousel */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0"
+        >
+          <img src={heroImages[current]} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation arrows */}
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-card/20 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center text-primary-foreground hover:bg-card/40 transition"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 h-10 w-10 rounded-full bg-card/20 backdrop-blur-sm border border-primary-foreground/20 flex items-center justify-center text-primary-foreground hover:bg-card/40 transition"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        {heroImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-2.5 h-2.5 rounded-full transition-all ${
+              i === current ? "bg-secondary w-6" : "bg-primary-foreground/40"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
+        ))}
       </div>
 
       <div className="container relative z-10 py-32 md:py-40">
@@ -21,7 +77,6 @@ const HeroSection = () => {
           transition={{ duration: 0.8 }}
           className="max-w-2xl"
         >
-          {/* Social proof badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card/15 backdrop-blur-sm border border-primary-foreground/20 mb-6">
             <Star className="w-4 h-4 text-gold fill-gold" />
             <span className="text-sm font-medium text-primary-foreground">
