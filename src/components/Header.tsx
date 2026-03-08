@@ -39,16 +39,16 @@ const Header = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
-        <a href="#home" className="flex items-center gap-1.5">
+        <a href="#home" className="flex flex-col leading-tight">
           <span className={`font-display text-xl md:text-2xl font-bold tracking-tight transition-colors duration-300 ${
             scrolled ? "text-primary" : "text-primary-foreground"
           }`}>
             Acureatus
           </span>
-          <span className={`hidden sm:inline text-xs md:text-sm font-medium transition-colors duration-300 ${
+          <span className={`text-[9px] md:text-[11px] font-semibold uppercase tracking-widest transition-colors duration-300 ${
             scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
           }`}>
-            AI Physio Clinic
+            AI Advanced Physio Pain Clinic
           </span>
         </a>
 
