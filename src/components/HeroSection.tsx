@@ -16,7 +16,6 @@ const HeroSection = () => {
   const [current, setCurrent] = useState(0);
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % heroImages.length), []);
-  const prev = useCallback(() => setCurrent((c) => (c - 1 + heroImages.length) % heroImages.length), []);
 
   useEffect(() => {
     const timer = setInterval(next, 5000);
