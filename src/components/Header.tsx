@@ -74,20 +74,35 @@ const Header = () => {
 
         {/* Desktop nav */}
         <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1">
-          {navKeys.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
-                scrolled
-                  ? "text-foreground hover:text-primary hover:bg-primary/5"
-                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              )}
-            >
-              {t(link.key)}
-            </a>
-          ))}
+          {navKeys.map((link) =>
+            link.isRoute ? (
+              <Link
+                key={link.href}
+                to={link.href}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                  scrolled
+                    ? "text-foreground hover:text-primary hover:bg-primary/5"
+                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                )}
+              >
+                {t(link.key)}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                  scrolled
+                    ? "text-foreground hover:text-primary hover:bg-primary/5"
+                    : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                )}
+              >
+                {t(link.key)}
+              </a>
+            )
+          )}
         </nav>
 
         {/* Right side */}
