@@ -31,7 +31,7 @@ const ServicesSection = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.08 }}
-              className="p-6 rounded-xl bg-card border border-border hover:shadow-lg transition-shadow"
+              className="p-6 rounded-xl bg-card border border-border"
             >
               <Icon className="w-8 h-8 text-secondary mb-4" />
               <h3 className="text-lg font-display font-semibold text-foreground mb-2">{clinic.title}</h3>

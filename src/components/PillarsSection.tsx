@@ -39,7 +39,7 @@ const PillarsSection = () => (
               transition={{ delay: i * 0.1 }}
               className="group p-6 rounded-xl bg-card border border-border"
             >
-              <div className="w-14 h-14 rounded-lg bg-secondary/20 flex items-center justify-center mb-4 group-hover:bg-secondary/40 transition-colors">
+              <div className="w-14 h-14 rounded-lg bg-secondary/20 flex items-center justify-center mb-4">
                 <Icon className="w-7 h-7 text-primary" />
               </div>
               <h3 className="text-lg font-display font-semibold text-foreground mb-2">{pillar}</h3>
