@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Quote, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, X, Linkedin, Instagram, Globe } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface iTestimonial {
