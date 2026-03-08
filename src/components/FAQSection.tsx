@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
 import FAQBlock from "@/components/ui/faq-block";
 
 const faqs = [
@@ -28,6 +30,8 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <section id="faq" className="py-16 md:py-24 bg-muted/30">
       <div className="container">
@@ -38,10 +42,27 @@ const FAQSection = () => {
           <p className="text-muted-foreground max-w-xl text-sm md:text-base">
             Find answers to common questions about our physiotherapy services and treatments.
           </p>
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-2 flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+            aria-expanded={expanded}
+          >
+            {expanded ? (
+              <>
+                <Minus className="w-5 h-5" /> Hide FAQs
+              </>
+            ) : (
+              <>
+                <Plus className="w-5 h-5" /> Show FAQs
+              </>
+            )}
+          </button>
         </div>
-        <div className="max-w-3xl mx-auto">
-          <FAQBlock faqs={faqs} />
-        </div>
+        {expanded && (
+          <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-top-4 duration-300">
+            <FAQBlock faqs={faqs} />
+          </div>
+        )}
       </div>
     </section>
   );
