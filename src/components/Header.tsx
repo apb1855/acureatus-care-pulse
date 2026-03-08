@@ -36,8 +36,8 @@ const Header = () => {
         className={cn(
           "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
           scrolled
-            ? "bg-card/90 backdrop-blur-xl border-border shadow-lg"
-            : "bg-card/60 backdrop-blur-lg border-border/50"
+            ? "bg-card/95 backdrop-blur-xl border-border shadow-lg"
+            : "bg-primary/90 backdrop-blur-lg border-primary-foreground/10"
         )}
       >
         {/* Logo */}
