@@ -43,11 +43,7 @@ const Header = () => {
           ))}
           <a
             href="tel:+917996217888"
-            className={`inline-flex items-center gap-2 h-11 px-6 ml-3 rounded-full font-semibold text-sm transition-all duration-300 ${
-              scrolled
-                ? "bg-primary text-primary-foreground hover:opacity-90"
-                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-            }`}
+            className="inline-flex items-center gap-2 h-11 px-6 ml-3 rounded-full font-semibold text-sm transition-all duration-300 bg-primary text-primary-foreground hover:opacity-90"
           >
             <Phone className="w-4 h-4" />
             Book Now
