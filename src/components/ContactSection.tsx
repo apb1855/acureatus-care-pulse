@@ -75,8 +75,22 @@ const ContactSection = () => {
             </a>
           </div>
 
-          {/* Secondary + FAQ */}
+          {/* Secondary + Map */}
           <div className="space-y-6">
+            {/* Embedded Map - visible only on lg+ */}
+            <div className="hidden lg:block rounded-xl overflow-hidden border border-border h-64">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.!2d74.856!3d12.876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDUyJzM0LjAiTiA3NMKwNTEnMjEuNiJF!5e0!3m2!1sen!2sin!4v1700000000000"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Acureatus Clinic Location"
+              />
+            </div>
+
             <div className="p-6 rounded-xl bg-card border border-border">
               <h3 className="text-xl font-display font-semibold text-foreground mb-3">{secondary.branch_name}</h3>
               <p className="text-sm text-foreground">{secondary.address}</p>
@@ -84,7 +98,6 @@ const ContactSection = () => {
                 {secondary.contact_number}
               </a>
             </div>
-
           </div>
         </div>
       </div>
