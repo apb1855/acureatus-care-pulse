@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { Star, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Star, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
 import heroBg from "@/assets/hero-bg.jpg";
 
