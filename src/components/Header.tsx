@@ -14,12 +14,19 @@ const navLinks = [
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+      setHidden(currentY > lastScrollY && currentY > 80);
+      setLastScrollY(currentY);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
     <header
