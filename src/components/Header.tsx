@@ -48,7 +48,7 @@ const Header = () => {
           <span className={`text-[9px] md:text-[11px] font-semibold tracking-widest transition-colors duration-300 ${
             scrolled ? "text-muted-foreground" : "text-primary-foreground/70"
           }`}>
-            Ai Advanced Physio Pain Clinic
+            AI Advanced Physio Pain Clinic
           </span>
         </a>
 
