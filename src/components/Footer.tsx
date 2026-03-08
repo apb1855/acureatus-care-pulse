@@ -55,7 +55,7 @@ const Footer = () => (
         {/* Brand column */}
         <AnimatedContainer delay={0} className="space-y-5">
           <a href="#home" className="inline-block">
-            <img src={logo} alt="Acureatus Logo" className="h-16 w-auto brightness-0 invert" />
+            <img src={logo} alt="Acureatus Logo" className="h-24 w-auto brightness-0 invert" />
           </a>
           <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-xs">
             {clinicData.business_identity.branding_tagline}
