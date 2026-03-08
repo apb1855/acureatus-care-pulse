@@ -15,7 +15,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 
 const Index = () => (
-  <div className="min-h-screen bg-background snap-y snap-mandatory overflow-y-auto h-screen scroll-smooth">
+  <div id="main-content" role="main" className="min-h-screen bg-background snap-y snap-mandatory overflow-y-auto h-screen scroll-smooth">
     <Header />
     <div className="snap-start"><HeroSection /></div>
     <div className="snap-start"><PillarsSection /></div>
