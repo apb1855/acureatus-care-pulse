@@ -100,7 +100,7 @@ const Footer = () => (
             <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-secondary" />
             <span>{clinicData.locations[0].address}</span>
           </div>
-          <div className="flex items-center gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-center gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <Phone className="w-4 h-4 shrink-0 text-secondary" />
             <a href={`tel:${clinicData.locations[0].contact_numbers[0]}`} className="hover:text-primary-foreground transition-colors">
               {clinicData.locations[0].contact_numbers[0]}
