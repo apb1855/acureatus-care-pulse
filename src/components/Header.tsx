@@ -23,11 +23,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50"
-          : "bg-card/20 backdrop-blur-lg border-b border-primary-foreground/15"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-card shadow-md border-b border-border/50`}
     >
       <div className="container flex items-center justify-between h-16 md:h-20">
         <a href="#home" className="flex items-center gap-2">
@@ -40,22 +36,14 @@ const Header = () => {
             <a
               key={l.href}
               href={l.href}
-              className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                scrolled
-                  ? "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              }`}
+              className="relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 text-foreground/80 hover:text-primary hover:bg-primary/5"
             >
               {l.label}
             </a>
           ))}
           <a
             href="tel:+917996217888"
-            className={`inline-flex items-center gap-2 h-11 px-6 ml-3 rounded-full font-semibold text-sm transition-all duration-300 ${
-              scrolled
-                ? "bg-primary text-primary-foreground hover:opacity-90"
-                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
-            }`}
+            className="inline-flex items-center gap-2 h-11 px-6 ml-3 rounded-full font-semibold text-sm transition-all duration-300 bg-primary text-primary-foreground hover:opacity-90"
           >
             <Phone className="w-4 h-4" />
             Book Now
@@ -65,8 +53,7 @@ const Header = () => {
         {/* Mobile hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className={`md:hidden p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full transition-colors ${
-            scrolled ? "text-foreground" : "text-primary-foreground"
+          className="md:hidden p-2 min-h-[48px] min-w-[48px] flex items-center justify-center rounded-full transition-colors text-foreground"
           }`}
           aria-label="Toggle menu"
         >
