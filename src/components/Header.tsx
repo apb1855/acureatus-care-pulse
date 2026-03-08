@@ -84,6 +84,11 @@ const Header = () => {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
+          <ThemeToggle className={cn(
+            scrolled
+              ? "text-foreground hover:bg-primary/5"
+              : "text-primary-foreground hover:bg-primary-foreground/10"
+          )} />
           <a
             href="tel:+917996217888"
             className={cn(
