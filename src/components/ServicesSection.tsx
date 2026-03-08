@@ -2,6 +2,7 @@ import { HeartPulse, Cpu, Brain, Dumbbell, Hand, Zap } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { clinicData } from "@/data/clinicData";
 import { useI18n } from "@/hooks/useI18n";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const clinicIcons = [HeartPulse, Cpu, Brain, Dumbbell, Hand];
 
@@ -44,14 +45,16 @@ const ServicesSection = () => {
   return (
     <section id="services" className="py-20 md:py-28 bg-muted/50">
       <div className="container">
-        <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-            {t("services.title")}
-          </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            {t("services.subtitle")}
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+              {t("services.title")}
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              {t("services.subtitle")}
+            </p>
+          </div>
+        </ScrollReveal>
 
         <BentoGrid className="lg:grid-rows-3">
           {features.map((feature) => (

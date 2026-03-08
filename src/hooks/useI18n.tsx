@@ -98,6 +98,12 @@ const translations: Record<Locale, Record<string, string>> = {
     "fab.goToTop": "Go to Top",
     "fab.bookNow": "Book Now",
     "fab.chat": "Chat with us",
+
+    // Stats
+    "stats.yearsExperience": "Years Experience",
+    "stats.happyPatients": "Happy Patients",
+    "stats.advancedTech": "Advanced Technologies",
+    "stats.specializedClinics": "Specialized Clinics",
   },
   kn: {
     // Nav
@@ -188,6 +194,12 @@ const translations: Record<Locale, Record<string, string>> = {
     "fab.goToTop": "ಮೇಲಕ್ಕೆ ಹೋಗಿ",
     "fab.bookNow": "ಈಗ ಬುಕ್ ಮಾಡಿ",
     "fab.chat": "ನಮ್ಮೊಂದಿಗೆ ಚಾಟ್ ಮಾಡಿ",
+
+    // Stats
+    "stats.yearsExperience": "ವರ್ಷಗಳ ಅನುಭವ",
+    "stats.happyPatients": "ಸಂತೋಷದ ರೋಗಿಗಳು",
+    "stats.advancedTech": "ಮುಂದುವರಿದ ತಂತ್ರಜ್ಞಾನಗಳು",
+    "stats.specializedClinics": "ವಿಶೇಷ ಕ್ಲಿನಿಕ್‌ಗಳು",
   },
 };
 
