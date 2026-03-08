@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
 interface TabContent {
   badge: string;
@@ -31,6 +39,8 @@ const Feature108 = ({
   description,
   tabs = [],
 }: Feature108Props) => {
+  const [openModal, setOpenModal] = useState<TabContent | null>(null);
+
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="container">
@@ -74,7 +84,9 @@ const Feature108 = ({
                     {tab.content.description}
                   </p>
                   <div className="mt-2">
-                    <Button>{tab.content.buttonText}</Button>
+                    <Button onClick={() => setOpenModal(tab.content)}>
+                      {tab.content.buttonText}
+                    </Button>
                   </div>
                 </div>
                 <div className="overflow-hidden rounded-lg">
@@ -89,6 +101,33 @@ const Feature108 = ({
           ))}
         </Tabs>
       </div>
+
+      <Dialog open={!!openModal} onOpenChange={(open) => !open && setOpenModal(null)}>
+        <DialogContent className="max-w-2xl">
+          {openModal && (
+            <>
+              <DialogHeader>
+                <Badge variant="secondary" className="w-fit mb-2">
+                  {openModal.badge}
+                </Badge>
+                <DialogTitle className="text-xl md:text-2xl font-display font-bold">
+                  {openModal.title}
+                </DialogTitle>
+                <DialogDescription className="text-muted-foreground leading-relaxed mt-2">
+                  {openModal.description}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="overflow-hidden rounded-lg mt-4">
+                <img
+                  src={openModal.imageSrc}
+                  alt={openModal.imageAlt}
+                  className="w-full h-auto rounded-lg object-cover aspect-video"
+                />
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
