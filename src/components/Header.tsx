@@ -35,7 +35,10 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl">
+    <header className={cn(
+      "fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-5xl transition-all duration-300",
+      visible ? "translate-y-0 opacity-100" : "-translate-y-[calc(100%+2rem)] opacity-0"
+    )}>
       <div
         className={cn(
           "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
