@@ -6,6 +6,7 @@ import PricingSection from "@/components/PricingSection";
 import TeamSection from "@/components/TeamSection";
 import HallOfFameSection from "@/components/HallOfFameSection";
 import GallerySection from "@/components/GallerySection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import FAQSection from "@/components/FAQSection";
 import FloatingCTA from "@/components/FloatingCTA";
@@ -21,6 +22,7 @@ const Index = () => (
     <div className="snap-start"><TeamSection /></div>
     <div className="snap-start"><HallOfFameSection /></div>
     <div className="snap-start"><GallerySection /></div>
+    <div className="snap-start"><TestimonialsSection /></div>
     <div className="snap-start"><ContactSection /></div>
     <div className="snap-start"><FAQSection /></div>
     <div className="snap-start"><Footer /></div>
