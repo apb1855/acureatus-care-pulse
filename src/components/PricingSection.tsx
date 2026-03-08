@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { clinicData } from "@/data/clinicData";
 import { useI18n } from "@/hooks/useI18n";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const PricingSection = () => {
   const { t } = useI18n();
