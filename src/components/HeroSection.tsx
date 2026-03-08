@@ -32,7 +32,7 @@ const HeroSection = () => {
           style={{ opacity: i === current ? 1 : 0 }}
         >
           <img src={src} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(213,100%,19%)]/90 via-[hsl(213,100%,19%)]/70 to-[hsl(213,100%,19%)]/40" />
         </div>
       ))}
 
