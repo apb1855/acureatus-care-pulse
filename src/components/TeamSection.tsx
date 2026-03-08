@@ -1,50 +1,79 @@
 import { motion } from "framer-motion";
-import { User } from "lucide-react";
 import { clinicData } from "@/data/clinicData";
+import { Carousel, TestimonialCard, iTestimonial } from "@/components/ui/retro-testimonial";
 
-const TeamSection = () => (
-  <section id="team" className="py-20 md:py-28 bg-muted/50">
-    <div className="container">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="text-center mb-14"
-      >
-        <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
-          Our Medical Team
-        </h2>
-        <p className="text-muted-foreground max-w-xl mx-auto">
-          Experienced professionals dedicated to your recovery
-        </p>
-      </motion.div>
+const teamBackgrounds: Record<string, string> = {
+  "Dr. Harish S. Krishna":
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop",
+  "Dr. Chaithresh":
+    "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=2080&auto=format&fit=crop",
+  "Dr. Jayshree":
+    "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?q=80&w=2091&auto=format&fit=crop",
+  "Dr. Pratham":
+    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop",
+  "Ms. Glevisha":
+    "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop",
+};
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
-        {clinicData.medical_team.map((member, i) => (
-          <motion.div
-            key={member.name}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
-            className="text-center p-6 rounded-xl bg-card border border-border"
-          >
-            <div className="w-20 h-20 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
-              <User className="w-10 h-10 text-primary" />
-            </div>
-            <h3 className="text-lg font-display font-semibold text-foreground">{member.name}</h3>
-            {member.credentials && (
-              <p className="text-sm text-secondary font-medium">{member.credentials}</p>
-            )}
-            <p className="text-sm text-muted-foreground mt-1">{member.role}</p>
-            {member.specialization && (
-              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{member.specialization}</p>
-            )}
-          </motion.div>
-        ))}
+const teamProfileImages: Record<string, string> = {
+  "Dr. Harish S. Krishna":
+    "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=200&auto=format&fit=crop",
+  "Dr. Chaithresh":
+    "https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop",
+  "Dr. Jayshree":
+    "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=200&auto=format&fit=crop",
+  "Dr. Pratham":
+    "https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200&auto=format&fit=crop",
+  "Ms. Glevisha":
+    "https://images.unsplash.com/photo-1594824476967-48c8b964ac31?q=80&w=200&auto=format&fit=crop",
+};
+
+const getDescription = (member: typeof clinicData.medical_team[0]) => {
+  const parts: string[] = [];
+  if (member.role) parts.push(member.role);
+  if (member.specialization) parts.push(`Specializing in ${member.specialization}`);
+  if (member.credentials) parts.push(`Credentials: ${member.credentials}`);
+  return parts.join(". ") + ".";
+};
+
+const TeamSection = () => {
+  const cards = clinicData.medical_team.map((member, index) => {
+    const testimonial: iTestimonial = {
+      name: member.name,
+      designation: member.role,
+      description: getDescription(member),
+      profileImage: teamProfileImages[member.name] || "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=200&auto=format&fit=crop",
+    };
+    return (
+      <TestimonialCard
+        key={member.name}
+        testimonial={testimonial}
+        index={index}
+        backgroundImage={teamBackgrounds[member.name]}
+      />
+    );
+  });
+
+  return (
+    <section id="team" className="py-20 md:py-28 bg-muted/50">
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-4"
+        >
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground mb-4">
+            Our Medical Team
+          </h2>
+          <p className="text-muted-foreground max-w-xl mx-auto">
+            Experienced professionals dedicated to your recovery
+          </p>
+        </motion.div>
       </div>
-    </div>
-  </section>
-);
+      <Carousel items={cards} />
+    </section>
+  );
+};
 
 export default TeamSection;
