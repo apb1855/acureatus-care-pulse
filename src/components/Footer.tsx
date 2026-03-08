@@ -96,7 +96,7 @@ const Footer = () => (
         {/* Contact column */}
         <AnimatedContainer delay={0.3} className="space-y-4">
           <h4 className="font-display text-lg font-semibold mb-4">Get in Touch</h4>
-          <div className="flex items-start gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-start gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-secondary" />
             <span>{clinicData.locations[0].address}</span>
           </div>
