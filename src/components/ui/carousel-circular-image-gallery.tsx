@@ -180,8 +180,8 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
 
     const defaults = { transformOrigin: "center center" };
     const flipDuration = firstLoad ? 0 : DURATION;
-    const upDuration = firstLoad ? 0 : 0.2;
-    const bounceDuration = firstLoad ? 0.01 : 1;
+    const upDuration = firstLoad ? 0 : 0.4;
+    const bounceDuration = firstLoad ? 0.01 : 1.4;
     const delay = firstLoad ? 0 : flipDuration + upDuration;
 
     setLoaded(false);
@@ -190,16 +190,16 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
       gsap
         .timeline()
         .set(clip.current, { ...defaults, ...getPosSmall() })
-        .to(clip.current, { ...defaults, ...getPosCenter(), duration: upDuration, ease: "power3.inOut" })
-        .to(clip.current, { ...defaults, ...getPosEnd(), duration: flipDuration, ease: "power4.in", onComplete: () => onInPlace(id) });
+        .to(clip.current, { ...defaults, ...getPosCenter(), duration: upDuration, ease: "power2.inOut" })
+        .to(clip.current, { ...defaults, ...getPosEnd(), duration: flipDuration, ease: "power2.inOut", onComplete: () => onInPlace(id) });
     } else {
       gsap
         .timeline({ overwrite: true })
         .set(clip.current, { ...defaults, ...getPosStart() })
-        .to(clip.current, { ...defaults, ...getPosCenter(), delay, duration: flipDuration, ease: "power4.out" })
+        .to(clip.current, { ...defaults, ...getPosCenter(), delay, duration: flipDuration, ease: "power2.inOut" })
         .to(clip.current, {
           ...defaults,
-          motionPath: { path: [getPosSmallAbove(), getPosSmall()], curviness: 1 },
+          motionPath: { path: [getPosSmallAbove(), getPosSmall()], curviness: 1.2 },
           duration: bounceDuration,
           ease: "bounce.out",
         });
