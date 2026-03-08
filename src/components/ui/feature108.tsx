@@ -47,14 +47,15 @@ const Feature108 = ({
         </div>
 
         <Tabs defaultValue={tabs[0]?.value} className="w-full">
-          <TabsList className="flex w-full justify-center gap-2 bg-transparent mb-8">
+          <TabsList className="flex w-full justify-center gap-1.5 sm:gap-2 bg-transparent mb-8 flex-wrap">
             {tabs.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="flex items-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all"
+                className="flex items-center gap-1 sm:gap-2 rounded-lg px-2.5 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm font-medium text-muted-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all"
               >
-                {tab.icon} {tab.label}
+                {tab.icon} <span className="hidden xs:inline sm:inline">{tab.label}</span>
+                <span className="inline xs:hidden sm:hidden">{tab.label.split(' ')[0]}</span>
               </TabsTrigger>
             ))}
           </TabsList>
