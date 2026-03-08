@@ -36,16 +36,22 @@ const Header = () => {
         className={cn(
           "flex items-center justify-between rounded-2xl border px-4 py-2.5 md:px-6 md:py-3 transition-all duration-500",
           scrolled
-            ? "bg-card/90 backdrop-blur-xl border-border shadow-lg"
-            : "bg-card/60 backdrop-blur-lg border-border/50"
+            ? "bg-card/95 backdrop-blur-xl border-border shadow-lg"
+            : "bg-primary/90 backdrop-blur-lg border-primary-foreground/10"
         )}
       >
         {/* Logo */}
         <a href="#home" className="flex flex-col leading-tight">
-          <span className="font-display text-lg md:text-xl font-bold tracking-tight text-primary">
+          <span className={cn(
+            "font-display text-lg md:text-xl font-bold tracking-tight transition-colors duration-500",
+            scrolled ? "text-primary" : "text-primary-foreground"
+          )}>
             ACUREATUS
           </span>
-          <span className="text-[8px] md:text-[10px] font-semibold tracking-widest text-foreground/60">
+          <span className={cn(
+            "text-[8px] md:text-[10px] font-semibold tracking-widest transition-colors duration-500",
+            scrolled ? "text-foreground/60" : "text-primary-foreground/70"
+          )}>
             AI Advanced Physio Pain Clinic
           </span>
         </a>
@@ -56,7 +62,12 @@ const Header = () => {
             <a
               key={link.href}
               href={link.href}
-              className="px-3 py-1.5 text-sm font-semibold text-foreground/80 hover:text-primary rounded-lg transition-colors hover:bg-primary/5"
+              className={cn(
+                "px-3 py-1.5 text-sm font-semibold rounded-lg transition-colors",
+                scrolled
+                  ? "text-foreground hover:text-primary hover:bg-primary/5"
+                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
+              )}
             >
               {link.label}
             </a>
@@ -68,8 +79,10 @@ const Header = () => {
           <a
             href="tel:+917996217888"
             className={cn(
-              buttonVariants({ variant: "default", size: "sm" }),
-              "hidden sm:inline-flex gap-2 rounded-xl"
+              "hidden sm:inline-flex items-center gap-2 h-9 px-4 rounded-xl text-sm font-semibold transition-colors duration-500",
+              scrolled
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-primary-foreground text-primary hover:bg-primary-foreground/90"
             )}
           >
             <Phone className="w-4 h-4" />
@@ -82,7 +95,10 @@ const Header = () => {
               variant="ghost"
               size="icon"
               onClick={() => setOpen(!open)}
-              className="lg:hidden"
+              className={cn(
+                "lg:hidden transition-colors",
+                scrolled ? "text-foreground" : "text-primary-foreground"
+              )}
             >
               <MenuIcon className="w-5 h-5" />
             </Button>
