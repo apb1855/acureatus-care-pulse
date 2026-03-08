@@ -36,11 +36,7 @@ const Header = () => {
             <a
               key={l.href}
               href={l.href}
-              className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
-                scrolled
-                  ? "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                  : "text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10"
-              }`}
+              className="relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 text-foreground/80 hover:text-primary hover:bg-primary/5"
             >
               {l.label}
             </a>
