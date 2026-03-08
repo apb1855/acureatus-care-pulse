@@ -104,6 +104,11 @@ const translations: Record<Locale, Record<string, string>> = {
     "stats.happyPatients": "Happy Patients",
     "stats.advancedTech": "Advanced Technologies",
     "stats.specializedClinics": "Specialized Clinics",
+
+    // Reviews
+    "reviews.title": "What Our Patients Say",
+    "reviews.reviewsOn": "reviews on Google",
+    "reviews.viewOnGoogle": "View all reviews on Google",
   },
   kn: {
     // Nav
