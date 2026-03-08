@@ -28,6 +28,7 @@ const Index = () => (
     <GallerySection />
     <TestimonialsSection />
     <GoogleReviewsSection />
+    <BlogPreviewSection />
     <ContactFormSection />
     <ContactSection />
     <FAQSection />

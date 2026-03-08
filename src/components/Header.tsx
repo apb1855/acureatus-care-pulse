@@ -13,6 +13,7 @@ const navKeys = [
   { key: "nav.pricing", href: "#pricing" },
   { key: "nav.team", href: "#team" },
   { key: "nav.gallery", href: "#gallery" },
+  { key: "nav.blog", href: "/blog", isRoute: true },
   { key: "nav.contact", href: "#contact-form" },
 ];
 
