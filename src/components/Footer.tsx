@@ -48,7 +48,7 @@ function AnimatedContainer({ className, delay = 0.1, children }: { delay?: numbe
 }
 
 const Footer = () => (
-  <footer className="bg-primary text-primary-foreground">
+  <footer className="bg-primary text-primary-foreground dark:bg-[hsl(213,80%,8%)] dark:text-[hsl(210,20%,95%)]">
     {/* Main footer */}
     <div className="container py-14">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -57,7 +57,7 @@ const Footer = () => (
           <a href="#home" className="inline-block">
             <img src={logo} alt="Acureatus Logo" className="h-24 w-auto brightness-0 invert" />
           </a>
-          <p className="text-sm text-primary-foreground/70 leading-relaxed max-w-xs">
+          <p className="text-sm text-primary-foreground/70 dark:text-white/70 leading-relaxed max-w-xs">
             {clinicData.business_identity.branding_tagline}
           </p>
           <div className="flex items-center gap-3 pt-2">
@@ -66,7 +66,7 @@ const Footer = () => (
                 key={s.label}
                 href={s.href}
                 aria-label={s.label}
-                className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary-foreground/20 transition-colors"
+                className="w-9 h-9 rounded-full bg-primary-foreground/10 dark:bg-white/10 flex items-center justify-center hover:bg-primary-foreground/20 dark:hover:bg-white/20 transition-colors"
               >
                 <s.icon className="w-4 h-4" />
               </a>
@@ -83,7 +83,7 @@ const Footer = () => (
                 <li key={link.title}>
                   <a
                     href={link.href}
-                    className="text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors"
+                    className="text-sm text-primary-foreground/60 dark:text-white/60 hover:text-primary-foreground dark:hover:text-white transition-colors"
                   >
                     {link.title}
                   </a>
@@ -96,17 +96,17 @@ const Footer = () => (
         {/* Contact column */}
         <AnimatedContainer delay={0.3} className="space-y-4">
           <h4 className="font-display text-lg font-semibold mb-4">Get in Touch</h4>
-          <div className="flex items-start gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-start gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-secondary" />
             <span>{clinicData.locations[0].address}</span>
           </div>
-          <div className="flex items-center gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-center gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <Phone className="w-4 h-4 shrink-0 text-secondary" />
             <a href={`tel:${clinicData.locations[0].contact_numbers[0]}`} className="hover:text-primary-foreground transition-colors">
               {clinicData.locations[0].contact_numbers[0]}
             </a>
           </div>
-          <div className="flex items-center gap-3 text-sm text-primary-foreground/70">
+          <div className="flex items-center gap-3 text-sm text-primary-foreground/70 dark:text-white/70">
             <Clock className="w-4 h-4 shrink-0 text-secondary" />
             <span>Mon–Sat: {clinicData.operating_hours.monday_to_saturday}</span>
           </div>
@@ -115,12 +115,12 @@ const Footer = () => (
     </div>
 
     {/* Bottom bar */}
-    <div className="border-t border-primary-foreground/10">
+    <div className="border-t border-primary-foreground/10 dark:border-white/10">
       <div className="container py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p className="text-xs text-primary-foreground/40">
+        <p className="text-xs text-primary-foreground/40 dark:text-white/40">
           © {new Date().getFullYear()} {clinicData.business_identity.name}. All rights reserved.
         </p>
-        <p className="text-xs text-primary-foreground/40">
+        <p className="text-xs text-primary-foreground/40 dark:text-white/40">
           An initiative of {clinicData.business_identity.initiative_of.join(" & ")}
         </p>
       </div>
