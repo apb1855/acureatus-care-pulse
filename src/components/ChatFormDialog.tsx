@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Send } from "lucide-react";
 import { z } from "zod";
@@ -77,7 +77,7 @@ interface ChatFormDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
+const ChatFormDialog = forwardRef<HTMLDivElement, ChatFormDialogProps>(({ open, onOpenChange }, ref) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -253,6 +253,8 @@ const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
       </DialogContent>
     </Dialog>
   );
-};
+});
+
+ChatFormDialog.displayName = "ChatFormDialog";
 
 export default ChatFormDialog;

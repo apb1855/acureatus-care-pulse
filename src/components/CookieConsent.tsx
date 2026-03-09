@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { Cookie, X } from "lucide-react";
 import { useI18n } from "@/hooks/useI18n";
 
-const CookieConsent = () => {
+const CookieConsent = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useI18n();
   const [visible, setVisible] = useState(false);
 
@@ -29,7 +29,7 @@ const CookieConsent = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[60] p-4 animate-in slide-in-from-bottom duration-500">
+    <div ref={ref} className="fixed bottom-0 left-0 right-0 z-[60] p-4 animate-in slide-in-from-bottom duration-500">
       <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-2xl p-5 md:p-6">
         <div className="flex items-start gap-4">
           <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -50,6 +50,8 @@ const CookieConsent = () => {
       </div>
     </div>
   );
-};
+});
+
+CookieConsent.displayName = "CookieConsent";
 
 export default CookieConsent;

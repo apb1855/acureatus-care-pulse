@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, forwardRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 declare global {
@@ -154,7 +154,7 @@ interface GalleryImageProps {
   total: number;
 }
 
-function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImageProps) {
+const GalleryImage = forwardRef<SVGGElement, GalleryImageProps>(function GalleryImage({ url, title, open, id, onInPlace, total }, ref) {
   const [firstLoad, setLoaded] = useState(true);
   const clip = useRef<SVGCircleElement>(null);
 
@@ -210,7 +210,7 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
   const small = getPosSmall();
 
   return (
-    <g>
+    <g ref={ref}>
       <defs>
         <clipPath id={`clip-${id}`}>
           <circle ref={clip} cx={small.cx} cy={small.cy} r={small.r} />
@@ -227,7 +227,7 @@ function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImagePr
       />
     </g>
   );
-}
+});
 
 interface TabsProps {
   images: ImageData[];
