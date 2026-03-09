@@ -24,6 +24,11 @@
 **Target Audience**: Developers and project planners  
 **Key Topics**: Backend architecture options, migration strategies, Lovable Cloud vs Firebase vs MongoDB comparison
 
+#### [`multi-tenant-guide.md`](./multi-tenant-guide.md)
+**Purpose**: Complete guide to evolving the app into a SaaS multi-tenant platform serving multiple clinics from a single codebase  
+**Target Audience**: Architects, developers, and business decision-makers  
+**Key Topics**: Tenancy strategies (subdomain, path-based, custom domain), data model with RLS, tenant detection, authentication, billing, admin panels, roadmap
+
 ---
 
 ### 🎨 **Design & User Experience**
@@ -101,6 +106,7 @@
 1. Start with [`developer-guide.md`](./developer-guide.md) for project setup
 2. Review [`features-guide.md`](./features-guide.md) to understand the application
 3. If implementing backend features, study [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md)
+4. For multi-tenant/SaaS evolution, read [`multi-tenant-guide.md`](./multi-tenant-guide.md)
 
 ### For Designers
 1. Begin with [`features-guide.md`](./features-guide.md) for feature overview
@@ -115,6 +121,13 @@
 1. Review [`project-invoice.md`](./project-invoice.md) for scope and deliverables
 2. Check [`features-guide.md`](./features-guide.md) for functionality overview
 3. Study [`future-backend-guide.md`](./future-backend-guide.md) for scaling plans
+4. Explore [`multi-tenant-guide.md`](./multi-tenant-guide.md) if considering SaaS model
+
+### For SaaS/Multi-Clinic Planners
+1. Start with [`multi-tenant-guide.md`](./multi-tenant-guide.md) for full architecture
+2. Review [`deployment.md`](./deployment.md) for subdomain DNS setup
+3. Study [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) for admin panel patterns
+4. Check [`future-backend-guide.md`](./future-backend-guide.md) for backend selection
 
 ---
 
@@ -124,12 +137,14 @@
 |----------|---------------|-----------|
 | Frontend Framework | [`developer-guide.md`](./developer-guide.md) | React + Vite for modern development |
 | Backend Options | [`future-backend-guide.md`](./future-backend-guide.md) | Comparison of Lovable Cloud, Firebase, MongoDB |
+| Multi-Tenant Strategy | [`multi-tenant-guide.md`](./multi-tenant-guide.md) | Subdomain + custom domain hybrid for scalability |
 | Authentication Strategy | [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) | Role-based access for admin features |
 | SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Static + dynamic JSON-LD, lazy loading, image optimization |
 | Domain Selection | [`deployment.md`](./deployment.md) | `.com` primary + `.in` redirect for optimal SEO |
 | Error Resilience | [`developer-guide.md`](./developer-guide.md) | ErrorBoundary wrapping each section |
 | Performance | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Full optimization inventory |
 | PWA & Offline | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Workbox caching + offline fallback |
+| RLS Data Isolation | [`multi-tenant-guide.md`](./multi-tenant-guide.md) | tenant_id on all tables with RLS policies |
 
 ---
 
@@ -156,6 +171,7 @@ Examples:
 - **Complex technical decision** → Add to existing relevant guide
 - **New deployment target** → Create deployment-specific guide
 - **New integration** → Add to [`future-backend-guide.md`](./future-backend-guide.md) or create specific guide
+- **Scaling strategy (multi-tenant, microservices)** → Create architecture guide like [`multi-tenant-guide.md`](./multi-tenant-guide.md)
 
 ---
 
@@ -171,6 +187,7 @@ Examples:
 - **v1.2** (March 2026): Created documentation index
 - **v1.3** (March 2026): Updated all docs with error boundaries, lazy loading, blog system, Lighthouse optimization results, static JSON-LD, sitemap, and performance architecture
 - **v1.4** (March 2026): Added offline fallback page, features-optimization-bestpractices.md, deployment.md with domain SEO analysis
+- **v1.5** (March 2026): Added multi-tenant-guide.md with SaaS architecture, data model, authentication, billing, and implementation roadmap
 
 ---
 
