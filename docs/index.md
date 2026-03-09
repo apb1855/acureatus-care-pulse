@@ -187,6 +187,7 @@ Examples:
 - **v1.2** (March 2026): Created documentation index
 - **v1.3** (March 2026): Updated all docs with error boundaries, lazy loading, blog system, Lighthouse optimization results, static JSON-LD, sitemap, and performance architecture
 - **v1.4** (March 2026): Added offline fallback page, features-optimization-bestpractices.md, deployment.md with domain SEO analysis
+- **v1.5** (March 2026): Added multi-tenant-guide.md with SaaS architecture, data model, authentication, billing, and implementation roadmap
 
 ---
 
