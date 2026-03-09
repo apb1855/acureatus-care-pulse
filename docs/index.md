@@ -171,6 +171,7 @@ Examples:
 - **Complex technical decision** → Add to existing relevant guide
 - **New deployment target** → Create deployment-specific guide
 - **New integration** → Add to [`future-backend-guide.md`](./future-backend-guide.md) or create specific guide
+- **Scaling strategy (multi-tenant, microservices)** → Create architecture guide like [`multi-tenant-guide.md`](./multi-tenant-guide.md)
 
 ---
 
