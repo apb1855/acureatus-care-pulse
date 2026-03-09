@@ -59,6 +59,24 @@
 
 ---
 
+### 🚀 **Deployment & Domain**
+
+#### [`deployment.md`](./deployment.md)
+**Purpose**: Deployment platforms comparison, domain extension SEO analysis, DNS/SSL setup, and go-live checklists  
+**Target Audience**: Site owners, DevOps, and decision-makers  
+**Key Topics**: Lovable/Vercel/Netlify comparison, `.com` vs `.in` SEO impact, pre-launch checklist, post-launch monitoring
+
+---
+
+### 📊 **Features & Optimization Reference**
+
+#### [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md)
+**Purpose**: Complete inventory of all features, performance optimizations, and engineering best practices  
+**Target Audience**: Developers, auditors, and stakeholders  
+**Key Topics**: Feature catalog, Lighthouse scores, caching strategy, accessibility, security, PWA/offline support
+
+---
+
 ### 🎨 **Branding & Customization**
 
 #### [`white-label-guide.md`](./white-label-guide.md)
@@ -108,8 +126,10 @@
 | Backend Options | [`future-backend-guide.md`](./future-backend-guide.md) | Comparison of Lovable Cloud, Firebase, MongoDB |
 | Authentication Strategy | [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) | Role-based access for admin features |
 | SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Static + dynamic JSON-LD, lazy loading, image optimization |
+| Domain Selection | [`deployment.md`](./deployment.md) | `.com` primary + `.in` redirect for optimal SEO |
 | Error Resilience | [`developer-guide.md`](./developer-guide.md) | ErrorBoundary wrapping each section |
-| Performance | [`seo-performance-guide.md`](./seo-performance-guide.md) | React.lazy(), image optimization, Workbox caching |
+| Performance | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Full optimization inventory |
+| PWA & Offline | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Workbox caching + offline fallback |
 
 ---
 
@@ -150,6 +170,7 @@ Examples:
 - **v1.1** (March 2026): Added admin panel implementation guide
 - **v1.2** (March 2026): Created documentation index
 - **v1.3** (March 2026): Updated all docs with error boundaries, lazy loading, blog system, Lighthouse optimization results, static JSON-LD, sitemap, and performance architecture
+- **v1.4** (March 2026): Added offline fallback page, features-optimization-bestpractices.md, deployment.md with domain SEO analysis
 
 ---
 
