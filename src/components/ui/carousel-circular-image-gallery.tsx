@@ -154,7 +154,7 @@ interface GalleryImageProps {
   total: number;
 }
 
-function GalleryImage({ url, title, open, id, onInPlace, total }: GalleryImageProps) {
+const GalleryImage = forwardRef<SVGGElement, GalleryImageProps>(function GalleryImage({ url, title, open, id, onInPlace, total }, ref) {
   const [firstLoad, setLoaded] = useState(true);
   const clip = useRef<SVGCircleElement>(null);
 
