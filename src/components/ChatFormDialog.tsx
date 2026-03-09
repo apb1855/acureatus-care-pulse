@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import { format } from "date-fns";
 import { CalendarIcon, Send } from "lucide-react";
 import { z } from "zod";
