@@ -68,7 +68,7 @@ const Footer = () => {
               <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.title}>
-                    <a href={link.href} className="text-sm text-primary-foreground/60 dark:text-white/60 hover:text-primary-foreground dark:hover:text-white transition-colors">{link.title}</a>
+                    <a href={link.href} className="inline-block py-1 text-sm text-primary-foreground/60 dark:text-white/60 hover:text-primary-foreground dark:hover:text-white transition-colors">{link.title}</a>
                   </li>
                 ))}
               </ul>
