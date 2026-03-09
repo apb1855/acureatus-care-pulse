@@ -14,7 +14,7 @@ const testimonials = [
     quote: "The sports rehabilitation program here is outstanding. I recovered from my ACL injury faster than expected and returned to competitive athletics.",
     name: "Sneha Reddy",
     designation: "National Level Athlete",
-    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "The combination of advanced technology and compassionate care sets Acureatus apart. My mother's post-stroke recovery has been remarkable.",
