@@ -6,10 +6,10 @@ import logo from "@/assets/acureatus-logo.png";
 import type { ComponentProps, ReactNode } from "react";
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "Youtube" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Facebook, href: "https://facebook.com/acureatus", label: "Facebook" },
+  { icon: Instagram, href: "https://instagram.com/acureatus", label: "Instagram" },
+  { icon: Youtube, href: "https://youtube.com/@acureatus", label: "Youtube" },
+  { icon: Linkedin, href: "https://linkedin.com/company/acureatus", label: "LinkedIn" },
 ];
 
 function AnimatedContainer({ className, delay = 0.1, children }: { delay?: number; className?: ComponentProps<"div">["className"]; children: ReactNode }) {
@@ -55,7 +55,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-3 pt-2">
               {socialLinks.map((s) => (
-                <a key={s.label} href={s.href} aria-label={s.label} className="w-9 h-9 rounded-full bg-primary-foreground/10 dark:bg-white/10 flex items-center justify-center hover:bg-primary-foreground/20 dark:hover:bg-white/20 transition-colors">
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className="w-9 h-9 rounded-full bg-primary-foreground/10 dark:bg-white/10 flex items-center justify-center hover:bg-primary-foreground/20 dark:hover:bg-white/20 transition-colors">
                   <s.icon className="w-4 h-4" />
                 </a>
               ))}
@@ -68,7 +68,7 @@ const Footer = () => {
               <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.title}>
-                    <a href={link.href} className="text-sm text-primary-foreground/60 dark:text-white/60 hover:text-primary-foreground dark:hover:text-white transition-colors">{link.title}</a>
+                    <a href={link.href} className="inline-block py-1 text-sm text-primary-foreground/60 dark:text-white/60 hover:text-primary-foreground dark:hover:text-white transition-colors">{link.title}</a>
                   </li>
                 ))}
               </ul>
