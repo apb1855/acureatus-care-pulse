@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { Cookie, X } from "lucide-react";
 import { useI18n } from "@/hooks/useI18n";
 
-const CookieConsent = () => {
+const CookieConsent = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useI18n();
   const [visible, setVisible] = useState(false);
 
