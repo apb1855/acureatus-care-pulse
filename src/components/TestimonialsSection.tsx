@@ -8,7 +8,7 @@ const testimonials = [
     quote: "After years of chronic back pain, Acureatus gave me my life back. The AI-powered diagnosis pinpointed my issue in the first session itself.",
     name: "Rajesh Menon",
     designation: "IT Professional, Hyderabad",
-    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "The sports rehabilitation program here is outstanding. I recovered from my ACL injury faster than expected and returned to competitive athletics.",
