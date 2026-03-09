@@ -210,7 +210,7 @@ const GalleryImage = forwardRef<SVGGElement, GalleryImageProps>(function Gallery
   const small = getPosSmall();
 
   return (
-    <g>
+    <g ref={ref}>
       <defs>
         <clipPath id={`clip-${id}`}>
           <circle ref={clip} cx={small.cx} cy={small.cy} r={small.r} />
@@ -227,7 +227,7 @@ const GalleryImage = forwardRef<SVGGElement, GalleryImageProps>(function Gallery
       />
     </g>
   );
-}
+});
 
 interface TabsProps {
   images: ImageData[];
