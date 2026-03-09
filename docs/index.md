@@ -126,8 +126,10 @@
 | Backend Options | [`future-backend-guide.md`](./future-backend-guide.md) | Comparison of Lovable Cloud, Firebase, MongoDB |
 | Authentication Strategy | [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) | Role-based access for admin features |
 | SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Static + dynamic JSON-LD, lazy loading, image optimization |
+| Domain Selection | [`deployment.md`](./deployment.md) | `.com` primary + `.in` redirect for optimal SEO |
 | Error Resilience | [`developer-guide.md`](./developer-guide.md) | ErrorBoundary wrapping each section |
-| Performance | [`seo-performance-guide.md`](./seo-performance-guide.md) | React.lazy(), image optimization, Workbox caching |
+| Performance | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Full optimization inventory |
+| PWA & Offline | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Workbox caching + offline fallback |
 
 ---
 
