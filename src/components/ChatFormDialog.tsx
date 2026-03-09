@@ -253,6 +253,8 @@ const ChatFormDialog = forwardRef<HTMLDivElement, ChatFormDialogProps>(({ open, 
       </DialogContent>
     </Dialog>
   );
-};
+});
+
+ChatFormDialog.displayName = "ChatFormDialog";
 
 export default ChatFormDialog;
