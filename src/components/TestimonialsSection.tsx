@@ -8,31 +8,31 @@ const testimonials = [
     quote: "After years of chronic back pain, Acureatus gave me my life back. The AI-powered diagnosis pinpointed my issue in the first session itself.",
     name: "Rajesh Menon",
     designation: "IT Professional, Hyderabad",
-    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "The sports rehabilitation program here is outstanding. I recovered from my ACL injury faster than expected and returned to competitive athletics.",
     name: "Sneha Reddy",
     designation: "National Level Athlete",
-    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "The combination of advanced technology and compassionate care sets Acureatus apart. My mother's post-stroke recovery has been remarkable.",
     name: "Arjun Patel",
     designation: "Business Owner, Bangalore",
-    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "I was skeptical about physiotherapy until I visited Acureatus. Their gait analysis technology and personalized treatment plan eliminated my knee pain completely.",
     name: "Meera Krishnan",
     designation: "School Teacher, Chennai",
-    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "Dr. Chandra and the team are incredibly skilled. The shockwave therapy and cupping sessions resolved my shoulder issue that other clinics couldn't fix.",
     name: "Vikram Singh",
     designation: "Retired Army Officer",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ];
 
@@ -94,6 +94,8 @@ const TestimonialsSection = () => {
                       src={item.src}
                       alt={item.name}
                       className="h-full w-full rounded-2xl object-cover object-center border border-border"
+                      loading="lazy"
+                      decoding="async"
                       draggable={false}
                       onError={(e) => {
                         e.currentTarget.src = `https://placehold.co/500x500/e2e8f0/64748b?text=${item.name.charAt(0)}`;
