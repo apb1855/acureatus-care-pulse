@@ -6,10 +6,10 @@ import logo from "@/assets/acureatus-logo.png";
 import type { ComponentProps, ReactNode } from "react";
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Youtube, href: "#", label: "Youtube" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Facebook, href: "https://facebook.com/acureatus", label: "Facebook" },
+  { icon: Instagram, href: "https://instagram.com/acureatus", label: "Instagram" },
+  { icon: Youtube, href: "https://youtube.com/@acureatus", label: "Youtube" },
+  { icon: Linkedin, href: "https://linkedin.com/company/acureatus", label: "LinkedIn" },
 ];
 
 function AnimatedContainer({ className, delay = 0.1, children }: { delay?: number; className?: ComponentProps<"div">["className"]; children: ReactNode }) {
