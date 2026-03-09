@@ -43,7 +43,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-primary text-primary-foreground dark:bg-[hsl(213,80%,8%)] dark:text-[hsl(210,20%,95%)]">
+    <footer role="contentinfo" className="bg-primary text-primary-foreground dark:bg-[hsl(213,80%,8%)] dark:text-[hsl(210,20%,95%)]">
       <div className="container py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <AnimatedContainer delay={0} className="space-y-5">

@@ -93,6 +93,8 @@ const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
                   <img
                     src={tab.content.imageSrc}
                     alt={tab.content.imageAlt}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-auto rounded-lg object-cover aspect-video"
                   />
                 </div>
@@ -121,6 +123,8 @@ const Feature108 = forwardRef<HTMLElement, Feature108Props>(({
                 <img
                   src={openModal.imageSrc}
                   alt={openModal.imageAlt}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-auto rounded-lg object-cover aspect-video"
                 />
               </div>
