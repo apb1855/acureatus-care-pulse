@@ -59,6 +59,24 @@
 
 ---
 
+### 🚀 **Deployment & Domain**
+
+#### [`deployment.md`](./deployment.md)
+**Purpose**: Deployment platforms comparison, domain extension SEO analysis, DNS/SSL setup, and go-live checklists  
+**Target Audience**: Site owners, DevOps, and decision-makers  
+**Key Topics**: Lovable/Vercel/Netlify comparison, `.com` vs `.in` SEO impact, pre-launch checklist, post-launch monitoring
+
+---
+
+### 📊 **Features & Optimization Reference**
+
+#### [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md)
+**Purpose**: Complete inventory of all features, performance optimizations, and engineering best practices  
+**Target Audience**: Developers, auditors, and stakeholders  
+**Key Topics**: Feature catalog, Lighthouse scores, caching strategy, accessibility, security, PWA/offline support
+
+---
+
 ### 🎨 **Branding & Customization**
 
 #### [`white-label-guide.md`](./white-label-guide.md)
