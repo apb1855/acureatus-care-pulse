@@ -35,8 +35,10 @@ const HeroSection = () => {
         >
           <img
             src={src}
-            alt=""
+            alt={i === 0 ? "Acureatus AI Physiotherapy Clinic" : ""}
             className="w-full h-full object-cover"
+            width={1920}
+            height={1080}
             loading={i === 0 ? "eager" : "lazy"}
             decoding={i === 0 ? "sync" : "async"}
             fetchPriority={i === 0 ? "high" : "low"}
