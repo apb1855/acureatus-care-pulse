@@ -20,7 +20,7 @@ const testimonials = [
     quote: "The combination of advanced technology and compassionate care sets Acureatus apart. My mother's post-stroke recovery has been remarkable.",
     name: "Arjun Patel",
     designation: "Business Owner, Bangalore",
-    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "I was skeptical about physiotherapy until I visited Acureatus. Their gait analysis technology and personalized treatment plan eliminated my knee pain completely.",
