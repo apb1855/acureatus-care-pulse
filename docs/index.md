@@ -170,6 +170,7 @@ Examples:
 - **v1.1** (March 2026): Added admin panel implementation guide
 - **v1.2** (March 2026): Created documentation index
 - **v1.3** (March 2026): Updated all docs with error boundaries, lazy loading, blog system, Lighthouse optimization results, static JSON-LD, sitemap, and performance architecture
+- **v1.4** (March 2026): Added offline fallback page, features-optimization-bestpractices.md, deployment.md with domain SEO analysis
 
 ---
 
