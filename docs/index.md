@@ -137,12 +137,14 @@
 |----------|---------------|-----------|
 | Frontend Framework | [`developer-guide.md`](./developer-guide.md) | React + Vite for modern development |
 | Backend Options | [`future-backend-guide.md`](./future-backend-guide.md) | Comparison of Lovable Cloud, Firebase, MongoDB |
+| Multi-Tenant Strategy | [`multi-tenant-guide.md`](./multi-tenant-guide.md) | Subdomain + custom domain hybrid for scalability |
 | Authentication Strategy | [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) | Role-based access for admin features |
 | SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Static + dynamic JSON-LD, lazy loading, image optimization |
 | Domain Selection | [`deployment.md`](./deployment.md) | `.com` primary + `.in` redirect for optimal SEO |
 | Error Resilience | [`developer-guide.md`](./developer-guide.md) | ErrorBoundary wrapping each section |
 | Performance | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Full optimization inventory |
 | PWA & Offline | [`features-optimization-bestpractices.md`](./features-optimization-bestpractices.md) | Workbox caching + offline fallback |
+| RLS Data Isolation | [`multi-tenant-guide.md`](./multi-tenant-guide.md) | tenant_id on all tables with RLS policies |
 
 ---
 
