@@ -24,6 +24,11 @@
 **Target Audience**: Developers and project planners  
 **Key Topics**: Backend architecture options, migration strategies, Lovable Cloud vs Firebase vs MongoDB comparison
 
+#### [`multi-tenant-guide.md`](./multi-tenant-guide.md)
+**Purpose**: Complete guide to evolving the app into a SaaS multi-tenant platform serving multiple clinics from a single codebase  
+**Target Audience**: Architects, developers, and business decision-makers  
+**Key Topics**: Tenancy strategies (subdomain, path-based, custom domain), data model with RLS, tenant detection, authentication, billing, admin panels, roadmap
+
 ---
 
 ### 🎨 **Design & User Experience**
