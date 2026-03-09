@@ -77,7 +77,7 @@ interface ChatFormDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const ChatFormDialog = ({ open, onOpenChange }: ChatFormDialogProps) => {
+const ChatFormDialog = forwardRef<HTMLDivElement, ChatFormDialogProps>(({ open, onOpenChange }, ref) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
