@@ -94,6 +94,8 @@ const TestimonialsSection = () => {
                       src={item.src}
                       alt={item.name}
                       className="h-full w-full rounded-2xl object-cover object-center border border-border"
+                      loading="lazy"
+                      decoding="async"
                       draggable={false}
                       onError={(e) => {
                         e.currentTarget.src = `https://placehold.co/500x500/e2e8f0/64748b?text=${item.name.charAt(0)}`;
