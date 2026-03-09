@@ -32,7 +32,7 @@ const testimonials = [
     quote: "Dr. Chandra and the team are incredibly skilled. The shockwave therapy and cupping sessions resolved my shoulder issue that other clinics couldn't fix.",
     name: "Vikram Singh",
     designation: "Retired Army Officer",
-    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ];
 
