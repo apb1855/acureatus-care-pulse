@@ -29,7 +29,7 @@ const CookieConsent = forwardRef<HTMLDivElement>((_, ref) => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[60] p-4 animate-in slide-in-from-bottom duration-500">
+    <div ref={ref} className="fixed bottom-0 left-0 right-0 z-[60] p-4 animate-in slide-in-from-bottom duration-500">
       <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-2xl p-5 md:p-6">
         <div className="flex items-start gap-4">
           <div className="shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
