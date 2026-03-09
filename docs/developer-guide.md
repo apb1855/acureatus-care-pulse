@@ -16,14 +16,17 @@
 7. [PWA (Progressive Web App)](#7-pwa-progressive-web-app)
 8. [Cookie Consent](#8-cookie-consent)
 9. [Treatment Pricing Data](#9-treatment-pricing-data)
+10. [Error Boundaries](#10-error-boundaries)
+11. [Performance Architecture](#11-performance-architecture)
 
 ---
 
 ## 1. Project Structure
 
 ```
-├── public/                  # Static assets served as-is (favicon, robots.txt, PWA icons)
+├── public/                  # Static assets served as-is (favicon, robots.txt, PWA icons, sitemap.xml)
 ├── docs/                    # Developer documentation (you are here)
+│   ├── index.md                     # Documentation index
 │   ├── developer-guide.md           # This file
 │   ├── features-guide.md            # i18n, accessibility, booking guide
 │   ├── animations-darkmode-guide.md # Animations & dark mode guide
@@ -31,6 +34,7 @@
 │   ├── seo-performance-guide.md     # JSON-LD, performance optimizations
 │   ├── seo-domain-deployment-cookies.md  # SEO, domain, deployment, cookies guide
 │   ├── white-label-guide.md         # Reusing for other clients
+│   ├── admin-panel-implementation-guide.md  # Auth & admin panel guide
 │   ├── future-backend-guide.md      # Firebase / MongoDB / Lovable Cloud migration
 │   └── project-invoice.md           # Cost breakdown
 ├── src/
@@ -38,6 +42,7 @@
 │   ├── components/          # All React components
 │   │   ├── ui/              # Reusable UI primitives (Button, Input, Dialog, etc.)
 │   │   │                      These come from shadcn/ui and are rarely edited.
+│   │   ├── ErrorBoundary.tsx  # Class-based error boundary (wraps each section)
 │   │   ├── Header.tsx        # Top navigation bar (desktop + mobile sheet) + theme toggle
 │   │   ├── HeroSection.tsx   # Landing hero with background image slideshow
 │   │   ├── PillarsSection.tsx  # Core pillars (Feature108 tabbed layout)
@@ -47,6 +52,7 @@
 │   │   ├── GallerySection.tsx
 │   │   ├── TestimonialsSection.tsx
 │   │   ├── GoogleReviewsSection.tsx  # Google reviews widget (static)
+│   │   ├── BlogPreviewSection.tsx    # Blog preview cards (3 latest posts)
 │   │   ├── ContactFormSection.tsx  # "Contact Us" form → sends email via EmailJS
 │   │   ├── ContactSection.tsx      # "Visit Us" with clinic addresses & map
 │   │   ├── FAQSection.tsx          # Collapsible FAQ list
@@ -61,10 +67,11 @@
 │   │   ├── LazyImage.tsx           # Image with skeleton loading state
 │   │   ├── JsonLd.tsx              # SEO structured data (MedicalBusiness schema)
 │   │   ├── SkipToContent.tsx       # Accessibility skip link
-│   │   ├── CookieConsent.tsx       # Cookie consent banner
+│   │   ├── CookieConsent.tsx       # Cookie consent banner (forwardRef)
 │   │   └── WhatsAppButton.tsx      # (Legacy) Standalone WhatsApp button — hidden, replaced by FAB
 │   ├── data/
 │   │   ├── clinicData.ts    # ALL clinic info (addresses, phone, hours, pricing, team, FAQs)
+│   │   ├── blogData.ts      # Blog posts data (static)
 │   │   └── galleryData.ts   # Gallery image data
 │   ├── hooks/               # Custom React hooks
 │   │   ├── useI18n.tsx      # Multi-language context (EN + Kannada)
@@ -73,42 +80,59 @@
 │   ├── lib/
 │   │   └── utils.ts         # Utility functions (cn helper for classnames)
 │   ├── pages/
-│   │   ├── Index.tsx         # Main page — assembles all sections in order
+│   │   ├── Index.tsx         # Main page — lazy loads sections with error boundaries
+│   │   ├── BlogList.tsx      # Blog listing page
+│   │   ├── BlogPost.tsx      # Individual blog post page
 │   │   └── NotFound.tsx      # 404 page with auto-redirect
 │   ├── index.css             # Global styles + Tailwind theme tokens (colours, fonts)
-│   ├── App.tsx               # Router setup + providers
+│   ├── App.tsx               # Router setup + providers (lazy loaded pages)
 │   └── main.tsx              # Entry point — renders App into the DOM
 ├── tailwind.config.ts        # Tailwind configuration (extends theme with custom tokens)
 ├── vite.config.ts            # Vite config + PWA plugin + React dedupe
-├── index.html                # HTML shell (meta tags, OG tags, theme-color)
+├── index.html                # HTML shell (meta tags, OG tags, canonical, JSON-LD, preconnect)
 └── package.json              # Dependencies and scripts
 ```
 
 ### How a page is built
 
-`src/pages/Index.tsx` is the homepage. It imports each section component and renders them in order:
+`src/pages/Index.tsx` is the homepage. It uses **React.lazy()** to code-split below-fold sections and wraps each in an **ErrorBoundary**:
 
 ```tsx
-<Header />
-<HeroSection />
-<PillarsSection />
-<ServicesSection />
-<PricingSection />
-<TeamSection />
-<GallerySection />
-<TestimonialsSection />
-<GoogleReviewsSection />
-<ContactFormSection />
-<ContactSection />
-<FAQSection />
-<Footer />
-<FloatingCTA />
-<CookieConsent />
+// Header and Hero load eagerly (above the fold)
+<E name="Header"><Header /></E>
+<E name="Hero"><HeroSection /></E>
+
+// Everything below is lazy-loaded inside a Suspense boundary
+<Suspense fallback={<SectionFallback />}>
+  <E name="Pillars"><PillarsSection /></E>
+  <E name="Services"><ServicesSection /></E>
+  <E name="Pricing"><PricingSection /></E>
+  <E name="Team"><TeamSection /></E>
+  <E name="Gallery"><GallerySection /></E>
+  <E name="Testimonials"><TestimonialsSection /></E>
+  <E name="GoogleReviews"><GoogleReviewsSection /></E>
+  <E name="Blog"><BlogPreviewSection /></E>
+  <E name="ContactForm"><ContactFormSection /></E>
+  <E name="Contact"><ContactSection /></E>
+  <E name="FAQ"><FAQSection /></E>
+  <E name="Footer"><Footer /></E>
+  <E name="FloatingCTA"><FloatingCTA /></E>
+  <E name="CookieConsent"><CookieConsent /></E>
+</Suspense>
 ```
 
 **To reorder sections**, simply move the components in `Index.tsx`.
 
-**To add a new section**, create a component in `src/components/`, then import and place it in `Index.tsx`.
+**To add a new section**, create a component in `src/components/`, lazy-import it in `Index.tsx`, and wrap with `<E name="YourSection">`.
+
+### Blog Pages
+
+The app includes a blog system with three routes:
+- `/` — Homepage with `BlogPreviewSection` showing 3 latest posts
+- `/blog` — Full blog listing page (`BlogList.tsx`)
+- `/blog/:slug` — Individual blog post page (`BlogPost.tsx`)
+
+Blog data lives in `src/data/blogData.ts`.
 
 ---
 
@@ -194,24 +218,21 @@ Just use semantic classes. They automatically adapt:
 
 At the top of `src/index.css`:
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Lora:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 ```
 
 ### Where fonts are mapped
 
-In `tailwind.config.ts`:
-```ts
-fontFamily: {
-  display: ["Outfit", "sans-serif"],  // Headings
-  body: ["DM Sans", "sans-serif"],    // Body text
-}
-```
+In `tailwind.config.ts` and `src/index.css`:
+- `--font-display: 'Playfair Display', serif` — Headings
+- `--font-body: 'DM Sans', sans-serif` — Body text
+- `--font-sans: 'Space Grotesk', ...` — Sans-serif fallback
 
 ### How to change a font
 
 1. Pick a new font from [Google Fonts](https://fonts.google.com/)
 2. Replace the `@import` URL in `src/index.css`
-3. Update `tailwind.config.ts` `fontFamily`
+3. Update the CSS variables and/or `tailwind.config.ts` `fontFamily`
 4. All `font-display` and `font-body` classes auto-update
 
 ---
@@ -276,9 +297,10 @@ The app is installable as a mobile app. Users can add it to their home screen fr
 ### How it's configured
 
 In `vite.config.ts`, the `VitePWA` plugin handles:
-- **Service worker**: Auto-generated, caches static assets
+- **Service worker**: Auto-generated with Workbox, caches static assets
 - **Manifest**: App name, icons, theme color, display mode
-- **Runtime caching**: Google Fonts (1 year), Unsplash images (30 days)
+- **Runtime caching**: Google Fonts (1 year), Google Fonts webfonts (1 year), Unsplash images (30 days, 50 entries max)
+- **Auto-update**: `registerType: "autoUpdate"` — SW updates silently
 
 ### PWA Icons
 
@@ -300,6 +322,7 @@ In `vite.config.ts`, the `VitePWA` plugin handles:
 - User choices: "Accept All" or "Essential Only"
 - Choice saved to `localStorage` as `cookie-consent`
 - Banner never appears again after a choice is made
+- Component uses `forwardRef` for compatibility
 
 ### Data stored on user's device
 
@@ -336,7 +359,7 @@ All pricing is managed in `src/data/clinicData.ts` → `treatment_price_list_inr
 ### How pricing is rendered
 
 - **PricingSection** (`src/components/PricingSection.tsx`) reads `clinicData.treatment_price_list_inr` and renders a table
-- **JSON-LD** (`src/components/JsonLd.tsx`) includes each treatment in a `hasOfferCatalog` for Google rich results
+- **JSON-LD** in `index.html` and `src/components/JsonLd.tsx` includes treatment pricing for Google rich results
 - **Payment methods accepted**: Google Pay, UPI, Cash
 
 ### Updating prices
@@ -345,6 +368,75 @@ All pricing is managed in `src/data/clinicData.ts` → `treatment_price_list_inr
 2. Edit the `treatment_price_list_inr` array
 3. Use `price: number` for fixed prices, or `price_range: "min - max"` for ranges
 4. Both the pricing table and JSON-LD schema update automatically
+
+---
+
+## 10. Error Boundaries
+
+### What it does
+
+**File**: `src/components/ErrorBoundary.tsx`
+
+A class-based React error boundary that wraps each major section on the homepage. If any section throws a runtime error, it is **silently caught** — the section disappears instead of crashing the entire page.
+
+### How it works
+
+```tsx
+<ErrorBoundary sectionName="Services">
+  <ServicesSection />
+</ErrorBoundary>
+```
+
+- Errors are logged to `console.error` with the section name
+- The default fallback renders nothing (`null`)
+- Custom fallback UI can be passed via the `fallback` prop
+
+### Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `children` | `ReactNode` | — | Content to protect |
+| `fallback` | `ReactNode` | `null` | UI to show on error |
+| `sectionName` | `string` | `"unknown"` | Label for console logging |
+
+---
+
+## 11. Performance Architecture
+
+### Lazy Loading Strategy
+
+The app uses a two-tier loading approach:
+
+1. **Eager (above-the-fold)**: `Header` and `HeroSection` are imported normally for instant render
+2. **Lazy (below-the-fold)**: All 12 other sections use `React.lazy()` and load via a shared `<Suspense>` boundary
+
+### Image Optimization
+
+| Technique | Applied To |
+|---|---|
+| `fetchPriority="high"` | First hero slide |
+| `loading="lazy"` + `decoding="async"` | All below-fold images |
+| Downscaled image URLs (600-800px) | Testimonials, team backgrounds |
+| `width`/`height` attributes | Hero LCP image |
+
+### Resource Hints (`index.html`)
+
+| Hint | Domain | Purpose |
+|---|---|---|
+| `preconnect` | `fonts.googleapis.com` | Faster font CSS |
+| `preconnect` | `fonts.gstatic.com` | Faster font files |
+| `preconnect` | `images.unsplash.com` | Faster image loads |
+
+### Lighthouse Scores (Post-Optimization)
+
+| Category | Score |
+|---|---|
+| Performance | 86–93 |
+| Accessibility | 91 |
+| Best Practices | 96 |
+| SEO | 90+ (when published to custom domain) |
+
+> **Note**: SEO shows ~69 on preview URLs due to Lovable's `x-robots-tag: noindex, nofollow` header on staging. This is removed on published/custom domains.
 
 ---
 
@@ -363,6 +455,10 @@ All pricing is managed in `src/data/clinicData.ts` → `treatment_price_list_inr
 | Change PWA config | `vite.config.ts` (VitePWA section) |
 | Change FAB behaviour | `src/components/FloatingCTA.tsx` |
 | Change language translations | `src/hooks/useI18n.tsx` |
+| Edit blog posts | `src/data/blogData.ts` |
+| Edit error boundary behavior | `src/components/ErrorBoundary.tsx` |
+| Edit SEO meta tags | `index.html` |
+| Edit JSON-LD schema | `index.html` (static) + `src/components/JsonLd.tsx` (dynamic) |
 
 ---
 
