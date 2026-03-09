@@ -26,7 +26,7 @@ const testimonials = [
     quote: "I was skeptical about physiotherapy until I visited Acureatus. Their gait analysis technology and personalized treatment plan eliminated my knee pain completely.",
     name: "Meera Krishnan",
     designation: "School Teacher, Chennai",
-    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3",
+    src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
   {
     quote: "Dr. Chandra and the team are incredibly skilled. The shockwave therapy and cupping sessions resolved my shoulder issue that other clinics couldn't fix.",
