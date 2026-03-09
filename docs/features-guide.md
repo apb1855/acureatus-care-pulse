@@ -14,6 +14,8 @@
 5. [Favicon & PWA Icons](#5-favicon--pwa-icons)
 6. [Online Appointment Booking](#6-online-appointment-booking)
 7. [Treatment Pricing System](#7-treatment-pricing-system)
+8. [Blog System](#8-blog-system)
+9. [Error Boundaries](#9-error-boundaries)
 
 ---
 
@@ -104,11 +106,15 @@ const MyComponent = () => {
 | **Skip to content** | `SkipToContent.tsx` | Hidden link that appears on Tab focus, jumps to `#main-content` |
 | **Main content landmark** | `Index.tsx` | `id="main-content"` and `role="main"` on page wrapper |
 | **Banner landmark** | `Header.tsx` | `role="banner"` on header |
+| **Footer landmark** | `Footer.tsx` | `role="contentinfo"` on footer |
 | **Navigation labels** | `Header.tsx` | `aria-label="Main navigation"` and `aria-label="Mobile navigation"` |
 | **Button labels** | Throughout | `aria-label` on icon-only buttons (theme toggle, menu, FAB, language switcher) |
-| **Link labels** | Header | `aria-label="Call to book appointment"` on phone link |
-| **Image alt text** | Throughout | All `<img>` tags have descriptive `alt` attributes |
+| **Link labels** | Header, Footer | `aria-label` on phone links and social icons |
+| **Image alt text** | Throughout | All `<img>` tags have descriptive `alt` attributes (hero LCP image included) |
 | **SR-only text** | Sheet title | `className="sr-only"` for screen reader context |
+| **Tap targets** | Footer | Links have adequate padding for mobile touch |
+
+### Lighthouse Accessibility Score: 91
 
 ### Testing Accessibility
 
@@ -130,18 +136,25 @@ A drop-in replacement for `<img>` that shows:
 2. **Error state** if image fails to load
 3. **Fade-in** when image loads successfully
 
-### Usage
+### Section Loading
+
+**File**: `src/pages/Index.tsx`
+
+Below-fold sections are lazy-loaded with `React.lazy()`. While loading, a spinner fallback is shown:
 
 ```tsx
-import LazyImage from "@/components/LazyImage";
-
-<LazyImage
-  src="photo.jpg"
-  alt="Description"
-  className="w-full h-64 object-cover"
-  wrapperClassName="w-full h-64"
-/>
+const SectionFallback = () => (
+  <div className="py-20 flex items-center justify-center">
+    <div className="h-8 w-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
+  </div>
+);
 ```
+
+### Page Loading
+
+**File**: `src/App.tsx`
+
+All pages (Index, BlogList, BlogPost, NotFound) are lazy-loaded with a "Loading…" text fallback.
 
 ---
 
@@ -237,33 +250,63 @@ Accepted: **Google Pay**, **UPI**, **Cash**
 | Location | Component | How |
 |---|---|---|
 | Pricing table on page | `PricingSection.tsx` | Reads `clinicData.treatment_price_list_inr` array |
-| Google rich results | `JsonLd.tsx` | Includes each treatment in `hasOfferCatalog` schema |
+| Google rich results (static) | `index.html` | JSON-LD in `<head>` |
+| Google rich results (dynamic) | `JsonLd.tsx` | Includes each treatment in `hasOfferCatalog` schema |
 | Payment badges | `PricingSection.tsx` | Reads `clinicData.payment_options` array |
-
-### Data Format
-
-```ts
-// Fixed price
-{ item: "Spinal Decompression", price: 500 }
-
-// Range price
-{ item: "Exercise Therapy", price_range: "250 - 500" }
-```
 
 ### Updating Prices
 
 1. Open `src/data/clinicData.ts`
 2. Edit the `treatment_price_list_inr` array
 3. Both the pricing table UI and JSON-LD schema update automatically
+4. **Also update** `index.html` static JSON-LD if prices change significantly
 
-### Adding a New Treatment
+---
 
-```ts
-treatment_price_list_inr: [
-  // ...existing items
-  { item: "New Treatment Name", price: 600 },
-],
+## 8. Blog System
+
+### Architecture
+
 ```
+src/data/blogData.ts       ← Blog post data (static)
+src/pages/BlogList.tsx     ← /blog — Full listing page
+src/pages/BlogPost.tsx     ← /blog/:slug — Individual post page
+src/components/BlogPreviewSection.tsx  ← Homepage preview (3 latest posts)
+```
+
+### Routes
+
+| Route | Component | Description |
+|---|---|---|
+| `/` | `Index.tsx` → `BlogPreviewSection` | Shows 3 latest posts |
+| `/blog` | `BlogList.tsx` | Full blog listing |
+| `/blog/:slug` | `BlogPost.tsx` | Individual post |
+
+### Adding a New Blog Post
+
+Edit `src/data/blogData.ts` — add a new entry with title, slug, content, excerpt, featuredImage, publishedAt, readingTime, and tags.
+
+---
+
+## 9. Error Boundaries
+
+### What it does
+
+**File**: `src/components/ErrorBoundary.tsx`
+
+Each major section on the homepage is wrapped in an `ErrorBoundary`. If any section throws a runtime error, it disappears silently instead of crashing the whole page.
+
+### How it's used in Index.tsx
+
+```tsx
+const E = ({ name, children }) => (
+  <ErrorBoundary sectionName={name}>{children}</ErrorBoundary>
+);
+
+<E name="Services"><ServicesSection /></E>
+```
+
+Errors are logged to `console.error` with the section name for debugging.
 
 ---
 
@@ -278,6 +321,8 @@ treatment_price_list_inr: [
 | Replace favicon | `public/pwa-192x192.png` |
 | Update treatment prices | `src/data/clinicData.ts` → `treatment_price_list_inr` |
 | Update payment methods | `src/data/clinicData.ts` → `payment_options` |
+| Add blog post | `src/data/blogData.ts` |
+| Edit error boundary | `src/components/ErrorBoundary.tsx` |
 
 ---
 

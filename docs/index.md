@@ -12,7 +12,7 @@
 #### [`developer-guide.md`](./developer-guide.md)
 **Purpose**: Main developer documentation covering project structure, setup, and development workflow  
 **Target Audience**: Developers joining the project  
-**Key Topics**: Local setup, code organization, build process, testing
+**Key Topics**: Local setup, code organization, build process, error boundaries, performance architecture, lazy loading
 
 #### [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md)
 **Purpose**: Comprehensive guide for implementing authentication and admin functionality  
@@ -31,12 +31,12 @@
 #### [`features-guide.md`](./features-guide.md)
 **Purpose**: Overview of application features and user-facing functionality  
 **Target Audience**: Product managers, designers, and stakeholders  
-**Key Topics**: Feature specifications, user journeys, functionality overview
+**Key Topics**: i18n, accessibility, blog system, error boundaries, booking flow, pricing system
 
 #### [`animations-darkmode-guide.md`](./animations-darkmode-guide.md)
 **Purpose**: Guidelines for implementing animations and dark mode theming  
 **Target Audience**: Frontend developers and designers  
-**Key Topics**: Animation patterns, dark mode implementation, theming system
+**Key Topics**: Animation patterns, dark mode implementation, theming system, error boundary integration
 
 #### [`services-reviews-microinteractions-guide.md`](./services-reviews-microinteractions-guide.md)
 **Purpose**: Detailed guide for service displays, review systems, and subtle UI interactions  
@@ -50,12 +50,12 @@
 #### [`seo-domain-deployment-cookies.md`](./seo-domain-deployment-cookies.md)
 **Purpose**: Technical guide for SEO optimization, domain setup, and cookie management  
 **Target Audience**: DevOps, SEO specialists, and full-stack developers  
-**Key Topics**: Search engine optimization, domain configuration, GDPR compliance, cookie policies
+**Key Topics**: Search engine optimization, domain configuration, GDPR compliance, cookie policies, Lighthouse scores
 
 #### [`seo-performance-guide.md`](./seo-performance-guide.md)
 **Purpose**: Specific strategies for improving website performance and search rankings  
 **Target Audience**: Performance engineers and SEO specialists  
-**Key Topics**: Page speed optimization, Core Web Vitals, technical SEO, performance monitoring
+**Key Topics**: JSON-LD (static + dynamic), lazy loading, image optimization, resource hints, Workbox caching, Lighthouse audit results
 
 ---
 
@@ -107,7 +107,9 @@
 | Frontend Framework | [`developer-guide.md`](./developer-guide.md) | React + Vite for modern development |
 | Backend Options | [`future-backend-guide.md`](./future-backend-guide.md) | Comparison of Lovable Cloud, Firebase, MongoDB |
 | Authentication Strategy | [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) | Role-based access for admin features |
-| SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Technical SEO + performance optimization |
+| SEO Strategy | [`seo-performance-guide.md`](./seo-performance-guide.md) | Static + dynamic JSON-LD, lazy loading, image optimization |
+| Error Resilience | [`developer-guide.md`](./developer-guide.md) | ErrorBoundary wrapping each section |
+| Performance | [`seo-performance-guide.md`](./seo-performance-guide.md) | React.lazy(), image optimization, Workbox caching |
 
 ---
 
@@ -147,6 +149,7 @@ Examples:
 - **v1.0** (March 2026): Initial documentation structure
 - **v1.1** (March 2026): Added admin panel implementation guide
 - **v1.2** (March 2026): Created documentation index
+- **v1.3** (March 2026): Updated all docs with error boundaries, lazy loading, blog system, Lighthouse optimization results, static JSON-LD, sitemap, and performance architecture
 
 ---
 

@@ -40,6 +40,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 | `PricingSection` | Price table (10 treatments, ₹250–₹500) fades up on scroll |
 | `StatsBar` | Stats counter row reveals with delay |
 | `GoogleReviewsSection` | Review cards stagger in |
+| `BlogPreviewSection` | Blog cards stagger in |
 
 ---
 
@@ -102,6 +103,19 @@ Displays 4 animated stats in the hero section:
    - Footer links
    - Contact form inputs
    - Google Reviews cards
+   - Blog preview cards
+
+---
+
+## 4. Error Boundary Integration
+
+Each section on the homepage is wrapped in an `ErrorBoundary` component (`src/components/ErrorBoundary.tsx`). This means:
+
+- If an animation or section crashes, only that section disappears
+- The rest of the page continues working normally
+- Errors are logged to `console.error` with the section name
+
+Combined with `React.lazy()` for below-fold sections, the app loads the header and hero immediately, then progressively loads other sections.
 
 ---
 
@@ -114,6 +128,7 @@ Displays 4 animated stats in the hero section:
 | Adjust dark mode colors | `src/index.css` → `.dark` block |
 | Modify stats values | `src/components/StatsBar.tsx` |
 | Add stats translations | `src/hooks/useI18n.tsx` → `stats.*` keys |
+| Edit error boundary | `src/components/ErrorBoundary.tsx` |
 
 ---
 

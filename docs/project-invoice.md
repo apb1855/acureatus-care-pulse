@@ -26,22 +26,24 @@
 | 12 | **Contact Form + EmailJS Integration** (Zod validation, 5 fields, email delivery) | 5,000 | 10,000 | 18,000 |
 | 13 | **WhatsApp Chat Form** (dialog with date/time picker, WhatsApp API redirect) | 4,000 | 9,000 | 16,000 |
 | 14 | **Visit Us / Contact Info Section** (2 branch addresses, Google Maps link, hours) | 2,000 | 4,000 | 8,000 |
-| 15 | **FAQ Section** (accordion, expandable) | 1,500 | 3,000 | 6,000 |
-| 16 | **Footer** (links, social icons, branding) | 1,500 | 3,500 | 7,000 |
+| 15 | **FAQ Section** (accordion, expandable, AI assistant fallback) | 1,500 | 3,000 | 6,000 |
+| 16 | **Footer** (links, social icons with real URLs, branding) | 1,500 | 3,500 | 7,000 |
 | 17 | **Floating Action Button (FAB)** (expandable menu: Book Now, Chat, Go to Top, scroll-aware) | 4,000 | 8,000 | 15,000 |
 | 18 | **Framer Motion Animations** (ScrollReveal, AnimatedCounter, hover effects, transitions) | 5,000 | 12,000 | 22,000 |
 | 19 | **Full Mobile & Tablet Responsiveness** (testing across breakpoints) | 5,000 | 10,000 | 20,000 |
-| 20 | **SEO Optimization** (meta tags, semantic HTML, alt text, robots.txt, JSON-LD MedicalBusiness schema with pricing) | 3,000 | 7,000 | 14,000 |
+| 20 | **SEO Optimization** (meta tags, canonical, sitemap, robots.txt, static + dynamic JSON-LD, preconnect, image optimization) | 4,000 | 9,000 | 16,000 |
 | 21 | **Theming System** (CSS variables, design tokens, dark-mode ready, smooth transitions) | 2,000 | 4,000 | 8,000 |
 | 22 | **Dark Mode Toggle** (theme persistence via localStorage, CSS variable switching) | 3,000 | 6,000 | 12,000 |
 | 23 | **Multi-Language (i18n)** (English + Kannada, context-based, localStorage persistence) | 5,000 | 10,000 | 18,000 |
-| 24 | **Accessibility (a11y)** (skip-to-content, ARIA labels, keyboard navigation, landmarks) | 2,000 | 4,000 | 8,000 |
-| 25 | **PWA Support** (service worker, manifest, installable app, offline caching) | 5,000 | 10,000 | 20,000 |
+| 24 | **Accessibility (a11y)** (skip-to-content, ARIA labels, keyboard navigation, landmarks, tap targets) | 2,000 | 4,000 | 8,000 |
+| 25 | **PWA Support** (Workbox service worker, manifest, installable app, runtime caching) | 5,000 | 10,000 | 20,000 |
 | 26 | **Cookie Consent Banner** (GDPR-style popup, localStorage consent tracking) | 3,000 | 6,000 | 12,000 |
-| 27 | **Page Speed Optimization** (font consolidation, DNS prefetch, code splitting, image caching) | 3,000 | 6,000 | 12,000 |
-| 28 | **Developer Documentation** (9 comprehensive guides) | 3,000 | 6,000 | 12,000 |
+| 27 | **Performance Optimization** (lazy loading sections, image optimization, preconnect, error boundaries) | 4,000 | 8,000 | 15,000 |
+| 28 | **Blog System** (listing page, individual post page, homepage preview, static data) | 4,000 | 8,000 | 15,000 |
+| 29 | **Error Boundaries** (section-level crash isolation, console logging) | 1,500 | 3,000 | 5,000 |
+| 30 | **Developer Documentation** (10 comprehensive guides) | 3,000 | 6,000 | 12,000 |
 | | | | | |
-| | **SUBTOTAL (Development)** | **95,000** | **2,17,000** | **4,13,000** |
+| | **SUBTOTAL (Development)** | **1,02,500** | **2,44,000** | **4,63,000** |
 
 ---
 
@@ -84,9 +86,9 @@ The following treatment prices are displayed on the website and embedded in the 
 
 | | Min (₹) | Avg (₹) | Max (₹) |
 |---|---:|---:|---:|
-| Development | 95,000 | 2,17,000 | 4,13,000 |
+| Development | 1,02,500 | 2,44,000 | 4,63,000 |
 | Additional Services | 3,500 | 12,000 | 26,500 |
-| **GRAND TOTAL** | **₹98,500** | **₹2,29,000** | **₹4,39,500** |
+| **GRAND TOTAL** | **₹1,06,000** | **₹2,56,000** | **₹4,89,500** |
 
 ---
 
@@ -108,12 +110,14 @@ The following treatment prices are displayed on the website and embedded in the 
 |---|---|
 | Design & Prototyping | 3–5 days |
 | Core Development (all sections) | 7–14 days |
+| Blog System | 2–3 days |
 | Animations & Polish | 2–4 days |
 | i18n (Multi-language) | 2–3 days |
 | Integrations (EmailJS, WhatsApp) | 1–2 days |
+| Performance & SEO Optimization | 2–3 days |
 | Testing & Responsiveness | 2–3 days |
 | Documentation & Handover | 2–3 days |
-| **Total** | **3–5 weeks** |
+| **Total** | **4–6 weeks** |
 
 ---
 
@@ -137,20 +141,24 @@ The following treatment prices are displayed on the website and embedded in the 
 - [x] EmailJS contact form (ready to configure)
 - [x] Floating Action Button with scroll detection
 - [x] Mobile & tablet optimized
-- [x] SEO-ready structure with JSON-LD MedicalBusiness schema (includes treatment pricing)
+- [x] SEO-ready structure with static + dynamic JSON-LD MedicalBusiness schema
+- [x] Canonical URL, sitemap.xml, robots.txt with sitemap reference
 - [x] Theming system (easy colour/font changes)
 - [x] Dark mode with smooth transitions
 - [x] Multi-language support (English + Kannada)
-- [x] Accessibility features (skip-to-content, ARIA labels, landmarks)
-- [x] PWA — installable as mobile app
+- [x] Accessibility features (skip-to-content, ARIA labels, landmarks, tap targets)
+- [x] PWA — installable as mobile app with Workbox offline caching
 - [x] Cookie consent banner
-- [x] Page speed optimization (font consolidation, code splitting, caching)
+- [x] Performance optimization (lazy loading, image optimization, preconnect, error boundaries)
+- [x] Blog system with listing and individual post pages
+- [x] Error boundaries on every section (crash isolation)
 - [x] Google Reviews widget
 - [x] 404 page with auto-redirect
 - [x] LazyImage component with skeleton loading
-- [x] Developer documentation (9 comprehensive guides)
+- [x] Developer documentation (10 comprehensive guides)
 - [x] Clean, maintainable TypeScript codebase
 - [x] Treatment pricing table with 10 treatments (₹250–₹500 range)
+- [x] Lighthouse scores: Performance 86–93, Accessibility 91, Best Practices 96, SEO 90+
 
 ---
 
