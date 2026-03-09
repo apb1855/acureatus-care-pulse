@@ -106,6 +106,7 @@
 1. Start with [`developer-guide.md`](./developer-guide.md) for project setup
 2. Review [`features-guide.md`](./features-guide.md) to understand the application
 3. If implementing backend features, study [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md)
+4. For multi-tenant/SaaS evolution, read [`multi-tenant-guide.md`](./multi-tenant-guide.md)
 
 ### For Designers
 1. Begin with [`features-guide.md`](./features-guide.md) for feature overview
