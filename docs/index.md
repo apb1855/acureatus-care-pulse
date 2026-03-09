@@ -121,6 +121,13 @@
 1. Review [`project-invoice.md`](./project-invoice.md) for scope and deliverables
 2. Check [`features-guide.md`](./features-guide.md) for functionality overview
 3. Study [`future-backend-guide.md`](./future-backend-guide.md) for scaling plans
+4. Explore [`multi-tenant-guide.md`](./multi-tenant-guide.md) if considering SaaS model
+
+### For SaaS/Multi-Clinic Planners
+1. Start with [`multi-tenant-guide.md`](./multi-tenant-guide.md) for full architecture
+2. Review [`deployment.md`](./deployment.md) for subdomain DNS setup
+3. Study [`admin-panel-implementation-guide.md`](./admin-panel-implementation-guide.md) for admin panel patterns
+4. Check [`future-backend-guide.md`](./future-backend-guide.md) for backend selection
 
 ---
 
